@@ -1,0 +1,8 @@
+appengine-generated/
+target/
+.idea
+.classpath
+.factorypath
+.project
+.settings/
+
