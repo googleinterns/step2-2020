@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+files_to_format=$(git diff --cached --name-only --diff-filter=ACMR | grep ".*java$\\|.*js$" )
+echo "Formatting: $files_to_format"
+clang-format --style=Google -i $files_to_format
+git add $files_to_format
