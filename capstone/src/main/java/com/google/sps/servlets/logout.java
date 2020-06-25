@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/signout")
-public class SignOut extends HttpServlet {
+public class logout extends HttpServlet {
 
   private UserService userService = UserServiceFactory.getUserService();
 
