@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "data-demo": {
+    "Data-Demo": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/data-demo",
+            "outputPath": "dist/Data-Demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
             ],
             "scripts": []
           },
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "data-demo:build"
+            "browserTarget": "Data-Demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "data-demo:build:production"
+              "browserTarget": "Data-Demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "data-demo:build"
+            "browserTarget": "Data-Demo:build"
           }
         },
         "test": {
@@ -110,15 +110,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "data-demo:serve"
+            "devServerTarget": "Data-Demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "data-demo:serve:production"
+              "devServerTarget": "Data-Demo:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "data-demo"
+    }
+  },
+  "defaultProject": "Data-Demo",
+  "cli": {
+    "analytics": "602cad61-acc4-493c-9728-56ff34de9c4a"
+  }
 }
