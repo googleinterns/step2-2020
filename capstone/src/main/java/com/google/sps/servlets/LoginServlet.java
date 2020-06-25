@@ -14,15 +14,14 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.datastore.*;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @WebServlet("/logon")
 public class LoginServlet extends HttpServlet {
@@ -36,7 +35,7 @@ public class LoginServlet extends HttpServlet {
       response.sendRedirect(userService.createLoginURL("/logon"));
     } 
     
-    if (userService.isUserLoggedIn()) {response.sendRedirect("/test.html");}
+    if (userService.isUserLoggedIn()) {response.sendRedirect("/");}
     
   }
 
