@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Data-Demo": {
+    "data-demo": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Data-Demo",
+            "outputPath": "dist/data-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Data-Demo:build"
+            "browserTarget": "data-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Data-Demo:build:production"
+              "browserTarget": "data-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Data-Demo:build"
+            "browserTarget": "data-demo:build"
           }
         },
         "test": {
@@ -110,18 +110,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Data-Demo:serve"
+            "devServerTarget": "data-demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Data-Demo:serve:production"
+              "devServerTarget": "data-demo:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Data-Demo",
+  "defaultProject": "data-demo",
   "cli": {
     "analytics": "602cad61-acc4-493c-9728-56ff34de9c4a"
   }

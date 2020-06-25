@@ -8,7 +8,7 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Data-Demo';
+  title = 'data-demo';
 
     // constructor(private oauthService: OAuthService) {
     //   this.oauthService.redirectUri = window.location.origin;
