@@ -1,6 +1,8 @@
-/* Set black background color, white text and some padding */
+
 footer {
-  background-color: #555;
-  color: white;
-  padding: 15px;
+    position: fixed;
+    left: 0;
+    color:black;
+    bottom: 0;
+    width: 100%;
 }
