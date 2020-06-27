@@ -1,0 +1,10 @@
+.container {
+    border-radius: 5px;
+    background-color: grey;
+    padding: 10px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

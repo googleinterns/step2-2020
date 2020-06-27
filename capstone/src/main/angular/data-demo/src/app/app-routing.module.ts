@@ -18,10 +18,10 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'about-the-team', component: AboutTheTeamComponent
+    path: 'about', component: AboutTheTeamComponent
   },
   {
-    path: 'hardcoded', component: HardcodedComponent
+    path: 'explore', component: HardcodedComponent
   },
   {
     path: 'login', component: LoginComponent
@@ -32,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
