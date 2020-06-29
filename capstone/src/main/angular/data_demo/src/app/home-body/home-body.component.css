@@ -1,0 +1,18 @@
+
+#main {
+    width: 555px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px 10px 32px 10px;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: #fff  662px 0px repeat-y;
+}
+
+.container {
+    padding: 80px 90px;
+    border-radius: 5px;
+    padding: 10px 320px;
+    margin: auto;
+}
