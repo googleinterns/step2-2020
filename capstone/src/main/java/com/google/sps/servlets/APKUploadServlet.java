@@ -14,29 +14,29 @@
 
 package com.google.sps.servlets;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServlet;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.BlobInfo;
 import javax.servlet.annotation.WebServlet;
-import com.google.appengine.api.datastore.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
+import com.google.cloud.storage.StorageOptions;
 
-@WebServlet("/signout")
+@WebServlet("/upload")
+@MultipartConfig
 public class LogoutServlet extends HttpServlet {
 
-  private UserService userService = UserServiceFactory.getUserService();
+   private String PROJECTID = "your-project-id";
+   private String BUCKETNAME = "your-unique-bucket-name";
+
+   private String filePath;
+   private String objectName;
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    if (userService.isUserLoggedIn()) {
-        response.sendRedirect(userService.createLogoutURL("/signout"));
-    }
-
-    if (!userService.isUserLoggedIn()) {response.sendRedirect("/#/home");}
-    
-  }
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 }
