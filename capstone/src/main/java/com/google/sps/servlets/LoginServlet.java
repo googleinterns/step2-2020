@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
       response.sendRedirect(userService.createLoginURL("/logon"));
     } 
     
-    if (userService.isUserLoggedIn()) {response.sendRedirect("/");}
+    if (userService.isUserLoggedIn()) {response.sendRedirect("/explore");}
     
   }
 
