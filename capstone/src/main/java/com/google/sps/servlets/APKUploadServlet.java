@@ -26,17 +26,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.cloud.storage.StorageOptions;
+import javax.servlet.annotation.MultipartConfig;
 
-@WebServlet("/upload")
+@WebServlet("/binary_upload")
 @MultipartConfig
-public class LogoutServlet extends HttpServlet {
+public class APKUploadServlet extends HttpServlet {
 
-   private String PROJECTID = "your-project-id";
-   private String BUCKETNAME = "your-unique-bucket-name";
+  private final String PROJECTID = "step-2020-team-2";
+  private final String BUCKETNAME = "vaderker-uploadedstoragebucket";
 
-   private String filePath;
-   private String objectName;
+  private String filePath;
+  private String objectName;
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    filePath = "Hello"; //Just a dummy.
+  }
 }
