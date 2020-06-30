@@ -37,7 +37,7 @@ function drawChart() {
             var data = google.visualization.arrayToDataTable([
             ['Content', 'Size'],
             ['Res',  list[i].resFileSize ],
-            ['Dex',  list[i].dexFileSize],
+            ['Java Code',  list[i].dexFileSize],
             ['Libraries', list[i].libraryFileSize],
             ['Assets', list[i].assetsFileSize],
             ['Resources',list[i].resourcesFileSize ],
