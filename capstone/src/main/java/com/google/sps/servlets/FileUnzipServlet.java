@@ -50,8 +50,8 @@ public class FileUnzipServlet extends HttpServlet {
     // The ID of GCS bucket
     String bucketName = "vaderker-uploadedstoragebucket";
 
+    // TODO: (https://github.com/googleinterns/step2-2020/issues/21): Hard-coded name of apk until the upload and login functions have been fully implemented
     // String fileName = request.getParamter("files");
-    // Hard-coded apkName
     String nameOfApk = "ApiDemos-debug.apk";
 
     // The ID of your GCS object
@@ -96,10 +96,17 @@ public class FileUnzipServlet extends HttpServlet {
   public static boolean analyzeApkFeatures(String nameOfApk, Blob blob, String userId) {
 
     byte[] apkBytes = blob.getContent();
-    long dexFileSize = 0, resFileSize = 0, libraryFileSize  = 0, assetsFileSize = 0, resourcesFileSize = 0, miscFileSize = 0, totalApkSize = 0;
+    long dexFileSize = 0;
+    long resFileSize = 0;
+    long libraryFileSize  = 0;
+    long assetsFileSize = 0;
+    long resourcesFileSize = 0;
+    long miscFileSize = 0;
+    long totalApkSize = 0;
     int filesCount = 0;
     long timestamp = System.currentTimeMillis();
 
+    // TODO: (https://github.com/googleinterns/step2-2020/issues/22): Change the retrieved size from uncompressed to compressed size so that we can show the zip noise due to zip alignment and zipCentralDict
     try {
 
       //Declare unzip elements
