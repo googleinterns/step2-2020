@@ -11,7 +11,7 @@ function getDisplay() {
       contentListElement.appendChild(
       createListElement(('Java Code: '+ list[i].dexFileSize +'bytes')));
       contentListElement.appendChild(
-      createListElement(('Library: '+ list[i].libraryFileSize +'bytes')));
+      createListElement(('Libraries: '+ list[i].libraryFileSize +'bytes')));
       contentListElement.appendChild(
       createListElement(('Assets: '+ list[i].assetsFileSize +'bytes')));
       contentListElement.appendChild(
