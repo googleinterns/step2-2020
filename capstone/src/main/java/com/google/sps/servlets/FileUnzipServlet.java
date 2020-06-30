@@ -40,8 +40,8 @@ public class FileUnzipServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
+    // TODO: (https://github.com/googleinterns/step2-2020/issues/20): Hard-coded UserId until the upload and login functions have been fully implemented
     // String userId = request.getParamter("userId");
-    //Hard-coded UserId
     String userId = "abcde";
     
     // The ID of GCP project
@@ -51,7 +51,7 @@ public class FileUnzipServlet extends HttpServlet {
     String bucketName = "vaderker-uploadedstoragebucket";
 
     // String fileName = request.getParamter("files");
-    //Hard-coded apkName
+    // Hard-coded apkName
     String nameOfApk = "ApiDemos-debug.apk";
 
     // The ID of your GCS object
@@ -59,11 +59,16 @@ public class FileUnzipServlet extends HttpServlet {
     System.out.println(objectName);
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
-    analyzeApkFeatures(nameOfApk, blob, userId);
+    
+    // Checks the success of the unzip function and responds with the appropriate values
+    boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
 
-    System.out.println("File " + nameOfApk + " uploaded to bucket " + bucketName + " as " + objectName);
-
-    response.setContentType("text/html;charset=UTF-8");
+    if (checkUnzipSuccess) {
+      System.out.println("File " + nameOfApk + " uploaded to bucket " + bucketName + " as " + objectName);
+      response.setContentType("text/html;charset=UTF-8");
+    } else {
+      response.sendError(500);
+    }
 
   }
   
@@ -88,8 +93,8 @@ public class FileUnzipServlet extends HttpServlet {
    
   }
 
-  public static void analyzeApkFeatures(String nameOfApk, Blob blob, String userId) {
-    
+  public static boolean analyzeApkFeatures(String nameOfApk, Blob blob, String userId) {
+
     byte[] apkBytes = blob.getContent();
     long dexFileSize = 0, resFileSize = 0, libraryFileSize  = 0, assetsFileSize = 0, resourcesFileSize = 0, miscFileSize = 0, totalApkSize = 0;
     int filesCount = 0;
@@ -152,8 +157,11 @@ public class FileUnzipServlet extends HttpServlet {
       zis.closeEntry();
       zis.close();
 
+      return true;
+
     } catch (IOException e) {
       e.printStackTrace();
+      return false;
     }
 
   }
