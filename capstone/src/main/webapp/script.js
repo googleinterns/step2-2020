@@ -11,13 +11,13 @@ function getDisplay() {
       contentListElement.appendChild(
       createListElement(('Dex: '+ list[i].dexFileSize +'bytes')));
       contentListElement.appendChild(
-      createListElement(('Lib: '+ list[i].libraryFileSize +'bytes')));
+      createListElement(('Library: '+ list[i].libraryFileSize +'bytes')));
       contentListElement.appendChild(
-      createListElement(('Ass: '+ list[i].assetsFileSize +'bytes')));
+      createListElement(('Assets: '+ list[i].assetsFileSize +'bytes')));
       contentListElement.appendChild(
-      createListElement(('Rsc: '+ list[i].resourcesFileSize +'bytes')));
+      createListElement(('Resources: '+ list[i].resourcesFileSize +'bytes')));
       contentListElement.appendChild(
-      createListElement(('Msc: '+ list[i].miscFileSize +'bytes')));
+      createListElement(('Miscellaneous: '+ list[i].miscFileSize +'bytes')));
       contentListElement.appendChild(
       createListElement(('Total '+ list[i].totalApkSize +'bytes')));
     }
@@ -39,7 +39,7 @@ function drawChart() {
             ['Res',  list[i].resFileSize ],
             ['Dex',  list[i].dexFileSize],
             ['Libraries', list[i].libraryFileSize],
-            ['assets', list[i].assetsFileSize],
+            ['Assets', list[i].assetsFileSize],
             ['Resources',list[i].resourcesFileSize ],
             ['Miscellaneous' , list[i].miscFileSize ]
         ]);
