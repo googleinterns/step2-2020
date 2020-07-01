@@ -1,5 +1,8 @@
 package com.google.servlets;
 
+import com.google.sps.data.ApkFileTypeFilter;
+import com.google.sps.data.ApkUnzipContent;
+
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
@@ -96,15 +99,9 @@ public class FileUnzipServlet extends HttpServlet {
   public static boolean analyzeApkFeatures(String nameOfApk, Blob blob, String userId) {
 
     byte[] apkBytes = blob.getContent();
-    long dexFileSize = 0;
-    long resFileSize = 0;
-    long libraryFileSize  = 0;
-    long assetsFileSize = 0;
-    long resourcesFileSize = 0;
-    long miscFileSize = 0;
+    long apkSizeOnDisk = blob.getSize();
     long totalApkSize = 0;
-    int filesCount = 0;
-    long timestamp = System.currentTimeMillis();
+    long filesCount = 0;
 
     // TODO: (https://github.com/googleinterns/step2-2020/issues/22): Change the retrieved size from uncompressed to compressed size so that we can show the zip noise due to zip alignment and zipCentralDict
     try {
@@ -114,22 +111,19 @@ public class FileUnzipServlet extends HttpServlet {
       ZipInputStream zis = new ZipInputStream(is);
       ZipEntry ze = zis.getNextEntry();
 
+      ApkFileTypeFilter fileFilter = new ApkFileTypeFilter();
+      ApkUnzipContent unzipContent = new ApkUnzipContent();
+
       while(ze != null) {
         String fileName = ze.getName();
-        totalApkSize += ze.getSize();
-        if (fileName.startsWith("res/")) {
-            resFileSize += ze.getSize();
-        } else if (fileName.startsWith("lib/")) {
-            libraryFileSize += ze.getSize();
-        } else if (fileName.startsWith("assets/")) {
-            assetsFileSize += ze.getSize();
-        } else if (fileName.endsWith(".dex")) {
-            dexFileSize += ze.getSize();
-        } else if (fileName.endsWith(".arsc")) {
-            resourcesFileSize += ze.getSize();
-        } else {
-            miscFileSize += ze.getSize();
-        }
+        unzipContent.addApkDataToMapStorage(
+          fileName, 
+          fileFilter.getApkFileType(ze),
+          ze.getSize(),
+          ze.getCompressedSize()
+        );
+      
+        totalApkSize += ze.getCompressedSize();
         
         if (!ze.isDirectory()) {
           filesCount++;
@@ -141,21 +135,9 @@ public class FileUnzipServlet extends HttpServlet {
 
       //Print the features to the console
       System.out.println(filesCount);
-      System.out.println("\n" + resFileSize + "\n" + libraryFileSize + "\n" + assetsFileSize + "\n" + dexFileSize + "\n" + resourcesFileSize + "\n" + miscFileSize + "\n");
       
       // Initiate the Datastore service for storage of entity created
-      Entity taskEntity = new Entity("UserFileFeature");
-      taskEntity.setProperty("UserId", userId);
-      taskEntity.setProperty("File_Name", nameOfApk);
-      taskEntity.setProperty("Res_File_Size", resFileSize);
-      taskEntity.setProperty("Dex_File_Size", dexFileSize);
-      taskEntity.setProperty("Lib_File_Size", libraryFileSize);
-      taskEntity.setProperty("Asset_File_Size", assetsFileSize);
-      taskEntity.setProperty("Resource_File_Size", resourcesFileSize);
-      taskEntity.setProperty("Misc_File_Size", miscFileSize);
-      taskEntity.setProperty("Total_Apk_size", totalApkSize);
-      taskEntity.setProperty("Files_Count", filesCount);
-      taskEntity.setProperty("Timestamp", timestamp);
+      Entity taskEntity = unzipContent.toEntity(userId, nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(taskEntity);
