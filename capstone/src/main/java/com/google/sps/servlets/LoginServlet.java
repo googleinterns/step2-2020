@@ -43,9 +43,9 @@ public class LoginServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (userService.isUserLoggedIn()) {
-        response.setContentType("text/html;");
-        response.getWriter().println("true");
-        return;
+      response.setContentType("text/html;");
+      response.getWriter().println("true");
+      return;
     }
 
     response.setContentType("text/html;");
