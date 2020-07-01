@@ -36,10 +36,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-storage</artifactId>
-    </dependency>
 
     <dependency>
         <groupId>commons-io</groupId>
