@@ -65,7 +65,8 @@ public class FileDisplayServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // Call the get() method through the post() method
     doGet(request, response);
-    
+
+    response.sendRedirect("/#/explore");
   }
   
 }

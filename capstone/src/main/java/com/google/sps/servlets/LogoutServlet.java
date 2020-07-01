@@ -14,15 +14,15 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.datastore.*;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
+import com.google.appengine.api.datastore.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @WebServlet("/signout")
 public class LogoutServlet extends HttpServlet {
@@ -33,10 +33,10 @@ public class LogoutServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (userService.isUserLoggedIn()) {
-        response.sendRedirect(userService.createLogoutURL("/signout"));
+      response.sendRedirect(userService.createLogoutURL("/signout"));
     }
 
-    if (!userService.isUserLoggedIn()) {response.sendRedirect("/home");}
+    if (!userService.isUserLoggedIn()) {response.sendRedirect("/#/home");}
     
   }
 }

@@ -35,17 +35,19 @@ public class LoginServlet extends HttpServlet {
       response.sendRedirect(userService.createLoginURL("/logon"));
     } 
     
-    if (userService.isUserLoggedIn()) {response.sendRedirect("/#/explore");}
-    
+    if (userService.isUserLoggedIn()) {
+        response.sendRedirect("/#/explore");
+    }
+
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (userService.isUserLoggedIn()) {
-        response.setContentType("text/html;");
-        response.getWriter().println("true");
-        return;
+      response.setContentType("text/html;");
+      response.getWriter().println("true");
+      return;
     }
 
     response.setContentType("text/html;");

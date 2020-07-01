@@ -5,14 +5,14 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Demo APK</h5>
-                    <form method="GET" enctype="multipart/form-data" action="/display">      
-                        <button>Explore</button>
+                    <form method="POST" enctype="multipart/form-data" action="/display">      
+                        <button onclick="getDisplay(); drawChart();">Explore</button>
                     </form>                                
                         <br>
                         <div class="card-text">
-                            <form method="post" enctype="multipart/form-data">
+                            <form action="/binary_upload" method="post" enctype="multipart/form-data">
                                 <input type="file" name="files" multiple />
-                                <input type="submit" value="Upload File" name="submit" />
+                                <input type="submit" value="Upload File"/>
                             </form>
                         </div>
                         <br>
@@ -31,6 +31,8 @@
                     <h5 class="card-title">APK Content Display</h5>
                         <p class="card-text"></p>
                 </div>
+                <div id="displayComponent"></div>
+                <div id="piechart_3d" style="width: 100%; height: 500px;"></div>
             </div>
         </div>
     </div>
