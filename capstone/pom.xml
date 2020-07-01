@@ -131,7 +131,7 @@
                 <failOnMissingWebXml>false</failOnMissingWebXml>
                 <webResources>
                     <resource>
-                        <directory>${basedir}/target/angular/data-demo/dist/data-demo</directory>
+                        <directory>${basedir}/target/angular/data_demo/dist/data-demo</directory>
                     </resource>
                 </webResources>
             </configuration>
@@ -150,11 +150,11 @@
                 <failOnError>false</failOnError>
                 <filesets>
                     <fileset>
-                        <directory>src/main/angular/data-demo/dist</directory>
+                        <directory>src/main/angular/data_demo/dist</directory>
                         <followSymlinks>false</followSymlinks>
                     </fileset>
                     <fileset>
-                        <directory>src/main/angular/data-demo/node_modules</directory>
+                        <directory>src/main/angular/data_demo/node_modules</directory>
                         <followSymlinks>false</followSymlinks>
                     </fileset>
                 </filesets>
@@ -193,7 +193,7 @@
                             <resource>
                                 <directory>src/main/angular</directory>
                                 <includes>
-                                    <include>data-demo/**/*.*</include>
+                                    <include>data_demo/**/*.*</include>
                                 </includes>
                             </resource>
                         </resources>
@@ -219,7 +219,7 @@
                         <arguments>
                             <argument>install</argument>
                         </arguments>
-                        <workingDirectory>${basedir}/target/angular/data-demo</workingDirectory>
+                        <workingDirectory>${basedir}/target/angular/data_demo</workingDirectory>
                         <target>
                             <echo message="Npm install" />
                         </target>
@@ -238,7 +238,7 @@
                             <argument>run</argument>
                             <argument>build</argument>
                         </arguments>
-                        <workingDirectory>${basedir}/target/angular/data-demo</workingDirectory>
+                        <workingDirectory>${basedir}/target/angular/data_demo</workingDirectory>
                     </configuration>
                 </execution>
             </executions>

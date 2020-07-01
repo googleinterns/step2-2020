@@ -66,6 +66,8 @@ public class FileDisplayServlet extends HttpServlet {
     // Call the get() method through the post() method
     doGet(request, response);
 
+    response.sendRedirect("/#/explore");
+
   }
   
 }
