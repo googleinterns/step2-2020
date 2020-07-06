@@ -16,8 +16,8 @@ package com.google.sps.servlets;
 
 import java.util.List;
 
-import java.nio.file.Paths;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.http.Part;
 import java.util.stream.Collectors;
@@ -26,6 +26,7 @@ import org.apache.commons.io.IOUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+import com.google.cloud.WriteChannel;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.BlobInfo;
@@ -34,6 +35,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.nio.ByteBuffer;
 import com.google.cloud.storage.StorageOptions;
 import javax.servlet.annotation.MultipartConfig;
 
@@ -58,7 +60,7 @@ public class APKUploadServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException {
 
-    // The line below only retrieves fles with sizes greater than 
+    // The line below only retrieves files with sizes greater than 
     // 0 bytes from the server making the post.
     List<Part> apks = request.getParts().stream()
     .filter(part -> "files".equals(part.getName()) && part.getSize() > 0)
@@ -72,14 +74,28 @@ public class APKUploadServlet extends HttpServlet {
 
       // The line below retrieves the contents of the files 
       // in their bytes form for easy upload.
-      apk_file = IOUtils.toByteArray(file.getInputStream());
 
-      // The block of code below uploads only APK files to cloud storage.
+      // The block of code below uploads only APK files to cloud storage in chunks.
       blobId = BlobId.of(BUCKETNAME, fileName);
       blobInfo = BlobInfo.newBuilder(blobId).build();
-      storage.create(blobInfo, apk_file);
 
-    }
+      // The snippet below upload files to cloud storage bits by bits. This
+      // is essential to allow the upload of larger files through the use of
+      // a write channel.
+      try (WriteChannel writer = storage.writer(blobInfo)) {
+
+        apk_file = new byte[10_240];
+        try (InputStream input = file.getInputStream()) {
+            int limit;
+
+            // The loop below writes data to cloud storage in pieces rather
+            // than an entire chunk.
+            while ((limit = input.read(apk_file)) >= 0) {
+                writer.write(ByteBuffer.wrap(apk_file, 0, limit));
+            }
+        }
+      }
+    } 
     response.sendRedirect("/#/home");
   }
 }
