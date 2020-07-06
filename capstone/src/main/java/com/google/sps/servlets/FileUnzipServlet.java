@@ -63,7 +63,7 @@ public class FileUnzipServlet extends HttpServlet {
 
     if (checkUnzipSuccess) {
       System.out.println("File has been successfully unzipped.");
-      response.setContentType("text/html;charset=UTF-8");
+      response.sendRedirect("/#/explore");
     } else {
       response.sendError(415);
     }
