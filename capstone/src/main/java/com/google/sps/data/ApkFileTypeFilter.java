@@ -1,11 +1,9 @@
 package com.google.sps.data;
 
-import java.util.zip.ZipEntry;
-
 public class ApkFileTypeFilter {
-
-  public String getApkFileType(ZipEntry ze) {
-    String fileName = ze.getName();
+  /*Returns the file type of files in APK  for mapping */
+  
+  public String getApkFileType(String fileName) {
 
     if (fileName.startsWith("res/")) {
       return "res";
