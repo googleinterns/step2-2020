@@ -14,45 +14,63 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.APK;
+
 import java.io.IOException;
 
-import javax.servlet.http.HttpServlet;
+import java.util.List;
+import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
+import com.google.api.gax.paging.Page;
+
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 import javax.servlet.annotation.WebServlet;
+
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.cloud.storage.StorageOptions;
 
 
-@WebServlet("/delete_file")
-public class FileDeletionServlet extends HttpServlet {
+@WebServlet("/retrieve_files")
+public class FileRetrievalServlet extends HttpServlet {
 
   private final String PROJECTID = "step-2020-team-2";
   private final String BUCKETNAME = "vaderker-uploadedstoragebucket";
-
-  private String fileName;
-
-  private BlobId blobId;
 
   private Storage storage = StorageOptions.newBuilder().setProjectId(PROJECTID)
   .build().getService();
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
    throws IOException {
 
-    fileName = request.getParameter("file_name");
+    // The boolean below is meant to bypass the 
+    // generation of a folder as an APK file.
+    boolean isDirectory = true;
 
-    // The block of code below creates an ID that cloud storage
-    // uses to locate the desired APK and deletes it.
-    blobId = BlobId.of(BUCKETNAME, fileName);
-    storage.delete(blobId);
+    Bucket bucket = storage.get(BUCKETNAME);
 
-    response.sendRedirect("/#/explore");
+    List<APK> apks = new ArrayList<>();
+
+    // Retrieves all APKs in Cloud Storage for display.
+    Page<Blob> blobs = bucket.list();
+    for (Blob blob : blobs.iterateAll()) {
+        if (isDirectory) {isDirectory = false; continue;}
+        apks.add(new APK(blob.getName()));
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(apks));
 
   }
 }

@@ -21,7 +21,6 @@ import java.io.InputStream;
 
 import javax.servlet.http.Part;
 import java.util.stream.Collectors;
-import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -84,7 +83,7 @@ public class APKUploadServlet extends HttpServlet {
       // a write channel.
       try (WriteChannel writer = storage.writer(blobInfo)) {
 
-        apk_file = new byte[10_240];
+        apk_file = new byte[9000000];
         try (InputStream input = file.getInputStream()) {
             int limit;
 
@@ -95,7 +94,7 @@ public class APKUploadServlet extends HttpServlet {
             }
         }
       }
-    } 
-    response.sendRedirect("/#/home");
+    }
+    response.sendRedirect("/#/explore");
   }
 }

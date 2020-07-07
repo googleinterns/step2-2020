@@ -30,3 +30,18 @@
     background-color:wheat;
     color: white;
 }
+
+#display-files {
+    list-style-type: none;
+}
+
+.binary_file {
+    border: thin solid black;
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+}
+
+.binary_file span {
+    flex-grow: 1;
+}
