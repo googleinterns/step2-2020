@@ -25,9 +25,19 @@ public class ApkFileFeatures {
 
   }
 
-  public ApkFileFeatures(List<Long> dexFiles, List<Long> resFiles, List<Long> libFiles, List<Long> assetsFiles, List<Long> resourcesFiles, List<Long> miscFiles, Long numOfFiles, Long totalSize, Long sizeLost) {
+  public ApkFileFeatures(List<Long> dexFiles,
+                        List<Long> resFiles, 
+                        List<Long> libFiles, 
+                        List<Long> assetsFiles, 
+                        List<Long> resourcesFiles, 
+                        List<Long> miscFiles, 
+                        Long numOfFiles, 
+                        Long totalSize, 
+                        Long sizeLost) 
+    {
+
     // Creates class for apk features and does not require entity as a parameter
-    
+
     this.dexFileSize = new ArrayList<Long>(dexFiles);
     this.resFileSize = new ArrayList<Long>(resFiles);
     this.libraryFileSize = new ArrayList<Long>(libFiles);
