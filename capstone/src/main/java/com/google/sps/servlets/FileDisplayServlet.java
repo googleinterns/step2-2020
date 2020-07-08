@@ -67,7 +67,6 @@ public class FileDisplayServlet extends HttpServlet {
     doGet(request, response);
 
     response.sendRedirect("/#/explore");
-
   }
   
 }
