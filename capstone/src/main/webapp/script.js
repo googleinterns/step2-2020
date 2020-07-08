@@ -12,8 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function getDisplay() {
-  fetch("/display").then(response => response.json()).then((list) => {
+function getDisplay(fileName) {
+  const params = new URLSearchParams();
+  params.append('apk_name', fileName);
+  fetch("/display", {method: 'POST', body: params}).then(response => response.json()).then((list) => {
     // list is an arraylist containing strings, so we have to
     // reference its elements to create HTML content
     const contentListElement = document.getElementById("displayComponent");
@@ -21,21 +23,49 @@ function getDisplay() {
 
     for (var i = 0; i < list.length; i++) {
       contentListElement.appendChild(
-      createListElement(('Res: '+ list[i].resFileSize +'bytes')));
+      createListElement(('Res: '+ list[i].resFileSize +' bytes')));
       contentListElement.appendChild(
-      createListElement(('Java Code: '+ list[i].dexFileSize +'bytes')));
+      createListElement(('Java Code: '+ list[i].dexFileSize +' bytes')));
       contentListElement.appendChild(
-      createListElement(('Libraries: '+ list[i].libraryFileSize +'bytes')));
+      createListElement(('Libraries: '+ list[i].libraryFileSize +' bytes')));
       contentListElement.appendChild(
-      createListElement(('Assets: '+ list[i].assetsFileSize +'bytes')));
+      createListElement(('Assets: '+ list[i].assetsFileSize +' bytes')));
       contentListElement.appendChild(
-      createListElement(('Resources: '+ list[i].resourcesFileSize +'bytes')));
+      createListElement(('Resources: '+ list[i].resourcesFileSize +' bytes')));
       contentListElement.appendChild(
-        createListElement(('Miscellaneous: '+ list[i].miscFileSize +'bytes')));
+        createListElement(('Miscellaneous: '+ list[i].miscFileSize +' bytes')));
         contentListElement.appendChild(
-        createListElement(('Total '+ list[i].totalApkSize +'bytes')));
+        createListElement(('Total: '+ list[i].totalApkSize +' bytes')));
       }
     });
+}
+
+function drawChart(fileName) {
+  const params = new URLSearchParams();
+  params.append('apk_name', fileName);
+  fetch("/display", {method: 'POST', body: params}).then(response => response.json()).then((list) => {
+
+      for ( var i = 0; i < list.length; i++) {
+          var data = google.visualization.arrayToDataTable([
+          ['Content', 'Size'],
+          ['Res',  list[i].resFileSize ],
+          ['Java Code',  list[i].dexFileSize],
+          ['Libraries', list[i].libraryFileSize],
+          ['Assets', list[i].assetsFileSize],
+          ['Resources',list[i].resourcesFileSize ],
+          ['Miscellaneous' , list[i].miscFileSize ]
+      ]);
+      }
+
+      var options = {
+        title: 'Apk Content',
+        is3D: true,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+      chart.draw(data, options);
+   });
+
 }
 
 function displayFiles() {
@@ -47,36 +77,24 @@ function displayFiles() {
   });
 }
 
-function drawChart() {
-    fetch("/display").then(response => response.json()).then((list) => {
-
-        for ( var i = 0; i < list.length; i++) {
-            var data = google.visualization.arrayToDataTable([
-            ['Content', 'Size'],
-            ['Res',  list[i].resFileSize ],
-            ['Java Code',  list[i].dexFileSize],
-            ['Libraries', list[i].libraryFileSize],
-            ['Assets', list[i].assetsFileSize],
-            ['Resources',list[i].resourcesFileSize ],
-            ['Miscellaneous' , list[i].miscFileSize ]
-        ]);
-        }
-
-        var options = {
-          title: 'Apk Content',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-     });
-
+function deleteAPK(fileName) {
+  const params = new URLSearchParams();
+  params.append('file_name', fileName);
+  fetch('/delete_file', {method: 'POST', body: params});
 }
 
-function deleteAPK(apk) {
-  const params = new URLSearchParams();
-  params.append('file_name', apk.name);
-  fetch('/delete_file', {method: 'POST', body: params});
+// logInStatus is called on every page to ensure
+// certain privileges are enjoyed by users who
+// choose to be verified.
+
+async function logInStatus() {
+  const response = await fetch('/logon', {method: 'POST'});
+  const isLoggedIn = await response.text();
+  if (isLoggedIn.trim() == "true") {
+    document.getElementById('login').style.display = "none";
+    return;
+  }
+  document.getElementById('logout').style.display = "none";
 }
 
 function createListElement(text) {
@@ -95,18 +113,16 @@ function createApkElement(apk) {
   const exploreButtonElement = document.createElement('button');
   exploreButtonElement.className = 'btn btn-primary';
   exploreButtonElement.innerText = 'Explore';
-  exploreButtonElement.setAttribute('disabled', 'true');
   exploreButtonElement.addEventListener('click', () => {
-    getDisplay();
-    drawChart();
+    getDisplay(apk.name);
+    drawChart(apk.name);
   });
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.className = 'btn btn-primary';
   deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.setAttribute('disabled', 'true');
   deleteButtonElement.addEventListener('click', () => {
-    deleteAPK(apk);
+    deleteAPK(apk.name);
 
     // Remove the apk from the DOM.
     apkElement.remove();

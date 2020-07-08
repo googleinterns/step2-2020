@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import com.google.api.gax.paging.Page;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,13 +51,10 @@ public class FileUnzipServlet extends HttpServlet {
     // The ID of GCS bucket
     String bucketName = "vaderker-uploadedstoragebucket";
 
-    // TODO: (https://github.com/googleinterns/step2-2020/issues/21): Hard-coded name of apk until the upload and login functions have been fully implemented
-    // String fileName = request.getParamter("files");
-    String nameOfApk = "ApiDemos-debug.apk";
+    String nameOfApk = (String) request.getAttribute("file_name");
 
     // The ID of your GCS object
-    String objectName = "apks/" + nameOfApk;
-    System.out.println(objectName);
+    String objectName = (String) request.getAttribute("object_name");
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
     
@@ -64,29 +62,24 @@ public class FileUnzipServlet extends HttpServlet {
     boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
 
     if (checkUnzipSuccess) {
+
       System.out.println("File " + nameOfApk + " uploaded to bucket " + bucketName + " as " + objectName);
       response.setContentType("text/html;charset=UTF-8");
+      response.getWriter().println("success");
+
     } else {
       response.sendError(500);
     }
-
   }
   
   public static Blob getApkObjectFromCloudStorage(String projectId, String bucketName, String objectName) {
     
     // Initiate bucket details from CloudStorage for apk retrieval
     Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
-    Bucket bucket = storage.get(bucketName);
-    
-    // Prints the entire apk in Cloud Storage to the console
-    Page<Blob> blobs = bucket.list();
-    for (Blob blob1 : blobs.iterateAll()) {
-      System.out.println(blob1.getName());
-    }
 
     // Retrieve the blob for the apk 
     Blob blob = storage.get(BlobId.of(bucketName, objectName));
-    System.out.println(blob.getName());
+    //System.out.println(blob.getName());
     
     return blob;
 
@@ -145,8 +138,7 @@ public class FileUnzipServlet extends HttpServlet {
       
       // Initiate the Datastore service for storage of entity created
       Entity taskEntity = new Entity("UserFileFeature");
-      taskEntity.setProperty("UserId", userId);
-      taskEntity.setProperty("File_Name", nameOfApk);
+      taskEntity.setProperty("UserId", userId + nameOfApk);
       taskEntity.setProperty("Res_File_Size", resFileSize);
       taskEntity.setProperty("Dex_File_Size", dexFileSize);
       taskEntity.setProperty("Lib_File_Size", libraryFileSize);
