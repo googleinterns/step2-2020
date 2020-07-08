@@ -30,6 +30,7 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.BlobInfo;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +56,7 @@ public class APKUploadServlet extends HttpServlet {
   private Storage storage = StorageOptions.newBuilder().setProjectId(PROJECTID)
   .build().getService();
 
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException {
@@ -65,14 +67,16 @@ public class APKUploadServlet extends HttpServlet {
     .filter(part -> "files".equals(part.getName()) && part.getSize() > 0)
     .collect(Collectors.toList());
 
+    RequestDispatcher unzip = this.getServletContext()
+    .getRequestDispatcher("/unzip");
+
+
     for (Part file : apks) {
 
       fileName = "apks/" + file.getSubmittedFileName();
+      
 
       if ( !(fileName.trim().endsWith(".apk")) ) {continue;}
-
-      // The line below retrieves the contents of the files 
-      // in their bytes form for easy upload.
 
       // The block of code below uploads only APK files to cloud storage in chunks.
       blobId = BlobId.of(BUCKETNAME, fileName);
@@ -83,17 +87,24 @@ public class APKUploadServlet extends HttpServlet {
       // a write channel.
       try (WriteChannel writer = storage.writer(blobInfo)) {
 
-        apk_file = new byte[9000000];
+        apk_file = new byte[70000];
         try (InputStream input = file.getInputStream()) {
-            int limit;
+          int limit;
 
-            // The loop below writes data to cloud storage in pieces rather
-            // than an entire chunk.
-            while ((limit = input.read(apk_file)) >= 0) {
-                writer.write(ByteBuffer.wrap(apk_file, 0, limit));
-            }
+          // The loop below writes data to cloud storage in pieces rather
+          // than an entire chunk.
+          while ((limit = input.read(apk_file)) >= 0) {
+            writer.write(ByteBuffer.wrap(apk_file, 0, limit));
+          }
+
         }
+        
       }
+
+      request.setAttribute("object_name", fileName);
+      request.setAttribute("file_name", file.getSubmittedFileName());
+      unzip.include(request, response);
+
     }
     response.sendRedirect("/#/explore");
   }

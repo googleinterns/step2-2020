@@ -64,7 +64,7 @@ public class FileRetrievalServlet extends HttpServlet {
     Page<Blob> blobs = bucket.list();
     for (Blob blob : blobs.iterateAll()) {
         if (isDirectory) {isDirectory = false; continue;}
-        apks.add(new APK(blob.getName()));
+        apks.add(new APK(blob.getName().substring(5)));
     }
 
     Gson gson = new Gson();
