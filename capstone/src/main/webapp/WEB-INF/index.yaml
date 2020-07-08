@@ -1,0 +1,6 @@
+indexes: 
+- kind: UserFileFeature
+  properties:
+  - name: UserId
+  - name: Timestamp
+    direction: desc
