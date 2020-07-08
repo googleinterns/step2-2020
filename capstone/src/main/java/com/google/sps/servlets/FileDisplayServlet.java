@@ -20,13 +20,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import com.google.gson.Gson; //Convert json to string
 
 
 
 @WebServlet("/display")
-@MultipartConfig
 public class FileDisplayServlet extends HttpServlet {
 
   @Override
@@ -37,11 +35,13 @@ public class FileDisplayServlet extends HttpServlet {
     // TODO: (https://github.com/googleinterns/step2-2020/issues/19): Hard-coded UserId until the upload and login functions have been fully implemented
     // String userId = request.getParamter("userId");
     String userId = "abcde";
+    String fileName = request.getParameter("apk_name");
 
     // Create a filter for retrieval of APKs specific to a certain user with UserId
-    Filter keyFilter =
-    new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
-    Query query = new Query("UserFileFeature").setFilter(keyFilter).addSort("Timestamp", SortDirection.DESCENDING);
+    Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId + fileName);
+
+    Query query = new Query("UserFileFeature").setFilter(userIdFilter);
+    query.addSort("Timestamp", SortDirection.DESCENDING);
 
     // Initiate Datastore service
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -65,9 +65,6 @@ public class FileDisplayServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // Call the get() method through the post() method
     doGet(request, response);
-
-    response.sendRedirect("/#/explore");
-
   }
   
 }

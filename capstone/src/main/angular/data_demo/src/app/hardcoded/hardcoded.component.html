@@ -5,27 +5,25 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Demo APK</h5>
-                    <form method="POST" enctype="multipart/form-data" action="/display">      
-                        <button onclick="getDisplay(); drawChart();">Explore</button>
-                    </form>                                
-                        <br>
-                        <div class="card-text">
-                            <form action="/binary_upload" method="post" enctype="multipart/form-data">
-                                <input type="file" name="files" multiple />
-                                <input type="submit" value="Upload File"/>
-                            </form>
-                        </div>
-                        <br>
-                        <div>
-                            More APKS
-                        </div>
-                        <br>
 
-                    <a href="#" class="btn btn-primary">Explore APK</a>
+                    <br>
+                    
+                    <div>
 
-                    <form method="POST" action="/delete_file" style="display: inline; padding: 10px;">    
-                        <button class="btn btn-primary" type="submit" disabled>Delete APK</button>
-                    </form>
+                        <ul id="display-files"></ul>
+                        
+                    </div>
+
+                    <br>
+
+                    <div class="card-text">
+                        <form action="/binary_upload" method="post" enctype="multipart/form-data">
+                            <input type="file" name="files" multiple />
+                            <input type="submit" value="Upload File"/>
+                        </form>
+                    </div>
+
+                    <br>
 
                 </div>
             </div>
