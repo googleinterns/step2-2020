@@ -33,10 +33,10 @@ public class LogoutServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (userService.isUserLoggedIn()) {
-      response.sendRedirect(userService.createLogoutURL("/signout"));
+      response.sendRedirect(userService.createLogoutURL(request.getRequestURI()));
     }
 
-    if (!userService.isUserLoggedIn()) {response.sendRedirect("/#/home");}
+    response.sendRedirect("/#/home");
     
   }
 }

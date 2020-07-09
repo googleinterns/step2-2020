@@ -73,9 +73,9 @@ public class FileDeletionServlet extends HttpServlet {
 
   private void deleteUnzippedApk(DatastoreService datastore, String apk_name) {
 
-    Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, "abcde" + apk_name);
+    Filter fileIdFilter = new FilterPredicate("fileId", FilterOperator.EQUAL, "abcde" + apk_name);
 
-    Query query = new Query("UserFileFeature").setFilter(userIdFilter);
+    Query query = new Query("UserFileFeature").setFilter(fileIdFilter);
 
     PreparedQuery results = datastore.prepare(query);
 

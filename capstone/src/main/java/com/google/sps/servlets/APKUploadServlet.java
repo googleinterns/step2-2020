@@ -87,7 +87,7 @@ public class APKUploadServlet extends HttpServlet {
       // a write channel.
       try (WriteChannel writer = storage.writer(blobInfo)) {
 
-        apk_file = new byte[70000];
+        apk_file = new byte[1_240];
         try (InputStream input = file.getInputStream()) {
           int limit;
 

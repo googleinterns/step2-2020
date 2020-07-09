@@ -125,12 +125,12 @@ public class FileUnzipServlet extends HttpServlet {
       
 
       // Set attributes for the entity to be stored in Datastore
-      Entity taskEntity = unzipContent.toEntity(userId + nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
+      Entity fileEntity = unzipContent.toEntity(userId + nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
 
 
       // Initiate the Datastore service for storage of entity created
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(taskEntity);
+      datastore.put(fileEntity);
      
       //close last ZipEntry
       zis.closeEntry();
