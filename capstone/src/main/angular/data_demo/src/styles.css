@@ -30,6 +30,22 @@
     background-color:wheat;
     color: white;
 }
+.bar {
+    fill: #5f89ad;
+}
+
+.axis {
+    font-size: 13px;
+}
+
+.axis path,.axis line {
+    fill: none;
+    display: none;
+}
+
+.label {
+    font-size: 13px;
+}
 
 #display-files {
     list-style-type: none;
