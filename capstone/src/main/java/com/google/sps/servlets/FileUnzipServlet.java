@@ -22,17 +22,16 @@ import java.io.ByteArrayInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import com.google.api.gax.paging.Page;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import com.google.api.gax.paging.Page;
 
 
 @WebServlet("/unzip")
-@MultipartConfig
 public class FileUnzipServlet extends HttpServlet {
 
   @Override
@@ -48,13 +47,11 @@ public class FileUnzipServlet extends HttpServlet {
     // The ID of GCS bucket
     String bucketName = "vaderker-uploadedstoragebucket";
 
-    // TODO: (https://github.com/googleinterns/step2-2020/issues/21): Hard-coded name of apk until the upload and login functions have been fully implemented
-    // String fileName = request.getParamter("files");
-    String nameOfApk = "anubis_debug.apk";
+    // Name of APK
+    String nameOfApk = (String) request.getAttribute("file_name");
 
     // The ID of your GCS object
-    String objectName = "apks/" + nameOfApk;
-    System.out.println(objectName);
+    String objectName = (String) request.getAttribute("object_name");
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
     
@@ -62,29 +59,23 @@ public class FileUnzipServlet extends HttpServlet {
     boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
 
     if (checkUnzipSuccess) {
-      System.out.println("File has been successfully unzipped.");
-      response.sendRedirect("/#/explore");
-    } else {
-      response.sendError(415);
-    }
 
+      response.setContentType("text/html;charset=UTF-8");
+      response.getWriter().println("success");
+      
+      System.out.println("File has been successfully unzipped.");
+      
+    } else {response.sendError(415);}
   }
   
   public static Blob getApkObjectFromCloudStorage(String projectId, String bucketName, String objectName) {
     
     // Initiate bucket details from CloudStorage for apk retrieval
     Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
-    Bucket bucket = storage.get(bucketName);
-    
-    // Prints the entire apk in Cloud Storage to the console
-    Page<Blob> blobs = bucket.list();
-    for (Blob blob1 : blobs.iterateAll()) {
-      System.out.println(blob1.getName());
-    }
 
     // Retrieve the blob for the apk 
     Blob blob = storage.get(BlobId.of(bucketName, objectName));
-    System.out.println(blob.getName());
+    //System.out.println(blob.getName());
     
     return blob;
   }
@@ -161,17 +152,15 @@ public class FileUnzipServlet extends HttpServlet {
 
       //Print the feature to the console
       System.out.println(filesCount);
-      
+
       // Set attributes for the entity to be stored in Datastore
-      Entity taskEntity = unzipContent.toEntity(userId, nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
+      Entity fileEntity = unzipContent.toEntity(userId + nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
 
       // Initiate the Datastore service for storage of entity created
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(taskEntity);
-      
-      int ZipSize = zis.available();
-      System.out.println("size in KB : " + ZipSize);
 
+      datastore.put(fileEntity);
+     
       //close last ZipEntry
       zis.closeEntry();
       zis.close();
