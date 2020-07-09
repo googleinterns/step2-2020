@@ -65,23 +65,22 @@ public class ApkUnzipContent {
   }
 
   // Creates entity to be stored in Datastore using contents retrieved from the unzip function
-  public Entity toEntity(String userId, String nameOfApk, Long apkSizeOnDisk, Long totalApkSize, Long filesCount) {
-    Entity taskEntity = new Entity("UserFileFeature");
-    taskEntity.setProperty("UserId", userId);
-    taskEntity.setProperty("File_Name", nameOfApk);
-    taskEntity.setProperty("Res_File_Size", apkPackageContentMap.get("res"));
-    taskEntity.setProperty("Dex_File_Size", apkPackageContentMap.get("dex"));
-    taskEntity.setProperty("Lib_File_Size", apkPackageContentMap.get("lib"));
-    taskEntity.setProperty("Assets_File_Size", apkPackageContentMap.get("assets"));
-    taskEntity.setProperty("Resources_File_Size", apkPackageContentMap.get("arsc"));
-    taskEntity.setProperty("Misc_File_Size", apkPackageContentMap.get("misc"));
-    taskEntity.setProperty("Total_Apk_size", totalApkSize);
-    taskEntity.setProperty("Files_Count", filesCount);
-    taskEntity.setProperty("Apk_Disk_Size", apkSizeOnDisk);
-    taskEntity.setProperty("Apk_Lost_Size", (apkSizeOnDisk - totalApkSize));
-    taskEntity.setProperty("Timestamp", timestamp);
+  public Entity toEntity(String fileId, Long apkSizeOnDisk, Long totalApkSize, Long filesCount) {
+    Entity fileEntity = new Entity("UserFileFeature");
+    fileEntity.setProperty("fileId", fileId);
+    fileEntity.setProperty("Res_File_Size", apkPackageContentMap.get("res"));
+    fileEntity.setProperty("Dex_File_Size", apkPackageContentMap.get("dex"));
+    fileEntity.setProperty("Lib_File_Size", apkPackageContentMap.get("lib"));
+    fileEntity.setProperty("Assets_File_Size", apkPackageContentMap.get("assets"));
+    fileEntity.setProperty("Resources_File_Size", apkPackageContentMap.get("arsc"));
+    fileEntity.setProperty("Misc_File_Size", apkPackageContentMap.get("misc"));
+    fileEntity.setProperty("Total_Apk_size", totalApkSize);
+    fileEntity.setProperty("Files_Count", filesCount);
+    fileEntity.setProperty("Apk_Disk_Size", apkSizeOnDisk);
+    fileEntity.setProperty("Apk_Lost_Size", (apkSizeOnDisk - totalApkSize));
+    fileEntity.setProperty("Timestamp", timestamp);
 
-    return taskEntity;
+    return fileEntity;
   }
     
 }

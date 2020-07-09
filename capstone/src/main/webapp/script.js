@@ -12,60 +12,69 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function getDisplay(fileName) {
+async function showFileStatistics(filename) {
   const params = new URLSearchParams();
-  params.append('apk_name', fileName);
-  fetch("/display", {method: 'POST', body: params}).then(response => response.json()).then((list) => {
-    // list is an arraylist containing strings, so we have to
-    // reference its elements to create HTML content
-    const contentListElement = document.getElementById("displayComponent");
-    contentListElement.innerHTML = '';
+  params.append('apk_name', filename);
 
-    for (var i = 0; i < list.length; i++) {
-      contentListElement.appendChild(
-      createListElement(('Res: '+ list[i].resFileSize +' bytes')));
-      contentListElement.appendChild(
-      createListElement(('Java Code: '+ list[i].dexFileSize +' bytes')));
-      contentListElement.appendChild(
-      createListElement(('Libraries: '+ list[i].libraryFileSize +' bytes')));
-      contentListElement.appendChild(
-      createListElement(('Assets: '+ list[i].assetsFileSize +' bytes')));
-      contentListElement.appendChild(
-      createListElement(('Resources: '+ list[i].resourcesFileSize +' bytes')));
-      contentListElement.appendChild(
-        createListElement(('Miscellaneous: '+ list[i].miscFileSize +' bytes')));
-        contentListElement.appendChild(
-        createListElement(('Total: '+ list[i].totalApkSize +' bytes')));
-      }
-    });
+  const response = await fetch("/display", {method: 'POST', body: params});
+  const fileStatistics = await response.json();
+
+  getDisplay(fileStatistics);
+  drawChart(fileStatistics);
 }
 
-function drawChart(fileName) {
-  const params = new URLSearchParams();
-  params.append('apk_name', fileName);
-  fetch("/display", {method: 'POST', body: params}).then(response => response.json()).then((list) => {
+function getDisplay(list) {
+  // list is an arraylist containing strings, so we have to
+  // reference its elements to create HTML content
+  const contentListElement = document.getElementById("displayComponent");
+  contentListElement.innerHTML = '';
 
-      for ( var i = 0; i < list.length; i++) {
-          var data = google.visualization.arrayToDataTable([
-          ['Content', 'Size'],
-          ['Res',  list[i].resFileSize ],
-          ['Java Code',  list[i].dexFileSize],
-          ['Libraries', list[i].libraryFileSize],
-          ['Assets', list[i].assetsFileSize],
-          ['Resources',list[i].resourcesFileSize ],
-          ['Miscellaneous' , list[i].miscFileSize ]
-      ]);
-      }
+  for (var i = 0; i < list.length; i++) {
+    contentListElement.appendChild(
+    createListElement(('Res: '+ list[i].resFileSize +' bytes')));
+    contentListElement.appendChild(
+    createListElement(('Java Code: '+ list[i].dexFileSize +' bytes')));
+    contentListElement.appendChild(
+    createListElement(('Libraries: '+ list[i].libraryFileSize +' bytes')));
+    contentListElement.appendChild(
+    createListElement(('Assets: '+ list[i].assetsFileSize +' bytes')));
+    contentListElement.appendChild(
+    createListElement(('Resources: '+ list[i].resourcesFileSize +' bytes')));
+    contentListElement.appendChild(
+      createListElement(('Miscellaneous: '+ list[i].miscFileSize +' bytes')));
+      contentListElement.appendChild(
+      createListElement(('Total: '+ list[i].totalApkSize +' bytes')));
+  }
+}
 
-      var options = {
-        title: 'Apk Content',
-        is3D: true,
-      };
+function drawChart(list) {
 
-      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-      chart.draw(data, options);
-   });
+  for ( var i = 0; i < list.length; i++) {
+      var data = google.visualization.arrayToDataTable([
+      ['Content', 'Size'],
+      ['Res',  list[i].resFileSize ],
+      ['Java Code',  list[i].dexFileSize],
+      ['Libraries', list[i].libraryFileSize],
+      ['Assets', list[i].assetsFileSize],
+      ['Resources',list[i].resourcesFileSize ],
+      ['Miscellaneous' , list[i].miscFileSize ]
+  ]);
+  }
 
+  var options = {
+    title: 'Apk Content',
+    is3D: true,
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  chart.draw(data, options);
+
+}
+
+function onSignIn(googleUser) {
+  // Useful data for your client-side scripts:
+  var profile = googleUser.getBasicProfile();
+  console.log('Full Name: ' + profile.getName());
 }
 
 function displayFiles() {
@@ -114,8 +123,7 @@ function createApkElement(apk) {
   exploreButtonElement.className = 'btn btn-primary';
   exploreButtonElement.innerText = 'Explore';
   exploreButtonElement.addEventListener('click', () => {
-    getDisplay(apk.name);
-    drawChart(apk.name);
+    showFileStatistics(apk.name);
   });
 
   const deleteButtonElement = document.createElement('button');

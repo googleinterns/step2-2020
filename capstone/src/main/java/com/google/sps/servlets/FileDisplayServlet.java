@@ -38,10 +38,10 @@ public class FileDisplayServlet extends HttpServlet {
     String fileName = request.getParameter("apk_name");
 
     // Create a filter for retrieval of APKs specific to a certain user with UserId
-    Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId + fileName);
+    Filter fileIdFilter = new FilterPredicate("fileId", FilterOperator.EQUAL, userId + fileName);
 
-    Query query = new Query("UserFileFeature").setFilter(userIdFilter);
-    query.addSort("Timestamp", SortDirection.DESCENDING);
+    Query query = new Query("UserFileFeature").setFilter(fileIdFilter);
+    //query.addSort("Timestamp", SortDirection.DESCENDING);
 
     // Initiate Datastore service
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
