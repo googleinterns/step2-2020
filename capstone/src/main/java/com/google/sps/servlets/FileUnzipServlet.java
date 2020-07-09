@@ -50,7 +50,7 @@ public class FileUnzipServlet extends HttpServlet {
 
     // TODO: (https://github.com/googleinterns/step2-2020/issues/21): Hard-coded name of apk until the upload and login functions have been fully implemented
     // String fileName = request.getParamter("files");
-    String nameOfApk = "ApiDemos-debug.apk";
+    String nameOfApk = "anubis_debug.apk";
 
     // The ID of your GCS object
     String objectName = "apks/" + nameOfApk;
@@ -96,7 +96,8 @@ public class FileUnzipServlet extends HttpServlet {
     long totalApkSize = 0;
     long filesCount = 0;
 
-    // TODO: (https://github.com/googleinterns/step2-2020/issues/22): Change the retrieved size from uncompressed to compressed size so that we can show the zip noise due to zip alignment and zipCentralDict
+    // TODO: (https://github.com/googleinterns/step2-2020/issues/22): Change the retrieved size 
+    // from uncompressed to compressed size so that we can show the zip noise due to zip alignment and zipCentralDict
     try {
 
       //Declare unzip elements
@@ -112,15 +113,43 @@ public class FileUnzipServlet extends HttpServlet {
 
       while(ze != null) {
         String fileName = ze.getName();
+        long compressedSize = ze.getCompressedSize();
+        long uncompressedSize = ze.getSize();
+
+        // For testing purposes in the console
+        System.out.printf("File %s:\n", fileName);
+        System.out.printf("Entry Compressed Size %d:\n", compressedSize);
+
+        // Handle cases where ZipEntry returns -1 for unknown sizes and 
+        if (uncompressedSize == -1) {
+          compressedSize = 0;
+          uncompressedSize = 0;
+          long startOfFile = is.available();
+          long read = 0;
+          byte[] buffer = new byte[10000];
+
+          // Calculates uncompressed size
+          while ((read = zis.read(buffer, 0, 10000)) > 0) {
+            uncompressedSize += read;
+          }
+
+          // Calculates the compressed size
+          compressedSize = startOfFile - is.available();
+          System.out.printf("Real Compressed Size %d:\n", compressedSize);
+          System.out.printf("Real Uncompressed Size %d:\n", uncompressedSize);
+        }
+        System.out.println();
+
+        // Map file types and names to storage
         unzipContent.addApkDataToMapStorage(
           fileName, 
           fileFilter.getApkFileType(fileName),
-          ze.getSize(),
-          ze.getCompressedSize()
+          uncompressedSize,
+          compressedSize
         );
-      
-        totalApkSize += ze.getCompressedSize();
-        
+
+        totalApkSize += compressedSize;
+
         // Count number of files
         if (!ze.isDirectory()) {
           filesCount++;
@@ -139,7 +168,10 @@ public class FileUnzipServlet extends HttpServlet {
       // Initiate the Datastore service for storage of entity created
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(taskEntity);
-     
+      
+      int ZipSize = zis.available();
+      System.out.println("size in KB : " + ZipSize);
+
       //close last ZipEntry
       zis.closeEntry();
       zis.close();
