@@ -59,13 +59,12 @@ public class FileUnzipServlet extends HttpServlet {
     boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
 
     if (checkUnzipSuccess) {
-
-      response.setContentType("text/html;charset=UTF-8");
-      response.getWriter().println("success");
-      
+      response.getWriter().println("success");      
       System.out.println("File has been successfully unzipped.");
-      
-    } else {response.sendError(415);}
+    } else {
+      response.sendError(415);
+    }
+
   }
   
   public static Blob getApkObjectFromCloudStorage(String projectId, String bucketName, String objectName) {
