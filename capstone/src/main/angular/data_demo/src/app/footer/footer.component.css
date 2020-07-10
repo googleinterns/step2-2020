@@ -1,6 +1,6 @@
 
 footer {
-    position: fixed;
+    position: static;
     left: 0;
     color:black;
     bottom: 0;

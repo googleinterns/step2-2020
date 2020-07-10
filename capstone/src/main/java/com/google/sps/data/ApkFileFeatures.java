@@ -10,6 +10,7 @@ public class ApkFileFeatures {
   // Declare variables and lists for content in APK
   private ArrayList<Long> dexFileSize, resFileSize, libraryFileSize, assetsFileSize, resourcesFileSize, miscFileSize;
   private Long totalApkSize, filesCount, lostSize;
+  private String apkName;
 
   // Create APK class once data has been received from Datastore
   public ApkFileFeatures(Entity entity) {

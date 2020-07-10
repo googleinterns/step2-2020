@@ -5,17 +5,12 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Demo APK</h5>
-
-                    <br>
-                    
+                         
                     <div>
 
                         <ul id="display-files"></ul>
                         
                     </div>
-
-                    <br>
-
                     <div class="card-text">
                         <form action="/binary_upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="files" multiple />
@@ -32,10 +27,15 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">APK Content Display</h5>
-                        <p class="card-text"></p>
+                    <h4 id="fileName"></h4>
+                        <select id="chart" onchange="changeChart()">
+                            <option value="1" >d3 chart</option>
+                            <option value="2">Google Chart</option>
+                        </select>
+
+                        <div id="display"></div>
+                        <div id="displayChart" style="width: 100%; height: 500px;"></div> 
                 </div>
-                <div id="displayComponent"></div>
-                <div id="piechart_3d" style="width: 100%; height: 500px;"></div>
             </div>
         </div>
     </div>

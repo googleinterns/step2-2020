@@ -47,10 +47,10 @@ public class FileUnzipServlet extends HttpServlet {
     // The ID of GCS bucket
     String bucketName = "vaderker-uploadedstoragebucket";
 
-    String nameOfApk = (String) request.getAttribute("file_name");
+    String nameOfApk =  "ApiDemos-debug.apk";
 
     // The ID of your GCS object
-    String objectName = (String) request.getAttribute("object_name");
+    String objectName =  "apks/" + nameOfApk;
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
     
