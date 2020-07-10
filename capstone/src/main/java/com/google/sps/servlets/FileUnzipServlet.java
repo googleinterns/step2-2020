@@ -65,9 +65,7 @@ public class FileUnzipServlet extends HttpServlet {
     boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
 
     if (checkUnzipSuccess) {
-      LOGGER.info("File has been successfully unzipped.");     
-      System.out.println("File has been successfully unzipped.");
-      
+      LOGGER.info("File has been successfully unzipped."); 
     } else {
       response.sendError(415);
     }
@@ -93,8 +91,6 @@ public class FileUnzipServlet extends HttpServlet {
     long totalApkSize = 0;
     long filesCount = 0;
 
-    // TODO: (https://github.com/googleinterns/step2-2020/issues/22): Change the retrieved size 
-    // from uncompressed to compressed size so that we can show the zip noise due to zip alignment and zipCentralDict
     try {
 
       //Declare unzip elements
@@ -114,8 +110,6 @@ public class FileUnzipServlet extends HttpServlet {
         long uncompressedSize = ze.getSize();
 
         // For testing purposes in the console
-        System.out.printf("File %s:\n", fileName);
-        System.out.printf("Entry Compressed Size %d:\n", compressedSize);
         LOGGER.info("Real Compressed Size " + compressedSize);
         LOGGER.info("Real Uncompressed Size " + uncompressedSize);
 
@@ -134,10 +128,8 @@ public class FileUnzipServlet extends HttpServlet {
 
           // Calculates the compressed size
           compressedSize = startOfFile - is.available();
-          System.out.printf("Real Compressed Size %d:\n", compressedSize);
-          System.out.printf("Real Uncompressed Size %d:\n", uncompressedSize);
-          LOGGER.info("Real Compressed Size " + compressedSize);
-          LOGGER.info("Real Uncompressed Size " + uncompressedSize);
+          LOGGER.info("Real Compressed Size: " + compressedSize);
+          LOGGER.info("Real Uncompressed Size: " + uncompressedSize);
 
         }
         System.out.println();
@@ -162,14 +154,14 @@ public class FileUnzipServlet extends HttpServlet {
       }
 
       //Print the feature to the console
-      System.out.println(filesCount);
+      LOGGER.info("" + filesCount);
+
 
       // Set attributes for the entity to be stored in Datastore
       Entity fileEntity = unzipContent.toEntity(userId + nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
 
       // Initiate the Datastore service for storage of entity created
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
       datastore.put(fileEntity);
      
       //close last ZipEntry
