@@ -22,6 +22,10 @@ import java.io.ByteArrayInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import java.util.logging.Level; 
+import java.util.logging.Logger; 
+import java.util.logging.*; 
+
 import com.google.api.gax.paging.Page;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +37,8 @@ import javax.servlet.ServletException;
 
 @WebServlet("/unzip")
 public class FileUnzipServlet extends HttpServlet {
+  
+  private static final Logger LOGGER = Logger.getLogger(FileUnzipServlet.class.getName());
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,8 +65,9 @@ public class FileUnzipServlet extends HttpServlet {
     boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
 
     if (checkUnzipSuccess) {
-      response.getWriter().println("success");      
+      LOGGER.info("File has been successfully unzipped.");     
       System.out.println("File has been successfully unzipped.");
+      
     } else {
       response.sendError(415);
     }
@@ -109,6 +116,8 @@ public class FileUnzipServlet extends HttpServlet {
         // For testing purposes in the console
         System.out.printf("File %s:\n", fileName);
         System.out.printf("Entry Compressed Size %d:\n", compressedSize);
+        LOGGER.info("Real Compressed Size " + compressedSize);
+        LOGGER.info("Real Uncompressed Size " + uncompressedSize);
 
         // Handle cases where ZipEntry returns -1 for unknown sizes and 
         if (uncompressedSize == -1) {
@@ -127,6 +136,9 @@ public class FileUnzipServlet extends HttpServlet {
           compressedSize = startOfFile - is.available();
           System.out.printf("Real Compressed Size %d:\n", compressedSize);
           System.out.printf("Real Uncompressed Size %d:\n", uncompressedSize);
+          LOGGER.info("Real Compressed Size " + compressedSize);
+          LOGGER.info("Real Uncompressed Size " + uncompressedSize);
+
         }
         System.out.println();
 
