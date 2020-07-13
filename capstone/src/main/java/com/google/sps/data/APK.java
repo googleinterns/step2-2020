@@ -21,8 +21,12 @@ objects to list elements for html.*/
 public final class APK {
 
   private final String name;
+  private final String isOwner;
+  private final long time;
 
-  public APK(String file_name) {
+  public APK(final String file_name, final String ownership, final long recordedTime) {
     this.name = file_name;
+    this.isOwner = ownership;
+    this.time = recordedTime;
   }
 }

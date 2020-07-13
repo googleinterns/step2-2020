@@ -15,6 +15,10 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
@@ -34,12 +38,12 @@ import javax.servlet.ServletException;
 @WebServlet("/unzip")
 public class FileUnzipServlet extends HttpServlet {
 
+  private UserService userService = UserServiceFactory.getUserService();
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
-    // TODO: (https://github.com/googleinterns/step2-2020/issues/20): Hard-coded UserId until the upload and login functions have been fully implemented
-    // String userId = request.getParamter("userId");
-    String userId = "abcde";
+
+    String userId = userService.getCurrentUser().getUserId();
     
     // The ID of GCP project
     String projectId = "step-2020-team-2";
@@ -49,13 +53,15 @@ public class FileUnzipServlet extends HttpServlet {
 
     String nameOfApk = (String) request.getAttribute("file_name");
 
+    long Time = (long) request.getAttribute("Time");
+
     // The ID of your GCS object
     String objectName = (String) request.getAttribute("object_name");
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
     
     // Checks the success of the unzip function and responds with the appropriate values
-    boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId);
+    boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId, Time);
 
     if (checkUnzipSuccess) {
 
@@ -79,7 +85,7 @@ public class FileUnzipServlet extends HttpServlet {
     return blob;
   }
 
-  public static boolean analyzeApkFeatures(String nameOfApk, Blob blob, String userId) {
+  public static boolean analyzeApkFeatures(String nameOfApk, Blob blob, String userId, long Time) {
 
     byte[] apkBytes = blob.getContent();
     long apkSizeOnDisk = blob.getSize();
@@ -125,7 +131,7 @@ public class FileUnzipServlet extends HttpServlet {
       
 
       // Set attributes for the entity to be stored in Datastore
-      Entity fileEntity = unzipContent.toEntity(userId + nameOfApk, apkSizeOnDisk, totalApkSize, filesCount);
+      Entity fileEntity = unzipContent.toEntity(userId, nameOfApk, apkSizeOnDisk, totalApkSize, filesCount, Time);
 
 
       // Initiate the Datastore service for storage of entity created
