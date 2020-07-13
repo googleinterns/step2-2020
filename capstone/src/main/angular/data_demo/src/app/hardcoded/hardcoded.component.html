@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<br>
 <div class="container">
     <div class="row">
         <div class="col-sm-6">
@@ -26,18 +27,21 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">APK Content Display</h5>
                     <h4 id="fileName"></h4>
-                        <select id="chart" onchange="changeChart()">
+                        <select id="chart" >
                             <option value="1" >d3 chart</option>
                             <option value="2">Google Chart</option>
                         </select>
-
+  
                         <div id="display"></div>
                         <div id="displayChart" style="width: 100%; height: 500px;"></div> 
+                        <br>
+                        <h5 class="card-title">APK Content Display</h5>
+                        <div id="displayComponent"></div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
 </div>
 <app-footer></app-footer>

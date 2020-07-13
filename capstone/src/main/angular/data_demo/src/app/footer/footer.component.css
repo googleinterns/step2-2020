@@ -1,8 +1,14 @@
-
 footer {
-    position: static;
+    position: fixed;
     left: 0;
     color:black;
     bottom: 0;
+    top: 10;
     width: 100%;
+}
+.bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
 }

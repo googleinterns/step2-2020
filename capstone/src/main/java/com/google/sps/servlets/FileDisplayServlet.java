@@ -35,10 +35,10 @@ public class FileDisplayServlet extends HttpServlet {
     // TODO: (https://github.com/googleinterns/step2-2020/issues/19): Hard-coded UserId until the upload and login functions have been fully implemented
     // String userId = request.getParamter("userId");
     String userId = "abcde";
-    //String fileName = request.getParameter("apk_name");
+    String fileName = request.getParameter("apk_name");
 
     // Create a filter for retrieval of APKs specific to a certain user with UserId
-    Filter fileIdFilter = new FilterPredicate("fileId", FilterOperator.EQUAL, "abcdeApiDemos-debug.apk");
+    Filter fileIdFilter = new FilterPredicate("fileId", FilterOperator.EQUAL, userId + fileName);
 
     Query query = new Query("UserFileFeature").setFilter(fileIdFilter);
     //query.addSort("Timestamp", SortDirection.DESCENDING);
@@ -66,4 +66,5 @@ public class FileDisplayServlet extends HttpServlet {
     // Call the get() method through the post() method
     doGet(request, response);
   }
+  
 }
