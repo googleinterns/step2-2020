@@ -8,8 +8,6 @@ import java.util.HashMap;
 public class ApkUnzipContent {
   /* Creates a class for each APK uploaded before unzipping for easy structuring of APK contents and testing */
 
-  // Declare variable for storage
-  public long timestamp = System.currentTimeMillis();
   
   // Declare map to store individual APK files and their characteristics
   private HashMap<String, ArrayList<Long>> apkFilesListMap = new HashMap<String, ArrayList<Long>>();
@@ -64,9 +62,10 @@ public class ApkUnzipContent {
   }
 
   // Creates entity to be stored in Datastore using contents retrieved from the unzip function
-  public Entity toEntity(String fileId, Long apkSizeOnDisk, Long totalApkSize, Long filesCount) {
+  public Entity toEntity(String UserId, String file_name, Long apkSizeOnDisk, Long totalApkSize, Long filesCount, long Timestamp) {
     Entity fileEntity = new Entity("UserFileFeature");
-    fileEntity.setProperty("fileId", fileId);
+    fileEntity.setProperty("File_name", file_name);
+    fileEntity.setProperty("UserId", UserId);
     fileEntity.setProperty("Res_File_Size", apkPackageContentMap.get("res"));
     fileEntity.setProperty("Dex_File_Size", apkPackageContentMap.get("dex"));
     fileEntity.setProperty("Lib_File_Size", apkPackageContentMap.get("lib"));
@@ -77,7 +76,7 @@ public class ApkUnzipContent {
     fileEntity.setProperty("Files_Count", filesCount);
     fileEntity.setProperty("Apk_Disk_Size", apkSizeOnDisk);
     fileEntity.setProperty("Apk_Lost_Size", (apkSizeOnDisk - totalApkSize));
-    fileEntity.setProperty("Timestamp", timestamp);
+    fileEntity.setProperty("Timestamp", Timestamp);
 
     return fileEntity;
   }

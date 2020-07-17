@@ -39,6 +39,13 @@ import java.nio.ByteBuffer;
 import com.google.cloud.storage.StorageOptions;
 import javax.servlet.annotation.MultipartConfig;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+
 
 @WebServlet("/binary_upload")
 @MultipartConfig
@@ -53,6 +60,11 @@ public class APKUploadServlet extends HttpServlet {
   private BlobId blobId;
   private BlobInfo blobInfo;
 
+  private String file_visibility;
+  private long currentTime;
+
+  private UserService userService = UserServiceFactory.getUserService();
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   private Storage storage = StorageOptions.newBuilder().setProjectId(PROJECTID)
   .build().getService();
 
@@ -60,6 +72,10 @@ public class APKUploadServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException {
+
+    if (!userService.isUserLoggedIn()) {response.sendError(403);}
+
+    file_visibility = request.getParameter("visibility");
 
     // The line below only retrieves files with sizes greater than 
     // 0 bytes from the server making the post.
@@ -87,7 +103,7 @@ public class APKUploadServlet extends HttpServlet {
       // a write channel.
       try (WriteChannel writer = storage.writer(blobInfo)) {
 
-        apk_file = new byte[1_240];
+        apk_file = new byte[10_240];
         try (InputStream input = file.getInputStream()) {
           int limit;
 
@@ -101,11 +117,36 @@ public class APKUploadServlet extends HttpServlet {
         
       }
 
+      currentTime = System.currentTimeMillis();
+      
+      storeTrackedFiles(fileName, file_visibility.trim(), datastore, currentTime);
+
+      // The attributes below send information essential for identifying
+      // the stored blobs later on to the unzip servlet for cohesive data storage.
       request.setAttribute("object_name", fileName);
+      request.setAttribute("Time", currentTime);
       request.setAttribute("file_name", file.getSubmittedFileName());
       unzip.include(request, response);
 
     }
     response.sendRedirect("/#/explore");
+  }
+
+  // This function marks files as public or private so
+  // the correct content a generated for a user
+  private void storeTrackedFiles(final String file_name, 
+  final String visible, DatastoreService datastorage, long time) {
+
+    Entity file;
+    User currentUser = userService.getCurrentUser();
+
+    if (visible.equals("Private")) {file = new Entity(currentUser.getUserId());}
+    else {file = new Entity("Vaderker");}
+    file.setProperty("File_name", file_name);
+    file.setProperty("UserId", currentUser.getUserId());
+    file.setProperty("Time", time);
+
+    datastorage.put(file);
+
   }
 }
