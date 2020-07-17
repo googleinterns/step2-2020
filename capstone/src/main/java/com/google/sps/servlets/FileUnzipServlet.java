@@ -63,7 +63,7 @@ public class FileUnzipServlet extends HttpServlet {
     long Time = (long) request.getAttribute("Time");
 
     // The ID of your GCS object
-    String objectName = (String) request.getAttribute("object_name");
+    String objectName =  "apks/" + nameOfApk;
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
     

@@ -31,7 +31,6 @@ public class ApkUnzipContent {
     apkPackageContentMap.put("lib", new ArrayList<Long>(Arrays.asList(0L, 0L)));
     apkPackageContentMap.put("arsc", new ArrayList<Long>(Arrays.asList(0L, 0L)));
     apkPackageContentMap.put("misc", new ArrayList<Long>(Arrays.asList(0L, 0L)));
-
   }
 
 

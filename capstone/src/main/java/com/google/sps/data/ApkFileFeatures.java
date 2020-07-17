@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApkFileFeatures {
-
   // Declare variables and lists for content in APK
   private ArrayList<Long> dexFileSize, resFileSize, libraryFileSize, assetsFileSize, resourcesFileSize, miscFileSize;
   private Long totalApkSize, filesCount, lostSize;
+
 
   // Create APK class once data has been received from Datastore
   public ApkFileFeatures(Entity entity) {
@@ -22,9 +22,7 @@ public class ApkFileFeatures {
     this.totalApkSize = (long) entity.getProperty("Total_Apk_size");
     this.filesCount = (long) entity.getProperty("Files_Count");
     this.lostSize = (long) entity.getProperty("Apk_Lost_Size");
-
   }
-
   public ApkFileFeatures(List<Long> dexFiles,
                         List<Long> resFiles, 
                         List<Long> libFiles, 
@@ -48,5 +46,4 @@ public class ApkFileFeatures {
     this.filesCount = (long) numOfFiles;
     this.lostSize = (long) sizeLost;
   } 
-
 }
