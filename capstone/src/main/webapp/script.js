@@ -13,6 +13,29 @@
 // limitations under the License.
 
 
+
+// This function tells angular what buttons should be displayed
+// or hidden depending on the login status of the user. 
+async function logInStatus() {
+
+  const response = await fetch("/signin", {method: 'POST'});
+  const isLoggedin  = await response.text();
+
+  if (isLoggedin.trim() == "true") {
+
+    document.getElementById('login').hidden = true;
+    document.getElementById('logout').hidden = false;
+    document.getElementById('upload').hidden = false;
+
+  } else {
+    
+    document.getElementById('logout').hidden = true;
+    document.getElementById('upload').hidden = true;
+    document.getElementById('login').hidden = false;
+  }
+
+}
+
 var apkName;
 function getFreqData(list){
     var res, javaCode, libraries, assets,resources, miscellaneous,total, freqData;
@@ -44,6 +67,7 @@ function getFreqData(list){
     return freqData;
 }
 
+
 function changeChart(fileStatistics, result){ 
     if ( result == 1){
         document.getElementById("displayChart").style.display = 'none';
@@ -60,9 +84,13 @@ function changeChart(fileStatistics, result){
     }
 }
 
-async function showFileStatistics(filename, result) {
+// showFileStatistics retrieves information from the
+// FileDisplayServlet for drawChart to display the content graph and
+// getDisplay to show the statistics of the file
+async function showFileStatistics(filename, time, result) {
     const params = new URLSearchParams();
     params.append('apk_name', filename);
+    params.append('timeStamp', time);
     apkName = filename;
     const response = await fetch("/display", {method: 'POST', body: params});
     const fileStatistics = await response.json();
@@ -294,12 +322,6 @@ function drawChart(list) {
   chart.draw(data, options);
 }
 
-function onSignIn(googleUser) {
-  // Useful data for your client-side scripts:
-  var profile = googleUser.getBasicProfile();
-  console.log('Full Name: ' + profile.getName());
-}
-
 function displayFiles() {
   fetch('/retrieve_files').then(response => response.json()).then((apks) => {
     const apkListElement = document.getElementById('display-files');
@@ -309,24 +331,30 @@ function displayFiles() {
   });
 }
 
-function deleteAPK(fileName) {
+function deleteAPK(fileName, fileOwnership) {
   const params = new URLSearchParams();
   params.append('file_name', fileName);
+  params.append('ownership', fileOwnership);
   fetch('/delete_file', {method: 'POST', body: params});
 }
 
-// logInStatus is called on every page to ensure
-// certain privileges are enjoyed by users who
-// choose to be verified.
 
-async function logInStatus() {
-  const response = await fetch('/logon', {method: 'POST'});
-  const isLoggedIn = await response.text();
-  if (isLoggedIn.trim() == "true") {
-    document.getElementById('login').style.display = "none";
-    return;
+// This function hides the privacy option
+// for file upload. It only shows it when a file
+// has been selected for upload.
+function fileVisibility() {
+  var file = document.getElementById('file').value;
+  if (file.length != 0) {
+    document.getElementById('private').hidden = false;
+    document.getElementById('privacy').hidden = false;
+    document.getElementById('public').hidden = false;
+    document.getElementById('privacies').hidden = false;
+  } else {
+    document.getElementById('private').hidden = true;
+    document.getElementById('privacy').hidden = true;
+    document.getElementById('public').hidden = true;
+    document.getElementById('privacies').hidden = true;
   }
-  document.getElementById('logout').style.display = "none";
 }
 
 function createListElement(text) {
@@ -349,27 +377,34 @@ function createApkElement(apk) {
   exploreButtonElement.className = 'btn btn-primary';
   exploreButtonElement.innerText = 'Explore';
   exploreButtonElement.addEventListener('click', () => {
+
     var val = document.getElementById("chart");
     var result = val.options[val.selectedIndex].value;
-    showFileStatistics(apk.name, result);
-  });
-
-  const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.className = 'btn btn-primary';
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.addEventListener('click', () => {
-    deleteAPK(apk.name);
-
-    // Remove the apk from the DOM.
-    apkElement.remove();
+    showFileStatistics(apk.name, apk.time, result);
+    
   });
 
   apkElement.appendChild(nameElement);
   apkElement.appendChild(exploreButtonElement);
-  apkElement.appendChild(deleteButtonElement);
+
+  if (apk.isOwner.trim() == "true" || apk.isOwner.trim() == "true1") {
+
+    const deleteButtonElement = document.createElement('button');
+    deleteButtonElement.className = 'btn btn-primary';
+    deleteButtonElement.innerText = 'Delete';
+    deleteButtonElement.addEventListener('click', () => {
+      deleteAPK(apk.name, apk.isOwner.trim());
+
+      // Remove the apk from the DOM.
+      apkElement.remove();
+    });
+
+    apkElement.appendChild(deleteButtonElement);
+  }
 
   return apkElement;
 }
+  
 function redirect(){
     displayFiles();
 }
@@ -387,6 +422,8 @@ function sizeUnitConversion(size){
     return (size.toFixed(2)).toString()+" Bytes";
 }
 
+// getDisplay makes a user aware of how much space each component
+// of the APK consumes.
 function getDisplay(list) {
   // list is an arraylist containing strings, so we have to
   // reference its elements to create HTML content
