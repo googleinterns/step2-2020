@@ -337,7 +337,6 @@ function createListElement(text) {
 
 function createApkElement(apk) {
 
-
   const apkElement = document.createElement('li');
   apkElement.className = 'binary_file';
 
@@ -370,6 +369,7 @@ function createApkElement(apk) {
 
   return apkElement;
 }
+
 function redirect(){
     displayFiles();
 }
@@ -422,3 +422,5 @@ function getDisplay(list) {
         createListElement(('Total: '+  sizeUnitConversion(list[i].totalApkSize))));
   }
 }
+
+exports.sizeUnitConversion = sizeUnitConversion;
