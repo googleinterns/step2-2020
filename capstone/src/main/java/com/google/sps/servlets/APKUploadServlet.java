@@ -119,7 +119,7 @@ public class APKUploadServlet extends HttpServlet {
 
       currentTime = System.currentTimeMillis();
       
-      storeTrackedFiles(fileName, file_visibility.trim(), datastore, currentTime);
+      storeTrackedFiles(fileName, file_visibility.trim(), datastore, currentTime, userService.getCurrentUser());
 
       // The attributes below send information essential for identifying
       // the stored blobs later on to the unzip servlet for cohesive data storage.
@@ -134,11 +134,10 @@ public class APKUploadServlet extends HttpServlet {
 
   // This function marks files as public or private so
   // the correct content a generated for a user
-  private void storeTrackedFiles(final String file_name, 
-  final String visible, DatastoreService datastorage, long time) {
+  private void storeTrackedFiles(final String file_name, final String visible, 
+  DatastoreService datastorage, long time, final User currentUser) {
 
     Entity file;
-    User currentUser = userService.getCurrentUser();
 
     if (visible.equals("Private")) {file = new Entity(currentUser.getUserId());}
     else {file = new Entity("Vaderker");}

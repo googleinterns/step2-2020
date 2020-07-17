@@ -38,12 +38,10 @@
 
   <dependencies>
 
-    <dependencies>
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-logging</artifactId>
       </dependency>
-    </dependencies>
 
     <dependency>
         <groupId>commons-io</groupId>
