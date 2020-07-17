@@ -73,7 +73,7 @@ public class APKUploadServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException {
 
-    if (!userService.isUserLoggedIn()) {return;}
+    if (!userService.isUserLoggedIn()) {response.sendError(403);}
 
     file_visibility = request.getParameter("visibility");
 

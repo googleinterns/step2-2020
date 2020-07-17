@@ -65,28 +65,32 @@ public class FileRetrievalServlet extends HttpServlet {
 
     List<APK> apks = new ArrayList<>();
 
-    // Retrieves the user's private APKs in Cloud Storage for display.
+    if (userService.isUserLoggedIn()) {
 
-    result = retrievePrivateFiles(userService, datastore);
+      // Retrieves the user's private APKs in Cloud Storage for display.
 
-    // The APK class takes filename, ownership and timestamp
-    // as its argument. This helps script.js determine the
-    // permissions on a file and also helps the display and 
-    // delete servlets target a particular APK.
-    for (Entity entity : result.asIterable()) {
-      apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
-      "true", (long) entity.getProperty("Time")));
+      result = retrievePrivateFiles(userService.getCurrentUser(), datastore);
+
+      // The APK class takes filename, ownership and timestamp
+      // as its argument. This helps script.js determine the
+      // permissions on a file and also helps the display and 
+      // delete servlets target a particular APK.
+      for (Entity entity : result.asIterable()) {
+        apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
+        "true", (long) entity.getProperty("Time")));
+      }
+
+      // Retrieves all public APKs in Cloud Storage for display.
+
+      result = retrieveOwnedPublicFiles(userService.getCurrentUser(), datastore);
+
+      for (Entity entity : result.asIterable()) {
+        apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
+        "true1", (long) entity.getProperty("Time")));
+      }
+      
     }
 
-    // Retrieves all public APKs in Cloud Storage for display.
-
-    result = retrieveOwnedPublicFiles(userService, datastore);
-
-    for (Entity entity : result.asIterable()) {
-      apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
-      "true1", (long) entity.getProperty("Time")));
-    }
-    
 
     result = retrievePublicFiles(userService, datastore);
 
@@ -103,11 +107,7 @@ public class FileRetrievalServlet extends HttpServlet {
 
   }
 
-  private PreparedQuery retrievePrivateFiles(UserService userServices, DatastoreService datastorage) {
-
-    if (!userServices.isUserLoggedIn()) {return datastorage.prepare(new Query("Empty"));}
-
-    User currentUser = userServices.getCurrentUser();
+  private PreparedQuery retrievePrivateFiles(final User currentUser, DatastoreService datastorage) {
 
     Query query = new Query(currentUser.getUserId());
 
@@ -115,11 +115,7 @@ public class FileRetrievalServlet extends HttpServlet {
 
   }
 
-  private PreparedQuery retrieveOwnedPublicFiles(UserService userServices, DatastoreService datastorage) {
-
-    if (!userServices.isUserLoggedIn()) {return datastorage.prepare(new Query("Empty"));}
-
-    User currentUser = userServices.getCurrentUser();
+  private PreparedQuery retrieveOwnedPublicFiles(final User currentUser, DatastoreService datastorage) {
     
     Filter visibilityFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, currentUser.getUserId());
 

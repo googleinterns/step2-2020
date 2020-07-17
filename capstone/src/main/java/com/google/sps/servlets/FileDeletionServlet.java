@@ -74,13 +74,13 @@ public class FileDeletionServlet extends HttpServlet {
 
     // The condition below is a safety belt for situations involving
     // the manipulation of permissions for public APKs
-    if (!userService.isUserLoggedIn()) {return;}
+    if (!userService.isUserLoggedIn()) {response.sendError(403);}
 
     currentUser = userService.getCurrentUser();
 
     // This condition below is a second safety belt that ensures the requested
     // file targeted for deletion belongs to the user making the request.
-    if (!deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {return;}
+    if (!deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {response.sendError(404);}
 
     deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
 
