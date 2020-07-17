@@ -1,7 +1,13 @@
 <nav class="navbar navbar-light bg-primary justify-content-between">
 
-  <a class="navbar-brand" routerLink="/home" >ProjectVADERKER</a>
+  <a class="navbar-brand" routerLink="/home" >PROJECT VADERKER</a>
 
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <form class="form-inline" id="login" action="/signin">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button>
+  </form>
+
+  <form class="form-inline" id="logout" action="/signout">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Out</button>
+  </form>
 
 </nav>
