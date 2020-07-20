@@ -86,7 +86,7 @@ public class FileDeletionServlet extends HttpServlet {
 
     // The block of code below creates an ID that cloud storage
     // uses to locate the desired APK and deletes it.
-    blobId = BlobId.of(BUCKETNAME, "apks/" + fileName);
+    blobId = BlobId.of(BUCKETNAME, "apks/" + currentUser.getUserId() + "/" + fileName);
     storage.delete(blobId);
 
     response.sendRedirect("/#/explore");

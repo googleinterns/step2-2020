@@ -21,11 +21,17 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 
-import javax.servlet.ServletException;
+import java.lang.reflect.Method;
 
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.BlobInfo;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.datastore.Query;
@@ -37,19 +43,15 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 
+import com.google.cloud.storage.contrib.nio.testing.LocalStorageHelper;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.appengine.tools.development.testing.LocalUserServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
-
-import com.google.sps.servlets.APKUploadServlet;
-
-
 
 
 @RunWith(JUnit4.class)
 public class UploadServletTest {
   
-  private final String PROJECTID = "step-2020-team-2";
   private final String BUCKETNAME = "vaderker-uploadedstoragebucket";
 
   private long currentTime = System.currentTimeMillis();
@@ -57,6 +59,8 @@ public class UploadServletTest {
   private Query first_query;
   private Query second_query;
   private PreparedQuery results;
+
+  private APKUploadServlet uploadServlet;
 
   private UserService userService;
   private DatastoreService datastore;
@@ -66,10 +70,15 @@ public class UploadServletTest {
   new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig(), new LocalUserServiceTestConfig())
   .setEnvIsLoggedIn(true);
 
+  private Storage storage = LocalStorageHelper.getOptions().getService();
+
 
   @Before
   public void setUps() {
 
+    // This function sets ups local versions
+    // of datastore, User API and cloud storage for testing
+    // purposes.
     helper.setUp();
 
     datastore = DatastoreServiceFactory.getDatastoreService();
@@ -113,18 +122,12 @@ public class UploadServletTest {
     datastore.put(private_file);
 
     results = datastore.prepare(first_query);
-    int resultCount = 0;
 
     Entity retrieved_entity = new Entity("Hero");
 
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : results.asIterable()) {retrieved_entity = entity;}
 
-      resultCount++;
-      retrieved_entity = entity;
-
-    }
-
-    Assert.assertEquals(1, resultCount);
+    Assert.assertEquals(1, results.countEntities(withLimit(3)));
     Assert.assertEquals(currentTime, (long) retrieved_entity.getProperty("Time"));
     Assert.assertEquals("1928364761813763", (String) retrieved_entity.getProperty("UserId"));
     Assert.assertEquals("HelloActivity.apk", (String) retrieved_entity.getProperty("File_name"));
@@ -154,6 +157,79 @@ public class UploadServletTest {
     for (Entity entity : results.asIterable()) {resultCount++;}
 
     Assert.assertEquals(2, resultCount);
+
+  }
+
+  @Test
+  public void uploadingFilesToCloudStorage() throws IOException {
+
+    // This functions checks if cloud storage receives the files
+    // along with its data.
+    File file = new File(ClassLoader.getSystemClassLoader().getResource("HelloActivity.apk").getFile());
+
+    BlobId blobId = BlobId.of(BUCKETNAME, "HelloActivity.apk");
+    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+    storage.create(blobInfo, Files.readAllBytes(file.toPath()));
+
+    Assert.assertEquals("HelloActivity.apk", storage.get(blobId).getName());
+
+  }
+
+  @Test
+  public void verifyingThatFilesAreTracked() throws Exception {
+
+    // This function tests the storeTrackedFiles function to ensure
+    // that it is successfully storing entities that keep track
+    // of files uploaded to cloud storage.
+    uploadServlet = new APKUploadServlet();
+
+    Method trackingFiles = APKUploadServlet.class.getDeclaredMethod("storeTrackedFiles", 
+    String.class, String.class, DatastoreService.class, long.class, User.class);
+
+    trackingFiles.setAccessible(true); //This line makes it possible to test private methods.
+
+    trackingFiles.invoke(uploadServlet, "ApiDemos.apk", "Private", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "Football.apk", "Private", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "HelloActivity.apk", "Private", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "ContactManager.apk", "Private", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "PasswordTracker.apk", "Private", datastore, currentTime, user);
+
+    trackingFiles.invoke(uploadServlet, "Avalon.apk", "Public", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "addresses.apk", "Public", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "rankings.apk", "Unknown", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "legends.apk", "Mendeleev", datastore, currentTime, user);
+    trackingFiles.invoke(uploadServlet, "worldTour.apk", "hola_chronos", datastore, currentTime, user);
+
+    results = datastore.prepare(first_query);
+    PreparedQuery public_apks = datastore.prepare(second_query);
+
+    Assert.assertEquals(5, results.countEntities(withLimit(6)));
+    Assert.assertEquals(5, public_apks.countEntities(withLimit(6)));
+
+  }
+
+  @Test
+  public void uploadingFilesInChunks() throws Exception {
+
+    // This function tests if the writeFilesToCloudStorage function
+    // is capable of successfully uploading large files to cloud storage in
+    // chunks. The file used for testing has a size of 59.7 MB.
+    uploadServlet = new APKUploadServlet();
+
+    InputStream testingFile = Thread.currentThread().getContextClassLoader()
+    .getResourceAsStream("HelloActivity.apk");
+
+    BlobId blobId = BlobId.of(BUCKETNAME, "HelloActivity.apk");
+    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+
+    Method fileStorage = APKUploadServlet.class.getDeclaredMethod("writeFilesToCloudStorage", 
+    Storage.class, BlobInfo.class, InputStream.class);
+
+    fileStorage.setAccessible(true);
+
+    fileStorage.invoke(uploadServlet, storage, blobInfo, testingFile);
+
+    Assert.assertEquals("HelloActivity.apk", storage.get(blobId).getName());
 
   }
 
