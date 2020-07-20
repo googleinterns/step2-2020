@@ -52,7 +52,6 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 @RunWith(JUnit4.class)
 public class UploadServletTest {
   
-  private final String PROJECTID = "step-2020-team-2";
   private final String BUCKETNAME = "vaderker-uploadedstoragebucket";
 
   private long currentTime = System.currentTimeMillis();

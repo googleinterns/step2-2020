@@ -125,7 +125,7 @@ public class FileRetrievalServlet extends HttpServlet {
 
   }
 
-  private PreparedQuery retrievePublicFiles(UserService userServices, DatastoreService datastorage) {
+  private PreparedQuery retrievePublicFiles(final UserService userServices, DatastoreService datastorage) {
 
     Query query;
 

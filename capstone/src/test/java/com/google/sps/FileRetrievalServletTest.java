@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*package com.google.sps.servlets;
+package com.google.sps.servlets;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,58 +21,59 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
+import org.mockito.Mockito;
 
 import java.lang.reflect.Method;
-
-import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.BlobInfo;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 
-import com.google.cloud.storage.contrib.nio.testing.LocalStorageHelper;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.appengine.tools.development.testing.LocalUserServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 
 
 @RunWith(JUnit4.class)
-public class UploadServletTest {
+public class FileRetrievalServletTest {
+
+  private Filter visibilityFilter;
+
+  private Query public_apks_query;
+  private Query private_apks_query;
+  private Query publicly_owned_apks_query;
+
+  private PreparedQuery public_apks;
+  private PreparedQuery private_apks;
+  private PreparedQuery publicly_owned_apks;
   
-  private final String PROJECTID = "step-2020-team-2";
-  private final String BUCKETNAME = "vaderker-uploadedstoragebucket";
+  private PreparedQuery publicFilesResult;
+  private PreparedQuery publiclyOwnedFilesResult;
+  private PreparedQuery privateFilesResult;
+
+  private Method publicFiles;
+  private Method personalFiles;
+  private Method publiclyOwnedFiles;
+
+  private FileRetrievalServlet fileRetrievalServlet;
+
+  private UserService userServices;
+  private DatastoreService datastore;
+  private User user = new User("chronos@gmail.com", "appspot.com", "1928364761813763");
 
   private long currentTime = System.currentTimeMillis();
 
-  private Query first_query;
-  private Query second_query;
-  private PreparedQuery results;
-
-  private APKUploadServlet uploadServlet;
-
-  private UserService userService;
-  private DatastoreService datastore;
-  private User user = new User("step2@gmail.com", "appspot.com", "1928364761813763");
-
   private final LocalServiceTestHelper helper = 
-  new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig(), new LocalUserServiceTestConfig())
-  .setEnvIsLoggedIn(true);
-
-  private Storage storage = LocalStorageHelper.getOptions().getService();
-
+  new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
   @Before
   public void setUps() {
@@ -80,7 +81,31 @@ public class UploadServletTest {
     helper.setUp();
 
     datastore = DatastoreServiceFactory.getDatastoreService();
-    userService = UserServiceFactory.getUserService();
+    userServices = Mockito.mock(UserService.class);
+
+    Mockito.when(userServices.isUserLoggedIn()).thenReturn(true);
+    Mockito.when(userServices.getCurrentUser()).thenReturn(user);
+
+    Assert.assertTrue(userServices.isUserLoggedIn());
+    Assert.assertEquals(user, userServices.getCurrentUser());
+
+  }
+
+  @Before
+  public void initializeFileRetrievalMethods() throws Exception {
+
+    fileRetrievalServlet = new FileRetrievalServlet();
+
+    personalFiles = FileRetrievalServlet.class.getDeclaredMethod("retrievePrivateFiles", 
+    User.class, DatastoreService.class);
+    publicFiles = FileRetrievalServlet.class.getDeclaredMethod("retrievePublicFiles", 
+    UserService.class, DatastoreService.class);
+    publiclyOwnedFiles = FileRetrievalServlet.class.getDeclaredMethod("retrieveOwnedPublicFiles", 
+    User.class, DatastoreService.class);
+
+    publicFiles.setAccessible(true);
+    personalFiles.setAccessible(true);
+    publiclyOwnedFiles.setAccessible(true);
 
   }
 
@@ -88,142 +113,287 @@ public class UploadServletTest {
   @Before
   public void querySetups() {
 
-    first_query = new Query("Vaderker");
-    second_query = new Query(user.getUserId());
+    visibilityFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, user.getUserId());
+
+    public_apks_query = new Query("Vaderker");
+    private_apks_query = new Query(user.getUserId());
+    publicly_owned_apks_query = new Query("Vaderker").setFilter(visibilityFilter);
 
   }
 
   @Test
   public void userCredentialsVerification() {
 
-    Assert.assertTrue(userService.isUserLoggedIn());
-    Assert.assertEquals("step2@gmail.com", user.getEmail());
+    Assert.assertEquals("chronos@gmail.com", user.getEmail());
     Assert.assertEquals("1928364761813763", user.getUserId());
     Assert.assertEquals("appspot.com", user.getAuthDomain());
   }
 
   @Test
-  public void checkIfEntitiesExistInDatastore() {
+  public void retrievingEmptyEntities() throws Exception {
 
-    Entity public_file = new Entity("Vaderker");
-    public_file.setProperty("File_name", "HelloActivity.apk");
-    public_file.setProperty("UserId", "1928364761813763");
-    public_file.setProperty("Time", currentTime);
+    // This block of code retrieves the true results
+    // from datastore to be tested against the results
+    // returned by the functions called in the next block of code.
+    public_apks = datastore.prepare(public_apks_query);
+    private_apks = datastore.prepare(private_apks_query);
+    publicly_owned_apks = datastore.prepare(publicly_owned_apks_query);
 
-    datastore.put(public_file);
+    privateFilesResult = (PreparedQuery) personalFiles.invoke(fileRetrievalServlet,  user, datastore);
+    publicFilesResult = (PreparedQuery) publicFiles.invoke(fileRetrievalServlet, userServices, datastore);
+    publiclyOwnedFilesResult = (PreparedQuery) publiclyOwnedFiles.invoke(fileRetrievalServlet,  user, datastore);
 
-    Entity private_file = new Entity(user.getUserId());
-    private_file.setProperty("File_name", "HelloActivity.apk");
-    private_file.setProperty("UserId", "1928364761813763");
-    private_file.setProperty("Time", currentTime);
-
-    datastore.put(private_file);
-
-    results = datastore.prepare(first_query);
-
-    Entity retrieved_entity = new Entity("Hero");
-
-    for (Entity entity : results.asIterable()) {retrieved_entity = entity;}
-
-    Assert.assertEquals(1, results.countEntities(withLimit(3)));
-    Assert.assertEquals(currentTime, (long) retrieved_entity.getProperty("Time"));
-    Assert.assertEquals("1928364761813763", (String) retrieved_entity.getProperty("UserId"));
-    Assert.assertEquals("HelloActivity.apk", (String) retrieved_entity.getProperty("File_name"));
-
-  }
-
-  @Test
-  public void arePrivateAPKsUploaded() {
-
-    Entity public_file = new Entity(user.getUserId());
-    public_file.setProperty("File_name", "ApiDemos.apk");
-    public_file.setProperty("UserId", "1928364761813763");
-    public_file.setProperty("Time", currentTime);
-
-    datastore.put(public_file);
-
-    Entity private_file = new Entity(user.getUserId());
-    private_file.setProperty("File_name", "Avalon.apk");
-    private_file.setProperty("UserId", "1928364761813763");
-    private_file.setProperty("Time", currentTime);
-
-    datastore.put(private_file);
-
-    results = datastore.prepare(second_query);
-    int resultCount = 0;
-
-    for (Entity entity : results.asIterable()) {resultCount++;}
-
-    Assert.assertEquals(2, resultCount);
-
-  }
-
-  @Test
-  public void uploadingFilesToCloudStorage() throws IOException {
-
-    File file = new File(ClassLoader.getSystemClassLoader().getResource("HelloActivity.apk").getFile());
-
-    BlobId blobId = BlobId.of(BUCKETNAME, "HelloActivity.apk");
-    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-    storage.create(blobInfo, Files.readAllBytes(file.toPath()));
-
-    Assert.assertEquals("HelloActivity.apk", storage.get(blobId).getName());
-
-  }
-
-  @Test
-  public void verifyingThatFilesAreTracked() throws Exception {
-
-    uploadServlet = new APKUploadServlet();
-
-    Method trackingFiles = APKUploadServlet.class.getDeclaredMethod("storeTrackedFiles", 
-    String.class, String.class, DatastoreService.class, long.class, User.class);
-
-    trackingFiles.setAccessible(true);
-
-    trackingFiles.invoke(uploadServlet, "ApiDemos.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "Football.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "HelloActivity.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "ContactManager.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "PasswordTracker.apk", "Private", datastore, currentTime, user);
-
-    trackingFiles.invoke(uploadServlet, "Avalon.apk", "Public", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "addresses.apk", "Public", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "rankings.apk", "Unknown", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "legends.apk", "Mendeleev", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "worldTour.apk", "hola_chronos", datastore, currentTime, user);
-
-    results = datastore.prepare(first_query);
-    PreparedQuery public_apks = datastore.prepare(second_query);
-
-    Assert.assertEquals(5, results.countEntities(withLimit(6)));
-    Assert.assertEquals(5, public_apks.countEntities(withLimit(6)));
-
-  }
-
-  @Test
-  public void uploadingFilesInChunks() throws Exception {
-
-    uploadServlet = new APKUploadServlet();
-
-    InputStream testingFile = Thread.currentThread().getContextClassLoader()
-    .getResourceAsStream("code_1.46.0-1591780013_amd64.deb");
-
-    BlobId blobId = BlobId.of(BUCKETNAME, "code_1.46.0-1591780013_amd64.deb");
-    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-
-    Method fileStorage = APKUploadServlet.class.getDeclaredMethod("writeFilesToCloudStorage", 
-    Storage.class, BlobInfo.class, InputStream.class);
-
-    fileStorage.setAccessible(true);
-
-    fileStorage.invoke(uploadServlet, storage, blobInfo, testingFile);
+    Assert.assertEquals(public_apks.countEntities(withLimit(6)), publicFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(private_apks.countEntities(withLimit(6)), privateFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(publicly_owned_apks.countEntities(withLimit(6)), publiclyOwnedFilesResult.countEntities(withLimit(6)));
     
-    Assert.assertEquals("code_1.46.0-1591780013_amd64.deb", storage.get(blobId).getName());
+  }
 
+  @Test
+  public void retrievingOtherPublicEntities() throws Exception {
+
+    // This function is ensuring that retrievePublicFiles returns the
+    // correct query results which contains no duplicates in 
+    // retrieveOwnedPublicFiles
+    Entity public_file1 = new Entity("Vaderker");
+    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("UserId", "93884584564745785");
+    public_file1.setProperty("Time", currentTime);
+
+    datastore.put(public_file1);
+
+    Entity public_file2 = new Entity("Vaderker");
+    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("UserId", "5566495842542584");
+    public_file2.setProperty("Time", currentTime);
+
+    datastore.put(public_file2);
+
+    Entity public_file3 = new Entity("Vaderker");
+    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("UserId", "85425758352584589");
+    public_file3.setProperty("Time", currentTime);
+
+    datastore.put(public_file3);
+
+    Entity public_file4 = new Entity("Vaderker");
+    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("UserId", "4295948459425854");
+    public_file4.setProperty("Time", currentTime);
+
+    datastore.put(public_file4);
+
+    public_apks = datastore.prepare(public_apks_query);
+    private_apks = datastore.prepare(private_apks_query);
+    publicly_owned_apks = datastore.prepare(publicly_owned_apks_query);
+
+    privateFilesResult = (PreparedQuery) personalFiles.invoke(fileRetrievalServlet,  user, datastore);
+    publicFilesResult = (PreparedQuery) publicFiles.invoke(fileRetrievalServlet, userServices, datastore);
+    publiclyOwnedFilesResult = (PreparedQuery) publiclyOwnedFiles.invoke(fileRetrievalServlet,  user, datastore);
+
+    Assert.assertEquals(public_apks.countEntities(withLimit(6)), publicFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(private_apks.countEntities(withLimit(6)), privateFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(publicly_owned_apks.countEntities(withLimit(6)), publiclyOwnedFilesResult.countEntities(withLimit(6)));
+    
+  }
+
+  @Test
+  public void retrievingAllPublicEntities() throws Exception {
+
+    // This function checks if all public entities are retrieved
+    // and if so, by the appropriate function calls to prevent duplicate
+    // results from being generated
+    Entity public_file1 = new Entity("Vaderker");
+    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("UserId", "93884584564745785");
+    public_file1.setProperty("Time", currentTime);
+
+    datastore.put(public_file1);
+
+    Entity public_file2 = new Entity("Vaderker");
+    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("UserId", "5566495842542584");
+    public_file2.setProperty("Time", currentTime);
+
+    datastore.put(public_file2);
+
+    Entity public_file3 = new Entity("Vaderker");
+    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("UserId", user.getUserId());
+    public_file3.setProperty("Time", currentTime);
+
+    datastore.put(public_file3);
+
+    Entity public_file4 = new Entity("Vaderker");
+    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("UserId", user.getUserId());
+    public_file4.setProperty("Time", currentTime);
+
+    datastore.put(public_file4);
+
+    private_apks = datastore.prepare(private_apks_query);
+    publicly_owned_apks = datastore.prepare(publicly_owned_apks_query);
+
+    privateFilesResult = (PreparedQuery) personalFiles.invoke(fileRetrievalServlet,  user, datastore);
+    publicFilesResult = (PreparedQuery) publicFiles.invoke(fileRetrievalServlet, userServices, datastore);
+    publiclyOwnedFilesResult = (PreparedQuery) publiclyOwnedFiles.invoke(fileRetrievalServlet,  user, datastore);
+
+    Assert.assertEquals(2, publicFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(private_apks.countEntities(withLimit(6)), privateFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(publicly_owned_apks.countEntities(withLimit(6)), publiclyOwnedFilesResult.countEntities(withLimit(6)));
+    
+  }
+
+  @Test
+  public void retrievingAllEntities() throws Exception {
+
+    Entity public_file1 = new Entity("Vaderker");
+    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("UserId", "93884584564745785");
+    public_file1.setProperty("Time", currentTime);
+
+    datastore.put(public_file1);
+
+    Entity public_file2 = new Entity("Vaderker");
+    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("UserId", "5566495842542584");
+    public_file2.setProperty("Time", currentTime);
+
+    datastore.put(public_file2);
+
+    Entity public_file3 = new Entity(user.getUserId());
+    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("UserId", user.getUserId());
+    public_file3.setProperty("Time", currentTime);
+
+    datastore.put(public_file3);
+
+    Entity public_file4 = new Entity("Vaderker");
+    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("UserId", user.getUserId());
+    public_file4.setProperty("Time", currentTime);
+
+    datastore.put(public_file4);
+
+    private_apks = datastore.prepare(private_apks_query);
+    publicly_owned_apks = datastore.prepare(publicly_owned_apks_query);
+
+    privateFilesResult = (PreparedQuery) personalFiles.invoke(fileRetrievalServlet,  user, datastore);
+    publicFilesResult = (PreparedQuery) publicFiles.invoke(fileRetrievalServlet, userServices, datastore);
+    publiclyOwnedFilesResult = (PreparedQuery) publiclyOwnedFiles.invoke(fileRetrievalServlet,  user, datastore);
+
+    Assert.assertEquals(2, publicFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(private_apks.countEntities(withLimit(6)), privateFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(publicly_owned_apks.countEntities(withLimit(6)), publiclyOwnedFilesResult.countEntities(withLimit(6)));
+    
+  }
+
+  @Test
+  public void retrievingEmptyQueries() throws Exception {
+
+    // This function is testing to ensure that the correct
+    // kind of entities are retrieved when needed.
+    Entity public_file1 = new Entity("VADERKER");
+    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("UserId", "93884584564745785");
+    public_file1.setProperty("Time", currentTime);
+
+    datastore.put(public_file1);
+
+    Entity public_file2 = new Entity("VADERker");
+    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("UserId", "5566495842542584");
+    public_file2.setProperty("Time", currentTime);
+
+    datastore.put(public_file2);
+
+    Entity public_file3 = new Entity("Public ");
+    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("UserId", "85425758352584589");
+    public_file3.setProperty("Time", currentTime);
+
+    datastore.put(public_file3);
+
+    Entity public_file4 = new Entity("Private Vaderker");
+    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("UserId", "4295948459425854");
+    public_file4.setProperty("Time", currentTime);
+
+    datastore.put(public_file4);
+
+    public_apks = datastore.prepare(public_apks_query);
+    private_apks = datastore.prepare(private_apks_query);
+    publicly_owned_apks = datastore.prepare(publicly_owned_apks_query);
+
+    privateFilesResult = (PreparedQuery) personalFiles.invoke(fileRetrievalServlet,  user, datastore);
+    publicFilesResult = (PreparedQuery) publicFiles.invoke(fileRetrievalServlet, userServices, datastore);
+    publiclyOwnedFilesResult = (PreparedQuery) publiclyOwnedFiles.invoke(fileRetrievalServlet,  user, datastore);
+
+    Assert.assertEquals(public_apks.countEntities(withLimit(6)), publicFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(private_apks.countEntities(withLimit(6)), privateFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(publicly_owned_apks.countEntities(withLimit(6)), publiclyOwnedFilesResult.countEntities(withLimit(6)));
+  
+  }
+
+  @Test
+  public void notSignedIn() throws Exception {
+
+    Mockito.when(userServices.isUserLoggedIn()).thenReturn(false);
+
+    // This function is verifying if all
+    // public files are reported or shown
+    // to a user who is not logged in.
+    Entity public_file1 = new Entity("Vaderker");
+    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("UserId", "93884584564745785");
+    public_file1.setProperty("Time", currentTime);
+
+    datastore.put(public_file1);
+
+    Entity private_file = new Entity("5566495842542584");
+    private_file.setProperty("File_name", "Avalon.apk");
+    private_file.setProperty("UserId", "5566495842542584");
+    private_file.setProperty("Time", currentTime);
+
+    datastore.put(private_file);
+
+    Entity public_file2 = new Entity("Vaderker");
+    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("UserId", "5566495842542584");
+    public_file2.setProperty("Time", currentTime);
+
+    datastore.put(public_file2);
+
+    Entity public_file3 = new Entity("Vaderker");
+    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("UserId", "85425758352584589");
+    public_file3.setProperty("Time", currentTime);
+
+    datastore.put(public_file3);
+
+    Entity public_file4 = new Entity("Vaderker");
+    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("UserId", "4295948459425854");
+    public_file4.setProperty("Time", currentTime);
+
+    datastore.put(public_file4);
+
+    public_apks = datastore.prepare(public_apks_query);
+    private_apks = datastore.prepare(private_apks_query);
+    publicly_owned_apks = datastore.prepare(publicly_owned_apks_query);
+
+    privateFilesResult = (PreparedQuery) personalFiles.invoke(fileRetrievalServlet,  user, datastore);
+    publicFilesResult = (PreparedQuery) publicFiles.invoke(fileRetrievalServlet, userServices, datastore);
+    publiclyOwnedFilesResult = (PreparedQuery) publiclyOwnedFiles.invoke(fileRetrievalServlet,  user, datastore);
+
+    Assert.assertFalse(userServices.isUserLoggedIn());
+    Assert.assertEquals(public_apks.countEntities(withLimit(6)), publicFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(private_apks.countEntities(withLimit(6)), privateFilesResult.countEntities(withLimit(6)));
+    Assert.assertEquals(publicly_owned_apks.countEntities(withLimit(6)), publiclyOwnedFilesResult.countEntities(withLimit(6)));
+  
   }
 
   @After
   public void tearDowns() {helper.tearDown();}
 
-}*/
+}
