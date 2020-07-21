@@ -19,19 +19,19 @@ function getFreqData(list){
     var uncomRes, uncomJavaCode, uncomLibraries, uncomAssets,uncomResources, uncomMiscellaneous;
 
     for (var i = 0; i < list.length; i++) {
-      res = list[i].resFileSize[1];
-      uncomRes = list[i].resFileSize[0];
-      javaCode = list[i].dexFileSize[1];
-      uncomJavaCode= list[i].dexFileSize[0];
-      libraries = list[i].libraryFileSize[1];
-      uncomLibraries = list[i].libraryFileSize[0];
-      assets =  list[i].assetsFileSize[1];
-      uncomAssets = list[i].assetsFileSize[0];
-      resources =  list[i].resourcesFileSize[1];
-      uncomResources =  list[i].resourcesFileSize[0];
-      miscellaneous=  list[i].miscFileSize[1];
-      uncomMiscellaneous = list[i].miscFileSize[0];
-      total =  list[i].totalApkSize;
+        res = list[i].resFileSize[1];
+        uncomRes = list[i].resFileSize[0];
+        javaCode = list[i].dexFileSize[1];
+        uncomJavaCode= list[i].dexFileSize[0];
+        libraries = list[i].libraryFileSize[1];
+        uncomLibraries = list[i].libraryFileSize[0];
+        assets =  list[i].assetsFileSize[1];
+        uncomAssets = list[i].assetsFileSize[0];
+        resources =  list[i].resourcesFileSize[1];
+        uncomResources =  list[i].resourcesFileSize[0];
+        miscellaneous=  list[i].miscFileSize[1];
+        uncomMiscellaneous = list[i].miscFileSize[0];
+        total =  list[i].totalApkSize;
     }
 
     freqData=[
@@ -384,7 +384,7 @@ function sizeUnitConversion(size){
         }
         return (byteToKb.toFixed(2)).toString()+" KB";
     }
-    return (size.toFixed(2)).toString()+" Bytes";
+    return size.toString()+" Bytes";
 }
 
 function getDisplay(list) {
@@ -424,3 +424,5 @@ function getDisplay(list) {
 }
 
 exports.sizeUnitConversion = sizeUnitConversion;
+exports.getFreqData = getFreqData;
+
