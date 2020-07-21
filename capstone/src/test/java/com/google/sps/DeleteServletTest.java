@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*package com.google.sps.servlets;
+package com.google.sps.servlets;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -50,17 +50,22 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 
 
 @RunWith(JUnit4.class)
-public class UploadServletTest {
+public class DeleteServletTest {
   
   private final String BUCKETNAME = "vaderker-uploadedstoragebucket";
 
   private long currentTime = System.currentTimeMillis();
 
-  private Query first_query;
-  private Query second_query;
+  private Query public_apks_query;
+  private Query private_apks_query;
+  private Query unzipped_apks_query;
+
   private PreparedQuery results;
 
-  private APKUploadServlet uploadServlet;
+  private Method trackedEntityDeletion;
+  private Method unzippedEntityDeletion;
+
+  private FileDeletionServlet deleteServlet;
 
   private UserService userService;
   private DatastoreService datastore;
@@ -83,12 +88,28 @@ public class UploadServletTest {
 
   }
 
+  @Before
+  public void initializeFileRetrievalMethods() throws Exception {
+
+    deleteServlet = new FileDeletionServlet();
+
+    trackedEntityDeletion = FileDeletionServlet.class.getDeclaredMethod("deleteTrackedFile", 
+    DatastoreService.class, String.class, String.class, String.class);
+    unzippedEntityDeletion = FileDeletionServlet.class.getDeclaredMethod("deleteUnzippedApk", 
+    DatastoreService.class, String.class, String.class);
+
+    trackedEntityDeletion.setAccessible(true);
+    unzippedEntityDeletion.setAccessible(true);
+
+  }
+
 
   @Before
   public void querySetups() {
 
-    first_query = new Query("Vaderker");
-    second_query = new Query(user.getUserId());
+    public_apks_query = new Query("Vaderker");
+    private_apks_query = new Query(user.getUserId());
+    unzipped_apks_query = new Query("UserFileFeature");
 
   }
 
@@ -102,64 +123,11 @@ public class UploadServletTest {
   }
 
   @Test
-  public void checkIfEntitiesExistInDatastore() {
+  public void verifyThatFilesAreUploaded() throws Exception {
 
-    Entity public_file = new Entity("Vaderker");
-    public_file.setProperty("File_name", "HelloActivity.apk");
-    public_file.setProperty("UserId", "1928364761813763");
-    public_file.setProperty("Time", currentTime);
-
-    datastore.put(public_file);
-
-    Entity private_file = new Entity(user.getUserId());
-    private_file.setProperty("File_name", "HelloActivity.apk");
-    private_file.setProperty("UserId", "1928364761813763");
-    private_file.setProperty("Time", currentTime);
-
-    datastore.put(private_file);
-
-    results = datastore.prepare(first_query);
-
-    Entity retrieved_entity = new Entity("Hero");
-
-    for (Entity entity : results.asIterable()) {retrieved_entity = entity;}
-
-    Assert.assertEquals(1, results.countEntities(withLimit(3)));
-    Assert.assertEquals(currentTime, (long) retrieved_entity.getProperty("Time"));
-    Assert.assertEquals("1928364761813763", (String) retrieved_entity.getProperty("UserId"));
-    Assert.assertEquals("HelloActivity.apk", (String) retrieved_entity.getProperty("File_name"));
-
-  }
-
-  @Test
-  public void arePrivateAPKsUploaded() {
-
-    Entity public_file = new Entity(user.getUserId());
-    public_file.setProperty("File_name", "ApiDemos.apk");
-    public_file.setProperty("UserId", "1928364761813763");
-    public_file.setProperty("Time", currentTime);
-
-    datastore.put(public_file);
-
-    Entity private_file = new Entity(user.getUserId());
-    private_file.setProperty("File_name", "Avalon.apk");
-    private_file.setProperty("UserId", "1928364761813763");
-    private_file.setProperty("Time", currentTime);
-
-    datastore.put(private_file);
-
-    results = datastore.prepare(second_query);
-    int resultCount = 0;
-
-    for (Entity entity : results.asIterable()) {resultCount++;}
-
-    Assert.assertEquals(2, resultCount);
-
-  }
-
-  @Test
-  public void uploadingFilesToCloudStorage() throws IOException {
-
+    // This function verifies that binary file are being uploaded
+    // so the next test can confidently call the delete method
+    // knowing that the file exists.
     File file = new File(ClassLoader.getSystemClassLoader().getResource("HelloActivity.apk").getFile());
 
     BlobId blobId = BlobId.of(BUCKETNAME, "HelloActivity.apk");
@@ -171,58 +139,103 @@ public class UploadServletTest {
   }
 
   @Test
-  public void verifyingThatFilesAreTracked() throws Exception {
+  public void verifyThatFilesAreDeleted() throws Exception {
 
-    uploadServlet = new APKUploadServlet();
+    // This function simulates a situation where the
+    // delete button is clicked and is testing how the servlet will respond.
+    File file = new File(ClassLoader.getSystemClassLoader().getResource("HelloActivity.apk").getFile());
 
-    Method trackingFiles = APKUploadServlet.class.getDeclaredMethod("storeTrackedFiles", 
-    String.class, String.class, DatastoreService.class, long.class, User.class);
+    BlobId blobId = BlobId.of(BUCKETNAME, "HelloActivity.apk");
+    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+    storage.create(blobInfo, Files.readAllBytes(file.toPath()));
 
-    trackingFiles.setAccessible(true);
+    Entity private_file = new Entity(user.getUserId());
+    private_file.setProperty("File_name", "HelloActivity.apk");
+    private_file.setProperty("UserId", user.getUserId());
+    private_file.setProperty("Time", currentTime);
 
-    trackingFiles.invoke(uploadServlet, "ApiDemos.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "Football.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "HelloActivity.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "ContactManager.apk", "Private", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "PasswordTracker.apk", "Private", datastore, currentTime, user);
+    datastore.put(private_file);
 
-    trackingFiles.invoke(uploadServlet, "Avalon.apk", "Public", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "addresses.apk", "Public", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "rankings.apk", "Unknown", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "legends.apk", "Mendeleev", datastore, currentTime, user);
-    trackingFiles.invoke(uploadServlet, "worldTour.apk", "hola_chronos", datastore, currentTime, user);
+    Entity unzippedAPK = new Entity("UserFileFeature");
+    unzippedAPK.setProperty("File_name", "HelloActivity.apk");
+    unzippedAPK.setProperty("UserId", user.getUserId());
+    unzippedAPK.setProperty("Time", currentTime);
 
-    results = datastore.prepare(first_query);
-    PreparedQuery public_apks = datastore.prepare(second_query);
+    datastore.put(unzippedAPK);
 
-    Assert.assertEquals(5, results.countEntities(withLimit(6)));
-    Assert.assertEquals(5, public_apks.countEntities(withLimit(6)));
+    trackedEntityDeletion.invoke(deleteServlet, datastore, "HelloActivity.apk", user.getUserId(), "true");
+
+    Assert.assertTrue(storage.delete(blobId));
+    Assert.assertEquals(0, datastore.prepare(private_apks_query).countEntities(withLimit(6)));
+    Assert.assertTrue((boolean) unzippedEntityDeletion.invoke(deleteServlet, datastore, "HelloActivity.apk", user.getUserId()));
 
   }
 
   @Test
-  public void uploadingFilesInChunks() throws Exception {
+  public void deletingAllEntities() throws Exception {
 
-    uploadServlet = new APKUploadServlet();
+    // This function is testing the delete servlet's
+    // ability to verify if the delete request is authentic
+    // before taking action.
+    Entity public_file1 = new Entity("Vaderker");
+    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("UserId", "93884584564745785");
+    public_file1.setProperty("Time", currentTime);
 
-    InputStream testingFile = Thread.currentThread().getContextClassLoader()
-    .getResourceAsStream("code_1.46.0-1591780013_amd64.deb");
+    datastore.put(public_file1);
 
-    BlobId blobId = BlobId.of(BUCKETNAME, "code_1.46.0-1591780013_amd64.deb");
-    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+    Entity public_file2 = new Entity("Vaderker");
+    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("UserId", "5566495842542584");
+    public_file2.setProperty("Time", currentTime);
 
-    Method fileStorage = APKUploadServlet.class.getDeclaredMethod("writeFilesToCloudStorage", 
-    Storage.class, BlobInfo.class, InputStream.class);
+    datastore.put(public_file2);
 
-    fileStorage.setAccessible(true);
+    Entity public_file3 = new Entity(user.getUserId());
+    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("UserId", user.getUserId());
+    public_file3.setProperty("Time", currentTime);
 
-    fileStorage.invoke(uploadServlet, storage, blobInfo, testingFile);
+    datastore.put(public_file3);
+
+    Entity public_file4 = new Entity("Vaderker");
+    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("UserId", "4295948459425854");
+    public_file4.setProperty("Time", currentTime);
+
+    datastore.put(public_file4);
+
+    Entity unzippedAPK = new Entity("UserFileFeature");
+    unzippedAPK.setProperty("File_name", "Phylum.apk");
+    unzippedAPK.setProperty("UserId", user.getUserId());
+    unzippedAPK.setProperty("Time", currentTime);
+
+    datastore.put(unzippedAPK);
+
+    Entity unzipped_apk = new Entity("UserFileFeature");
+    unzipped_apk.setProperty("File_name", "Kingdoms.apk");
+    unzipped_apk.setProperty("UserId", "4295948459425854");
+    unzipped_apk.setProperty("Time", currentTime);
+
+    datastore.put(unzipped_apk);
+
+    trackedEntityDeletion.invoke(deleteServlet, datastore, "Phylum.apk", user.getUserId(), "true");
+    trackedEntityDeletion.invoke(deleteServlet, datastore, "Avalon.apk", "5566495842542584", "false");
+    trackedEntityDeletion.invoke(deleteServlet, datastore, "Kingdoms.apk", "4295948459425854", "false");
+    trackedEntityDeletion.invoke(deleteServlet, datastore, "HelloActivity.apk", "93884584564745785", "false");
+
+    Assert.assertFalse((boolean) unzippedEntityDeletion.invoke(deleteServlet, datastore, "Phylum.apk", "4295948459425854"));
+    Assert.assertTrue((boolean) unzippedEntityDeletion.invoke(deleteServlet, datastore, "Phylum.apk", user.getUserId()));
+    Assert.assertFalse((boolean) unzippedEntityDeletion.invoke(deleteServlet, datastore, "Kingdoms.apk", "85425758352584589"));
+    Assert.assertTrue((boolean) unzippedEntityDeletion.invoke(deleteServlet, datastore, "Kingdoms.apk", "4295948459425854"));
+
+    Assert.assertEquals(0, datastore.prepare(public_apks_query).countEntities(withLimit(6)));
+    Assert.assertEquals(0, datastore.prepare(private_apks_query).countEntities(withLimit(6)));
+    Assert.assertEquals(0, datastore.prepare(unzipped_apks_query).countEntities(withLimit(6)));
     
-    Assert.assertEquals("code_1.46.0-1591780013_amd64.deb", storage.get(blobId).getName());
-
   }
 
   @After
   public void tearDowns() {helper.tearDown();}
 
-}*/
+}

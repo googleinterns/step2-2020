@@ -55,9 +55,9 @@ public class FileDeletionServlet extends HttpServlet {
 
   private BlobId blobId;
 
-  private UserService userService = UserServiceFactory.getUserService();
-  private DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
-  private Storage storage = StorageOptions.newBuilder().setProjectId(PROJECTID)
+  private final UserService userService = UserServiceFactory.getUserService();
+  private final DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
+  private final Storage storage = StorageOptions.newBuilder().setProjectId(PROJECTID)
   .build().getService();
 
   private User currentUser;
