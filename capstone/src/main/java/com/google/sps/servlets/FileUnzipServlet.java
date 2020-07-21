@@ -15,10 +15,6 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
@@ -44,12 +40,11 @@ public class FileUnzipServlet extends HttpServlet {
   
   private static final Logger LOGGER = Logger.getLogger(FileUnzipServlet.class.getName());
 
-  private UserService userService = UserServiceFactory.getUserService();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    String userId = userService.getCurrentUser().getUserId();
+    String userId = (String) request.getAttribute("userId");
     
     // The ID of GCP project
     String projectId = "step-2020-team-2";
@@ -60,15 +55,17 @@ public class FileUnzipServlet extends HttpServlet {
     // Name of APK
     String nameOfApk = (String) request.getAttribute("file_name");
 
-    long Time = (long) request.getAttribute("Time");
-
     // The ID of your GCS object
-    String objectName =  "apks/" + nameOfApk;
+    String objectName =  "apks/" + userId + "/" + nameOfApk;
 
     Blob blob = getApkObjectFromCloudStorage(projectId, bucketName, objectName);
+
+    long Time = blob.getCreateTime();
     
     // Checks the success of the unzip function and responds with the appropriate values
     boolean checkUnzipSuccess = analyzeApkFeatures(nameOfApk, blob, userId, Time);
+
+    request.setAttribute("Time", Time);
 
     if (checkUnzipSuccess) {
       LOGGER.info("File has been successfully unzipped."); 

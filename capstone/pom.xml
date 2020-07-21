@@ -38,12 +38,10 @@
 
   <dependencies>
 
-    <dependencies>
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-logging</artifactId>
       </dependency>
-    </dependencies>
 
     <dependency>
         <groupId>commons-io</groupId>
@@ -88,12 +86,6 @@
 
     <dependency>
         <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-api-labs</artifactId>
-        <version>1.9.80</version>
-    </dependency>
-
-    <dependency>
-        <groupId>com.google.appengine</groupId>
         <artifactId>appengine-api-stubs</artifactId>
         <version>1.9.80</version>
         <scope>test</scope>
@@ -104,6 +96,11 @@
         <artifactId>appengine-testing</artifactId>
         <version>1.9.80</version>
         <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-nio</artifactId>
     </dependency>
 
     <dependency>
