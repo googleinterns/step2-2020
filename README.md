@@ -5,13 +5,16 @@ The goal of Project VADERKER is to enable developers to explore and analyze thei
 
 <br/>
 
+
 ## Table of Contents
-- [DATA](#Data-Analysis-Tool-for-Android-(DATA))
+- [DATA](#Data-Analysis-Tool-for-Android)
 - [Developer Environment Setup](#Developer-Environment-Setup)
 - [Code Style](#Code-Style)
 - [License](#License)
 
-## Data Analysis Tool for Android (DATA)
+<br/>
+
+## Data Analysis Tool for Android
 
 Through the Data Analysis Tool for Android (DATA), developers will be able to upload arbitrary android applications (APK), visually explore data compiled in the app, and analyze the components of the APK to scale the cost of each implementation.
 
@@ -106,11 +109,11 @@ However, if you would also like to explore the apks uploaded by the team, you wo
   
   > - To unzip already provided apks and store in your local Datastore, you will need to download the apk you want from the [Cloud Storage Directory](https://pantheon.corp.google.com/storage/browser/vaderker-uploadedstoragebucket/apks;tab=objects?forceOnBucketsSortingFiltering=false&project=step-2020-team-2) 
   > - Once downloaded, delete the apk from your local webapp through the **Delete** button and re-upload the apk. This will ensure it is unzipped and stored in your local Datastore so that you can explore it.
-  > - To access your local Datastore, migrate to : http://localhost:8080/_ah/admin to ensure it has been stored. 
+  > - To access your local Datastore, migrate to: http://localhost:8080/_ah/admin to ensure it has been stored. 
 
 
 ```
-If you ever come across the error, "Data table not defined" after clicking explore for any of the apks, 
+If you ever come across the error, "Data table not defined" or "NaN" after clicking explore for any of the apks, 
 it simply means the apk hasn't been unzipped and stored in your local Datastore.
 ```
 
