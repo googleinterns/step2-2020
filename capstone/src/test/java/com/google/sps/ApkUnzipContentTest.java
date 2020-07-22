@@ -32,7 +32,6 @@ public class ApkUnzipContentTest {
   @Test
   public void testApkDataToMapEntryStorageWhenFileTypeMappingIsEmpty() {
     ApkUnzipContent unzipContent = new ApkUnzipContent();
-        
     HashMap<String, ArrayList<Long>> apkPackageMapTest = new HashMap<String, ArrayList<Long>>();
     apkPackageMapTest.put("res", new ArrayList<Long>(Arrays.asList(0L, 0L)));
     apkPackageMapTest.put("dex", new ArrayList<Long>(Arrays.asList(0L, 0L)));

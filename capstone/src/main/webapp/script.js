@@ -42,19 +42,19 @@ function getFreqData(list){
     var uncomRes, uncomJavaCode, uncomLibraries, uncomAssets,uncomResources, uncomMiscellaneous;
 
     for (var i = 0; i < list.length; i++) {
-      res = list[i].resFileSize[1];
-      uncomRes = list[i].resFileSize[0];
-      javaCode = list[i].dexFileSize[1];
-      uncomJavaCode= list[i].dexFileSize[0];
-      libraries = list[i].libraryFileSize[1];
-      uncomLibraries = list[i].libraryFileSize[0];
-      assets =  list[i].assetsFileSize[1];
-      uncomAssets = list[i].assetsFileSize[0];
-      resources =  list[i].resourcesFileSize[1];
-      uncomResources =  list[i].resourcesFileSize[0];
-      miscellaneous=  list[i].miscFileSize[1];
-      uncomMiscellaneous = list[i].miscFileSize[0];
-      total =  list[i].totalApkSize;
+        res = list[i].resFileSize[1];
+        uncomRes = list[i].resFileSize[0];
+        javaCode = list[i].dexFileSize[1];
+        uncomJavaCode= list[i].dexFileSize[0];
+        libraries = list[i].libraryFileSize[1];
+        uncomLibraries = list[i].libraryFileSize[0];
+        assets =  list[i].assetsFileSize[1];
+        uncomAssets = list[i].assetsFileSize[0];
+        resources =  list[i].resourcesFileSize[1];
+        uncomResources =  list[i].resourcesFileSize[0];
+        miscellaneous=  list[i].miscFileSize[1];
+        uncomMiscellaneous = list[i].miscFileSize[0];
+        total =  list[i].totalApkSize;
     }
 
     freqData=[
@@ -71,6 +71,7 @@ function getFreqData(list){
 function changeChart(fileStatistics, result){ 
     if ( result == 1){
         document.getElementById("displayChart").style.display = 'none';
+        document.getElementById("displayComponent").style.display= 'none';
         document.getElementById("display").style.display = 'block';
         d3.select("#display").selectAll("svg").remove();
         d3.select("#display").selectAll("table").remove();
@@ -79,8 +80,16 @@ function changeChart(fileStatistics, result){
     }
     else if (result == 2){
         document.getElementById("display").style.display = 'none';
+        document.getElementById("displayComponent").style.display= 'none';
         document.getElementById("displayChart").style.display = 'block'; 
         drawChart(fileStatistics);
+    }
+    else {
+        document.getElementById("displayChart").style.display = 'none';
+        document.getElementById("display").style.display = 'none';
+        document.getElementById("displayComponent").style.display= 'block';
+        document.createElement("h5").text(apkName);
+        getDisplay(fileStatistics);
     }
 }
 
@@ -365,7 +374,6 @@ function createListElement(text) {
 
 function createApkElement(apk) {
 
-
   const apkElement = document.createElement('li');
   apkElement.className = 'binary_file';
 
@@ -404,7 +412,7 @@ function createApkElement(apk) {
 
   return apkElement;
 }
-  
+
 function redirect(){
     displayFiles();
 }
@@ -419,7 +427,7 @@ function sizeUnitConversion(size){
         }
         return (byteToKb.toFixed(2)).toString()+" KB";
     }
-    return (size.toFixed(2)).toString()+" Bytes";
+    return size.toString()+" Bytes";
 }
 
 // getDisplay makes a user aware of how much space each component
@@ -459,3 +467,7 @@ function getDisplay(list) {
         createListElement(('Total: '+  sizeUnitConversion(list[i].totalApkSize))));
   }
 }
+
+exports.sizeUnitConversion = sizeUnitConversion;
+exports.getFreqData = getFreqData;
+

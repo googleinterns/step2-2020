@@ -144,9 +144,7 @@ public class FileUnzipServlet extends HttpServlet {
           uncompressedSize,
           compressedSize
         );
-
         totalApkSize += compressedSize;
-
         // Count number of files
         if (!ze.isDirectory()) {
           filesCount++;
