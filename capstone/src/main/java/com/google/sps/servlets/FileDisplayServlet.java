@@ -11,6 +11,8 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,17 +33,19 @@ public class FileDisplayServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     /* Receives request from client side to retrieve APK features from Datastore and return those features for rendering to client */
     
-    
-    // TODO: (https://github.com/googleinterns/step2-2020/issues/19): Hard-coded UserId until the upload and login functions have been fully implemented
-    // String userId = request.getParamter("userId");
-    String userId = "abcde";
+    // The two lines below retrieve certain details about the desired apk
+    // for the correct results to be generated.
+    long time = Long.parseLong(request.getParameter("timeStamp"));
     String fileName = request.getParameter("apk_name");
 
-    // Create a filter for retrieval of APKs specific to a certain user with UserId
-    Filter fileIdFilter = new FilterPredicate("fileId", FilterOperator.EQUAL, userId + fileName);
+    // Create a filter for retrieval of APKs specific to a certain user with a timestamp nad filename
+    Filter timeFilter = new FilterPredicate("Timestamp", FilterOperator.EQUAL, time);
+    Filter fileNameFilter = new FilterPredicate("File_name", FilterOperator.EQUAL, fileName);
 
-    Query query = new Query("UserFileFeature").setFilter(fileIdFilter);
-    //query.addSort("Timestamp", SortDirection.DESCENDING);
+    CompositeFilter targetFileFilter =
+    CompositeFilterOperator.and(fileNameFilter, timeFilter);
+
+    Query query = new Query("UserFileFeature").setFilter(targetFileFilter);
 
     // Initiate Datastore service
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
