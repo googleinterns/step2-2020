@@ -108,7 +108,9 @@ public class FileUnzipServlet extends HttpServlet {
           ze.getSize(),
           ze.getCompressedSize()
         );
-      
+        if (fileName.equals("AndroidManifest.xml")){
+                    System.out.println(fileName);
+                }
         totalApkSize += ze.getCompressedSize();
         
         // Count number of files

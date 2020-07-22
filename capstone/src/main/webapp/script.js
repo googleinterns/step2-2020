@@ -47,6 +47,7 @@ function getFreqData(list){
 function changeChart(fileStatistics, result){ 
     if ( result == 1){
         document.getElementById("displayChart").style.display = 'none';
+        document.getElementById("displayComponent").style.display= 'none';
         document.getElementById("display").style.display = 'block';
         d3.select("#display").selectAll("svg").remove();
         d3.select("#display").selectAll("table").remove();
@@ -55,8 +56,16 @@ function changeChart(fileStatistics, result){
     }
     else if (result == 2){
         document.getElementById("display").style.display = 'none';
+        document.getElementById("displayComponent").style.display= 'none';
         document.getElementById("displayChart").style.display = 'block'; 
         drawChart(fileStatistics);
+    }
+    else {
+        document.getElementById("displayChart").style.display = 'none';
+        document.getElementById("display").style.display = 'none';
+        document.getElementById("displayComponent").style.display= 'block';
+        document.createElement("h5").text(apkName);
+        getDisplay(fileStatistics);
     }
 }
 
