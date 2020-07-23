@@ -20,8 +20,11 @@ public class AndroidManifestWrapper {
 
     }
     public AndroidManifestWrapper() {
-       File file = new File ("AndroidManifest.xml");
-       readContentIntoByteArray(file);
+       File file = new File ("./com/google/sps/data/AndroidManifest.xml");
+       boolean exists = file.exists();
+       if (exists) System.out.println("I found AndroidManifest.xml");
+       AndroidManifestParser ManifestParser = new AndroidManifestParser();
+       ManifestParser.displayAndroidManifestContent(readContentIntoByteArray(file));
     }
     
     public byte[] readContentIntoByteArray(File file) {
@@ -34,10 +37,6 @@ public class AndroidManifestWrapper {
         //convert file into array of bytes
         fileInputStream = new FileInputStream(file);
         fileInputStream.read(bFile);
-        
-        for (int i = 0; i < bFile.length; i++) {
-        System.out.print((char) bFile[i]);
-        }
         fileInputStream.close();
     }
     catch (Exception e) {
