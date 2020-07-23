@@ -14,7 +14,6 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
@@ -35,10 +34,11 @@ public class SignInServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (!userService.isUserLoggedIn()) {
+
       response.sendRedirect(userService.createLoginURL("/signin"));
-    } 
+
+    } else { response.sendRedirect("/#/explore"); }
     
-    response.sendRedirect("/#/explore");
     
   }
 
@@ -46,9 +46,11 @@ public class SignInServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (userService.isUserLoggedIn()) {
-        response.setContentType("text/html;");
-        response.getWriter().println("true");
-        return;
+
+      response.setContentType("text/html;");
+      response.getWriter().println("true");
+      return;
+
     }
 
     response.setContentType("text/html;");
