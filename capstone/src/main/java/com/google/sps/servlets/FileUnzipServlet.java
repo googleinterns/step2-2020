@@ -135,8 +135,6 @@ public class FileUnzipServlet extends HttpServlet {
           LOGGER.info("Real Uncompressed Size: " + uncompressedSize);
 
         }
-        System.out.println();
-
         // Map file types and names to storage
         unzipContent.addApkDataToMapStorage(
           fileName, 
