@@ -37,9 +37,9 @@ public class DexLoaderTest {
 
     DexLoader dexLoader = new DexLoader();
 
-    // To run this locally, change the file path to your current one
-    String filePath = "/home/charlesogbogu/step2-2020/capstone/src/main/resources/IncorrectHelloActivity.apk";
-    boolean result = dexLoader.analyzeApkFeaturesLocally(filePath);
+    // Using a fake path to test the DEX Loader
+    String fakeFilePath = "/home/charlesogbogu/step2-2020/capstone/src/main/resources/IncorrectHelloActivity.apk";
+    boolean result = dexLoader.analyzeApkFeaturesLocally(fakeFilePath);
 
     Assert.assertFalse(result);
 
