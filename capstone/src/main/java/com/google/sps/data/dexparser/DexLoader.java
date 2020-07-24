@@ -93,8 +93,8 @@ public class DexLoader {
       System.out.println();
 
       //Print the feature to the console
-      LOGGER.info("" + filesCount);
-      LOGGER.info("" + totalApkSize);
+      LOGGER.info("File Count: {0}", filesCount);
+      LOGGER.info("Total APK Size: {0}", totalApkSize);
 
       //close last ZipEntry
       zis.closeEntry();
