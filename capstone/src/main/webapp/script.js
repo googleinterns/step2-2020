@@ -364,12 +364,6 @@ function fileVisibility() {
   }
 }
 
-function createListElement(text) {
-  const liElement = document.createElement('ul');
-  liElement.innerText = text;
-  return liElement;
-}
-
 function createApkElement(apk) {
 
   const apkElement = document.createElement('li');
@@ -427,57 +421,93 @@ function sizeUnitConversion(size){
     }
     return size.toString()+" Bytes";
 }
+function createListAPKNameElement(texts) {
+  const card = document.createElement("div");
+  card.className = "card bg-primary text-dark";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-header";
+  cardBody.innerText =("APK Name: " + texts);
+
+  card.appendChild(cardBody);
+  
+  return card;
+}
+
+function createListHeaderElement(texts) {
+  const card = document.createElement("div");
+  card.className = "card bg-secondary text-white";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-header";
+  cardBody.innerText = texts;
+
+  card.appendChild(cardBody);
+  
+  return card;
+}
+function createListBodyElement(texts) {
+  const card = document.createElement("div");
+  card.className = "card bg-light text-dark";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-header";
+  cardBody.innerText = texts;
+
+  card.appendChild(cardBody);
+  
+  return card;
+}
 
 // getDisplay makes a user aware of how much space each component
 // of the APK consumes.
 function getDisplay(list) {
   // list is an arraylist containing strings, so we have to
   // reference its elements to create HTML content
-  d3.select("#displayComponent").text(apkName);
   const contentListElement = document.getElementById("displayComponent");
   contentListElement.innerHTML = '';
     
   for (var i = 0; i < list.length; i++) {
         contentListElement.appendChild(
-        createListElement('Res '));
+        createListAPKNameElement(apkName));
         contentListElement.appendChild(
-        createListElement(('Uncompressed: '+ sizeUnitConversion(list[i].resFileSize[0]))));
+        createListHeaderElement('Res '));
         contentListElement.appendChild(
-        createListElement(('Compressed: '+ sizeUnitConversion(list[i].resFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].resFileSize[0]))));
         contentListElement.appendChild(
-        createListElement('Java Code '));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].resFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed: '+ sizeUnitConversion(list[i].dexFileSize[0]))));
+        createListHeaderElement('Java Code '));
         contentListElement.appendChild(
-        createListElement(('Compressed: '+ sizeUnitConversion(list[i].dexFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].dexFileSize[0]))));
         contentListElement.appendChild(
-        createListElement('Libraries '));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].dexFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed: '+ sizeUnitConversion(list[i].libraryFileSize[0]))));
+        createListHeaderElement('Libraries '));
         contentListElement.appendChild(
-        createListElement(('Compressed: '+ sizeUnitConversion(list[i].libraryFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].libraryFileSize[0]))));
         contentListElement.appendChild(
-        createListElement('Assets '));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].libraryFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed: '+ sizeUnitConversion(list[i].assetsFileSize[0]))));
+        createListHeaderElement('Assets '));
         contentListElement.appendChild(
-        createListElement(('Compressed: '+ sizeUnitConversion(list[i].assetsFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].assetsFileSize[0]))));
         contentListElement.appendChild(
-        createListElement('Resources '));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].assetsFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed: '+ sizeUnitConversion(list[i].resourcesFileSize[0]))));
+        createListHeaderElement('Resources '));
         contentListElement.appendChild(
-        createListElement(('Compressed: '+ sizeUnitConversion(list[i].resourcesFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].resourcesFileSize[0]))));
         contentListElement.appendChild(
-        createListElement('Miscellaneous '));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].resourcesFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed: '+   sizeUnitConversion(list[i].miscFileSize[0]))));
+        createListHeaderElement('Miscellaneous '));
         contentListElement.appendChild(
-        createListElement(('Compressed: '+   sizeUnitConversion(list[i].miscFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+   sizeUnitConversion(list[i].miscFileSize[0]))));
         contentListElement.appendChild(
-        createListElement(('Total: '+  sizeUnitConversion(list[i].totalApkSize))));
+        createListBodyElement(('Compressed: '+   sizeUnitConversion(list[i].miscFileSize[1]))));
+        contentListElement.appendChild(
+        createListHeaderElement(('Total: '+  sizeUnitConversion(list[i].totalApkSize))));
   }
 }
+
 
 exports.sizeUnitConversion = sizeUnitConversion;
 exports.getFreqData = getFreqData;

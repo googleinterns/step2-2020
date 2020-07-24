@@ -20,5 +20,9 @@ public class AndroidManifestParser {
         //     }
                      
         // }
+            for (int i = 0; i < byteFile.length; i++) {
+                System.out.print((char) byteFile[i]);
+            }
+          
     }
 }
