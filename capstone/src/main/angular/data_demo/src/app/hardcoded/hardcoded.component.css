@@ -13,6 +13,24 @@
     margin:50px auto;
 }
 
+#display-files {
+  padding-inline-start: 0px;
+}
+
+.container {
+  padding: 50px 20px;
+  margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 50px 20px;
+    width: 150%;
+    margin-bottom: 100px;
+  }
+}
+
+
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
 rect:hover {  fill:blue; }
