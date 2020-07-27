@@ -17,7 +17,7 @@ public class AndroidManifestWrapper {
     public static void main(String args[]){     
       File file = new File (args [0]);
       AndroidManifestParser ManifestParser = new AndroidManifestParser();
-      ManifestParser.displayAndroidManifestContent(readContentIntoByteArray(file));
+      ManifestParser.decompressXML(readContentIntoByteArray(file));
     }
 
     public static byte[] readContentIntoByteArray(File file) {
