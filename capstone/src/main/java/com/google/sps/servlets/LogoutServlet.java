@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.annotation.WebServlet;
-import com.google.appengine.api.datastore.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.UserService;
@@ -33,10 +32,11 @@ public class LogoutServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     if (userService.isUserLoggedIn()) {
-      response.sendRedirect(userService.createLogoutURL("/signout"));
-    }
 
-    response.sendRedirect("/#/home");
+      response.sendRedirect(userService.createLogoutURL("/signout"));
+
+    } else { response.sendRedirect("/#/home"); }
     
   }
+    
 }
