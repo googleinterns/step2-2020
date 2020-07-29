@@ -24,6 +24,14 @@ public class AndroidManifestParser {
     public static int endDocTag = 0x00100101;
     public static int startTag =  0x00100102;
     public static int endTag =    0x00100103;
+    public static String spaces = "                                             ";
+
+    /*
+    Overall logic of decompressXML is to get the xml in human readable format
+    All print statement has been commented out and the only print statement is the
+    permissions in the APK
+    */
+
     public void decompressXML(byte[] xml) {
     // Compressed XML file/bytes starts with 24x bytes of data,
     // 9 32 bit words in little endian order (LSB first):
@@ -109,53 +117,51 @@ public class AndroidManifestParser {
                     ? compXmlString(xml, sitOff, stOff, attrValueSi)
                     : "resourceID 0x"+Integer.toHexString(attrResId);
                 sb.append(" "+attrName+"=\""+attrValue+"\"");
-                //tr.add(attrName, attrValue);
+                getPermissions(attrValue);
             }
-            prtIndent(indent, "<"+name+sb+">");
+            //prtIndent(indent, "<"+name+sb+">");
             indent++;
         
         } else if (tag0 == endTag) { // XML END TAG
             indent--;
             off += 6*4;  // Skip over 6 words of endTag data
             String name = compXmlString(xml, sitOff, stOff, nameSi);
-            prtIndent(indent, "</"+name+">  (line "+startTagLineNo+"-"+lineNo+")");
+            //prtIndent(indent, "</"+name+">  (line "+startTagLineNo+"-"+lineNo+")");
             //tr.parent();  // Step back up the NobTree
         
         } else if (tag0 == endDocTag) {  // END OF XML DOC TAG
             break;
         
         } else {
-            System.out.println("  Unrecognized tag code '"+Integer.toHexString(tag0)
-            +"' at offset "+off);
+            // System.out.println("  Unrecognized tag code '"+Integer.toHexString(tag0)
+            // +"' at offset "+off);
             break;
             }
     } // end of while loop scanning tags and attributes of XML tree
-        System.out.println("    end at offset "+off);
+        //System.out.println("    end at offset "+off);
     } // end of decompressXML
         
     
     public String compXmlString(byte[] xml, int sitOff, int stOff, int strInd) {
-    if (strInd < 0) return null;
-    int strOff = stOff + LEW(xml, sitOff+strInd*4);
+        if (strInd < 0) 
+            return null;
+        int strOff = stOff + LEW(xml, sitOff+strInd*4);
     return compXmlStringAt(xml, strOff);
-    }
+    }   
     
-    
-    public static String spaces = "                                             ";
     public void prtIndent(int indent, String str) {
         System.out.println(spaces.substring(0, Math.min(indent*2, spaces.length()))+str);
     }
-    
-    
+        
     // compXmlStringAt -- Return the string stored in StringTable format at
     // offset strOff.  This offset points to the 16 bit string length, which 
     // is followed by that number of 16 bit (Unicode) chars.
     public String compXmlStringAt(byte[] arr, int strOff) {
-    int strLen = arr[strOff+1]<<8&0xff00 | arr[strOff]&0xff;
-    byte[] chars = new byte[strLen];
-    for (int ii=0; ii<strLen; ii++) {
-        chars[ii] = arr[strOff+2+ii*2];
-    }
+        int strLen = arr[strOff+1]<<8&0xff00 | arr[strOff]&0xff;
+        byte[] chars = new byte[strLen];
+        for (int ii=0; ii<strLen; ii++) {
+            chars[ii] = arr[strOff+2+ii*2];
+        }
     return new String(chars);  // Hack, just use 8 byte chars
     } // end of compXmlStringAt
     
@@ -163,8 +169,16 @@ public class AndroidManifestParser {
     // LEW -- Return value of a Little Endian 32 bit word from the byte array
     //   at offset off.
     public int LEW(byte[] arr, int off) {
-    return arr[off+3]<<24&0xff000000 | arr[off+2]<<16&0xff0000
-        | arr[off+1]<<8&0xff00 | arr[off]&0xFF;
+        return arr[off+3]<<24&0xff000000 | arr[off+2]<<16&0xff0000
+            | arr[off+1]<<8&0xff00 | arr[off]&0xFF;
     } 
+
+    //This function takes in the attribute value which contains attributes and prints the
+    //attributes with permission
+    public void getPermissions(String perm){
+        String word = "android.permission.";
+        if(perm.contains(word))
+             System.out.println(perm.replaceAll(word, " "));
+    }
 
 }
