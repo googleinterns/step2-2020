@@ -30,6 +30,10 @@
   }
 }
 
+#btn-load {
+  display: none;
+}
+
 
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
