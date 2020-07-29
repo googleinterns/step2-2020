@@ -13,7 +13,7 @@
                         
                     </div>
                     <div class="card-text">
-                        <form action="/binary_upload" method="post" enctype="multipart/form-data" id="upload">
+                        <form action="/binary_upload" method="post" enctype="multipart/form-data" id="upload" onsubmit="displayLoader()">
                             <input type="file" accept=".apk" id="file" onchange="fileVisibility()" name="files" multiple />
                             <input type="submit" class="btn btn-primary" value="Upload File"/> <br>
                             <input type="radio" id="private" name="visibility" value="Private" required hidden />
@@ -21,6 +21,11 @@
                             <input type="radio" id="public" name="visibility" value="Public" hidden />
                             <label for="public" id="privacies" style="padding: 10px;" hidden>Public</label>
                         </form>
+
+                        <button id="btn-load" class="btn btn-primary load" type="button" disabled>
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          Loading...
+                        </button>                  
                     </div>
 
                     <br>
@@ -43,7 +48,7 @@
                         <div id="displayComponent"></div>
                 </div>
             </div>
-        </div>
+        </div>      
     </div>
     <br>
 </div>

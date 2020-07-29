@@ -6,3 +6,4 @@ target/
 .project
 .settings/
 node_modules
+build/
