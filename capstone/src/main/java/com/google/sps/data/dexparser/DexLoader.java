@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 public class DexLoader {
 
   private static final Logger LOGGER = Logger.getLogger(DexLoader.class.getName());
-  private static ArrayList<RandomAccessFile> rafs;
 
   public static void main(String[] args) throws IOException {
 
@@ -35,7 +34,7 @@ public class DexLoader {
     input.close();
 
     
-    rafs = analyzeApkFeaturesLocally(filePath);
+    ArrayList<RandomAccessFile> rafs = analyzeApkFeaturesLocally(filePath);
     
 
     for (RandomAccessFile raf : rafs) {
@@ -57,7 +56,7 @@ public class DexLoader {
    */
   public static ArrayList<RandomAccessFile> analyzeApkFeaturesLocally(String filePath) {
     
-    rafs = new ArrayList<>();
+    ArrayList<RandomAccessFile> rafs = new ArrayList<>();
 
     try {
 
@@ -99,7 +98,7 @@ public class DexLoader {
    */
   public static ArrayList<RandomAccessFile> analyzeApkFeaturesOnline(ZipInputStream zis) {
 
-    rafs = new ArrayList<>();
+    ArrayList<RandomAccessFile> rafs = new ArrayList<>();
 
     try {
 
