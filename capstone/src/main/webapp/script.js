@@ -421,6 +421,8 @@ function sizeUnitConversion(size){
     }
     return size.toString()+" Bytes";
 }
+
+//This function adds a background color to the Apk file type to make it easily distinguished
 function createListAPKNameElement(texts) {
   const card = document.createElement("div");
   card.className = "card bg-primary text-dark";
@@ -433,6 +435,7 @@ function createListAPKNameElement(texts) {
   return card;
 }
 
+//This function adds a background color to the Apk Header to make it easily distinguished
 function createListHeaderElement(texts) {
   const card = document.createElement("div");
   card.className = "card bg-secondary text-white";
@@ -444,6 +447,9 @@ function createListHeaderElement(texts) {
   
   return card;
 }
+
+//This function adds a background color to the Apk compressed and uncompressed 
+//size type to make it easily distinguished
 function createListBodyElement(texts) {
   const card = document.createElement("div");
   card.className = "card bg-light text-dark";
@@ -508,15 +514,10 @@ function getDisplay(list) {
   }
 }
 
-exports.sizeUnitConversion = sizeUnitConversion;
-exports.getFreqData = getFreqData;
-
 // Show the loader button once the form has been submitted
 // until the page has finished loading
 function displayLoader() {
   var loader = document.getElementById('btn-load');
-
-
   loader.style.display = "block";
 }
 
