@@ -11,8 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// Link to StackOverflow reference: 
-//https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
 package com.google.sps.data;
 import java.util.ArrayList; 
 public class AndroidManifestParser {
@@ -31,6 +29,10 @@ public class AndroidManifestParser {
     */
 
     public ArrayList<String> decompressXML(byte[] xml) {
+    /* 
+     Link to StackOverflow reference: 
+     https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
+    */
     // Compressed XML file/bytes starts with 24x bytes of data,
     // 9 32 bit words in little endian order (LSB first):
     //   0th word is 03 00 08 00
