@@ -20,7 +20,6 @@ public class AndroidManifestParser {
     public static int endDocTag = 0x00100101;
     public static int startTag =  0x00100102;
     public static int endTag =    0x00100103;
-    public static String spaces = "                                             ";
 
     ArrayList<String> permissionsList = new ArrayList<String>();
     /*
@@ -58,8 +57,8 @@ public class AndroidManifestParser {
             xmlTagOff = ii;  break;
         }
     } 
-    
-    // XML tags and attributes:
+    // This is what the bytecode for a XML looks like. it conatins tags and attributes 
+    // which makes up the original source code of the XML file
     // Every XML start and end tag consists of 6 32 bit words:
     //   0th word: 02011000 for startTag and 03011000 for endTag 
     //   1st word: a flag?, like 38000000
@@ -87,9 +86,7 @@ public class AndroidManifestParser {
     int startTagLineNo = -2;
     while (off < xml.length) {
         int tag0 = LEW(xml, off);
-        //int tag1 = LEW(xml, off+1*4);
         int lineNo = LEW(xml, off+2*4);
-        //int tag3 = LEW(xml, off+3*4);
         int nameNsSi = LEW(xml, off+4*4);
         int nameSi = LEW(xml, off+5*4);
     
@@ -142,10 +139,6 @@ public class AndroidManifestParser {
         int strOff = stOff + LEW(xml, sitOff+strInd*4);
     return compXmlStringAt(xml, strOff);
     }   
-    
-    public void prtIndent(int indent, String str) {
-        System.out.println(spaces.substring(0, Math.min(indent*2, spaces.length()))+str);
-    }
         
     // compXmlStringAt -- Return the string stored in StringTable format at
     // offset strOff.  This offset points to the 16 bit string length, which 
