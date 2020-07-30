@@ -405,9 +405,9 @@ function createApkElement(apk) {
   return apkElement;
 }
 
-function redirect(){
-    displayFiles();
-}
+function reloadAboutPage() { location.replace("/#/about"); location.reload(); }
+
+function redirect(){ location.replace("/#/explore"); location.reload(); }
 
 function sizeUnitConversion(size){
     if (size >= 1000) {
@@ -508,7 +508,17 @@ function getDisplay(list) {
   }
 }
 
-
 exports.sizeUnitConversion = sizeUnitConversion;
 exports.getFreqData = getFreqData;
 
+// Show the loader button once the form has been submitted
+// until the page has finished loading
+function displayLoader() {
+  var loader = document.getElementById('btn-load');
+
+
+  loader.style.display = "block";
+}
+
+exports.sizeUnitConversion = sizeUnitConversion;
+exports.getFreqData = getFreqData;
