@@ -11,8 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// Link to StackOverflow reference: 
-//https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
 package com.google.sps.data;
 
 public class AndroidManifestParser {
@@ -29,7 +27,10 @@ public class AndroidManifestParser {
     All print statement has been commented out and the only print statement is the
     permissions in the APK
     */
-
+    /* 
+     Link to StackOverflow reference: 
+     https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
+    */
     public void decompressXML(byte[] xml) {
     // Compressed XML file/bytes starts with 24x bytes of data,
     // 9 32 bit words in little endian order (LSB first):
