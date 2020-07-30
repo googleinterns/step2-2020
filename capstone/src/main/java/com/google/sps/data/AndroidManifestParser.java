@@ -166,8 +166,8 @@ public class AndroidManifestParser {
         //Uses the key to search through the attribute value and checks if it's present
         String key = "android.permission.";
         if(param.contains(key)){
-             param = param.replaceAll(key, ""));
-             permissionsList.add(param);
+            param = param.replaceAll(key, "");
+            permissionsList.add(param);
         }
     }
     
