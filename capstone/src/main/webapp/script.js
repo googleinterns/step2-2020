@@ -508,15 +508,10 @@ function getDisplay(list) {
   }
 }
 
-exports.sizeUnitConversion = sizeUnitConversion;
-exports.getFreqData = getFreqData;
-
 // Show the loader button once the form has been submitted
 // until the page has finished loading
 function displayLoader() {
   var loader = document.getElementById('btn-load');
-
-
   loader.style.display = "block";
 }
 

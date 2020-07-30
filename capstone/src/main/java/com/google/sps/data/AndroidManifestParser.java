@@ -14,7 +14,7 @@
 // Link to StackOverflow reference: 
 //https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
 package com.google.sps.data;
-
+import java.util.ArrayList; 
 public class AndroidManifestParser {
 
     public void displayAndroidManifestContent(byte[] byteFile){       
@@ -26,13 +26,13 @@ public class AndroidManifestParser {
     public static int endTag =    0x00100103;
     public static String spaces = "                                             ";
 
+    ArrayList<String> permissionsList = new ArrayList<String>();
     /*
     Overall logic of decompressXML is to get the xml in human readable format
-    All print statement has been commented out and the only print statement is the
-    permissions in the APK
+    Currently decompressXml returns an ArrayList of permissions
     */
 
-    public void decompressXML(byte[] xml) {
+    public ArrayList<String> decompressXML(byte[] xml) {
     // Compressed XML file/bytes starts with 24x bytes of data,
     // 9 32 bit words in little endian order (LSB first):
     //   0th word is 03 00 08 00
@@ -119,6 +119,7 @@ public class AndroidManifestParser {
                 sb.append(" "+attrName+"=\""+attrValue+"\"");
                 getPermissions(attrValue);
             }
+            
             //prtIndent(indent, "<"+name+sb+">");
             indent++;
         
@@ -139,6 +140,7 @@ public class AndroidManifestParser {
             }
     } // end of while loop scanning tags and attributes of XML tree
         //System.out.println("    end at offset "+off);
+        return permissionsList;
     } // end of decompressXML
         
     
@@ -177,8 +179,10 @@ public class AndroidManifestParser {
     //attributes with permission
     public void getPermissions(String perm){
         String word = "android.permission.";
-        if(perm.contains(word))
-             System.out.println(perm.replaceAll(word, " "));
+        if(perm.contains(word)){
+            perm = perm.replaceAll(word, "");
+            //System.out.println(perm);
+            permissionsList.add(perm);
+        }
     }
-
 }
