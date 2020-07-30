@@ -16,9 +16,7 @@
 package com.google.sps.data;
 import java.util.ArrayList; 
 public class AndroidManifestParser {
-
-    public void displayAndroidManifestContent(byte[] byteFile){       
- 
+     
     // decompressXML -- Parse the 'compressed' binary form of Android XML docs 
     // such as for AndroidManifest.xml in .apk files
     public static int endDocTag = 0x00100101;
@@ -96,10 +94,8 @@ public class AndroidManifestParser {
         if (tag0 == startTag) { // XML START TAG
             int tag6 = LEW(xml, off+6*4);  // Expected to be 14001400
             int numbAttrs = LEW(xml, off+7*4);  // Number of Attributes to follow
-            //int tag8 = LEW(xml, off+8*4);  // Expected to be 00000000
             off += 9*4;  // Skip over 6+3 words of startTag data
             String name = compXmlString(xml, sitOff, stOff, nameSi);
-            //tr.addSelect(name, null);
             startTagLineNo = lineNo;
         
             // Look for the Attributes
@@ -119,27 +115,21 @@ public class AndroidManifestParser {
                 sb.append(" "+attrName+"=\""+attrValue+"\"");
                 getPermissions(attrValue);
             }
-            
-            //prtIndent(indent, "<"+name+sb+">");
             indent++;
         
         } else if (tag0 == endTag) { // XML END TAG
             indent--;
             off += 6*4;  // Skip over 6 words of endTag data
             String name = compXmlString(xml, sitOff, stOff, nameSi);
-            //prtIndent(indent, "</"+name+">  (line "+startTagLineNo+"-"+lineNo+")");
-            //tr.parent();  // Step back up the NobTree
         
         } else if (tag0 == endDocTag) {  // END OF XML DOC TAG
             break;
         
         } else {
-            // System.out.println("  Unrecognized tag code '"+Integer.toHexString(tag0)
-            // +"' at offset "+off);
             break;
             }
     } // end of while loop scanning tags and attributes of XML tree
-        //System.out.println("    end at offset "+off);
+
         return permissionsList;
     } // end of decompressXML
         
@@ -177,12 +167,14 @@ public class AndroidManifestParser {
 
     //This function takes in the attribute value which contains attributes and prints the
     //attributes with permission
-    public void getPermissions(String perm){
-        String word = "android.permission.";
-        if(perm.contains(word)){
-            perm = perm.replaceAll(word, "");
-            //System.out.println(perm);
-            permissionsList.add(perm);
+    public void getPermissions(String param){
+        //Uses the key to search through the attribute value and checks if it's present
+        String key = "android.permission.";
+        if(param.contains(key)){
+             param = param.replaceAll(key, ""));
+             permissionsList.add(param);
         }
     }
+    
 }
+
