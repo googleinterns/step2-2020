@@ -32,6 +32,9 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class AndroidManifestParserTest{
     @Test
+    //This Test if the bytes  is converting to XML format and 
+    // Prints permission.This is the entire functional test of the parser 
+    // Library. The other Test tests sub functions
     public void testIfBytesConvertsToXmlAndReturnsPermissions() {
         String filePath = Resources.getResource("AndroidManifest.xml").getPath();
         System.out.print(filePath);
@@ -65,6 +68,82 @@ public class AndroidManifestParserTest{
         permissionsList.add("BIND_ACCESSIBILITY_SERVICE");
         permissionsList.add("BIND_DEVICE_ADMIN");
         Assert.assertEquals(permissionsList, ManifestParser.decompressXML(bFile));
+    }
+
+    @Test
+    //This test if decompress XML gets attribute tags and can read each position
+    public void testIfByteIsConvertedToXMLTagPosition () {
+        String filePath = Resources.getResource("AndroidManifest.xml").getPath();
+        System.out.print(filePath);
+        AndroidManifestParser ManifestParser = new AndroidManifestParser();
+        File file = new File(filePath);
+        FileInputStream fileInputStream = null;
+        byte[] bFile = new byte[(int) file.length()];
+         try{
+            //convert file into array of bytes
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        int off = 166840;
+        int lewResult = 1048835;
+
+        Assert.assertEquals(lewResult, ManifestParser.LEW(bFile,off));
+    }
+
+    @Test
+    // This test if bytes is been converted to attribute name based 
+    // on the position generated in previous function
+    public void testIfBytesIsConvertedToAttributeName () {
+        String filePath = Resources.getResource("AndroidManifest.xml").getPath();
+        System.out.print(filePath);
+        AndroidManifestParser ManifestParser = new AndroidManifestParser();
+        File file = new File(filePath);
+        FileInputStream fileInputStream = null;
+        byte[] bFile = new byte[(int) file.length()];
+         try{
+            //convert file into array of bytes
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int sitOff = 36;
+        int stOff = 2788;
+        int strInd36 = 3;
+        String  compXmlStringResult = "name";
+        Assert.assertEquals(compXmlStringResult, ManifestParser.compXmlString(bFile, sitOff, stOff,strInd36));
+    }
+
+    @Test
+    // This test if bytes is converted from string and permissions is extracted correctly
+    public void testIfBytesReturnsPermissions() {
+        String filePath = Resources.getResource("AndroidManifest.xml").getPath();
+        System.out.print(filePath);
+        AndroidManifestParser ManifestParser = new AndroidManifestParser();
+        File file = new File(filePath);
+        FileInputStream fileInputStream = null;
+        byte[] bFile = new byte[(int) file.length()];
+         try{
+            //convert file into array of bytes
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> permissionsList = new ArrayList();
+        permissionsList.add("TEST");
+        String param = "android.permission.TEST";
+
+        Assert.assertEquals(permissionsList, ManifestParser.getPermissions(param));
     }
 }
 

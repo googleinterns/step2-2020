@@ -119,8 +119,7 @@ public class AndroidManifestParser {
         } else if (tag0 == endTag) { // XML END TAG
             indent--;
             off += 6*4;  // Skip over 6 words of endTag data
-            String name = compXmlString(xml, sitOff, stOff, nameSi);
-        
+            String name = compXmlString(xml, sitOff, stOff, nameSi);        
         } else if (tag0 == endDocTag) {  // END OF XML DOC TAG
             break;
         
@@ -128,8 +127,7 @@ public class AndroidManifestParser {
             break;
             }
     } // end of while loop scanning tags and attributes of XML tree
-
-        return permissionsList;
+    return permissionsList;
     } // end of decompressXML
         
     
@@ -152,7 +150,6 @@ public class AndroidManifestParser {
     return new String(chars);  // Hack, just use 8 byte chars
     } // end of compXmlStringAt
     
-    
     // LEW -- Return value of a Little Endian 32 bit word from the byte array
     //   at offset off.
     public int LEW(byte[] arr, int off) {
@@ -162,13 +159,14 @@ public class AndroidManifestParser {
 
     //This function takes in the attribute value which contains attributes and prints the
     //attributes with permission
-    public void getPermissions(String param){
+    public ArrayList<String> getPermissions(String param){
         //Uses the key to search through the attribute value and checks if it's present
         String key = "android.permission.";
         if(param.contains(key)){
             param = param.replaceAll(key, "");
             permissionsList.add(param);
         }
+    return permissionsList;
     }
     
 }
