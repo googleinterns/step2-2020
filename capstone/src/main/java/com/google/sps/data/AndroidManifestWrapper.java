@@ -20,6 +20,7 @@ public class AndroidManifestWrapper {
       ManifestParser.decompressXML(readContentIntoByteArray(file));
     }
 
+    //This function converts the file to bytes
     public static byte[] readContentIntoByteArray(File file) {
 
       FileInputStream fileInputStream = null;

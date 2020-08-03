@@ -13,6 +13,11 @@
 // limitations under the License.
 package com.google.sps.data;
 import java.util.ArrayList; 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 public class AndroidManifestParser {
      
     // decompressXML -- Parse the 'compressed' binary form of Android XML docs 
@@ -20,18 +25,23 @@ public class AndroidManifestParser {
     public static int endDocTag = 0x00100101;
     public static int startTag =  0x00100102;
     public static int endTag =    0x00100103;
+    public static String spaces = "                                             ";
+    File file = new File("AndroidManifestReadFile.txt");  
+
 
     ArrayList<String> permissionsList = new ArrayList<String>();
     /*
     Overall logic of decompressXML is to get the xml in human readable format
     Currently decompressXml returns an ArrayList of permissions
     */
-
-    public ArrayList<String> decompressXML(byte[] xml) {
+    
+    public File decompressXML(byte[] xml) {
     /* 
      Link to StackOverflow reference: 
      https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
     */
+
+
     // Compressed XML file/bytes starts with 24x bytes of data,
     // 9 32 bit words in little endian order (LSB first):
     //   0th word is 03 00 08 00
@@ -114,25 +124,39 @@ public class AndroidManifestParser {
                 sb.append(" "+attrName+"=\""+attrValue+"\"");
                 getPermissions(attrValue);
             }
+            writeToFile(indent, "<"+name+sb+">");
             indent++;
         
         } else if (tag0 == endTag) { // XML END TAG
             indent--;
             off += 6*4;  // Skip over 6 words of endTag data
-            String name = compXmlString(xml, sitOff, stOff, nameSi);
-        
+            String name = compXmlString(xml, sitOff, stOff, nameSi);  
+            writeToFile(indent, "</"+name+">  (line "+startTagLineNo+"-"+lineNo+")");      
         } else if (tag0 == endDocTag) {  // END OF XML DOC TAG
             break;
         
         } else {
+            
             break;
             }
     } // end of while loop scanning tags and attributes of XML tree
-
-        return permissionsList;
+      return file;
     } // end of decompressXML
-        
-    
+
+    //This method writes the parsed Xml to a file 
+    public void writeToFile(int indent, String str) {
+        try{
+            if(file.exists()==false){
+                    file.createNewFile();
+            }
+            PrintWriter out = new PrintWriter(new FileWriter(file, true));
+            out.append(spaces.substring(0, Math.min(indent*2, spaces.length()))+str+"\n");
+            out.close();
+        }catch(IOException e){
+                System.out.println("COULD NOT LOG!!");
+            }
+    }
+
     public String compXmlString(byte[] xml, int sitOff, int stOff, int strInd) {
         if (strInd < 0) 
             return null;
@@ -152,7 +176,6 @@ public class AndroidManifestParser {
     return new String(chars);  // Hack, just use 8 byte chars
     } // end of compXmlStringAt
     
-    
     // LEW -- Return value of a Little Endian 32 bit word from the byte array
     //   at offset off.
     public int LEW(byte[] arr, int off) {
@@ -162,13 +185,14 @@ public class AndroidManifestParser {
 
     //This function takes in the attribute value which contains attributes and prints the
     //attributes with permission
-    public void getPermissions(String param){
+    public ArrayList<String> getPermissions(String param){
         //Uses the key to search through the attribute value and checks if it's present
         String key = "android.permission.";
         if(param.contains(key)){
             param = param.replaceAll(key, "");
             permissionsList.add(param);
         }
+    return permissionsList;
     }
     
 }
