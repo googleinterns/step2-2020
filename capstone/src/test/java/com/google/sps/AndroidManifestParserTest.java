@@ -62,16 +62,13 @@ public class AndroidManifestParserTest{
         String filePath = Resources.getResource("AndroidManifest.xml").getPath();
         File file = new File(filePath);
         File returnedFile = ManifestParser.decompressXML(readContentIntoByteArray(file));
-        byte[] expected = readContentIntoByteArray(returnedFile);
+        byte[] actual = readContentIntoByteArray(returnedFile);
 
         String filePath2 = Resources.getResource("AndroidManifestReadFile.txt").getPath();
         File file2 = new File(filePath2);
-        byte[] actual = readContentIntoByteArray(file2);
+        byte[] expected = readContentIntoByteArray(file2);
         
-        
-        for(int i=0; i < expected.length; i++){
-            assertEquals(expected[i], actual[i]);
-        }
+        assertArrayEquals(expected, actual);
     }
 
     //This test if decompress XML gets attribute tags and can read each position
