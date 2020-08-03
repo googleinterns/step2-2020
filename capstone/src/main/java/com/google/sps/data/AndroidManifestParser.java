@@ -143,6 +143,7 @@ public class AndroidManifestParser {
       return file;
     } // end of decompressXML
 
+    //This method writes the parsed Xml to a file 
     public void writeToFile(int indent, String str) {
         try{
             if(file.exists()==false){

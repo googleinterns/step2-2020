@@ -34,6 +34,8 @@ import static org.junit.Assert.*;
     */
 @RunWith(JUnit4.class)
 public class AndroidManifestParserTest{
+    
+    //This function converts the file to bytes
     public static byte[] readContentIntoByteArray(File file) {
 
       FileInputStream fileInputStream = null;
