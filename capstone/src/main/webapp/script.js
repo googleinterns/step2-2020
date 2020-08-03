@@ -58,11 +58,11 @@ function getFreqData(list){
     }
 
     freqData=[
-        {fileType:'Res',freq:{compressed:res, uncompressed:uncomRes, lost:(uncomRes - res)}},
-        {fileType:'Java Code',freq:{compressed:javaCode, uncompressed:uncomJavaCode, lost:(uncomJavaCode - javaCode)}},
-        {fileType:'Resources',freq:{compressed:resources, uncompressed:uncomResources, lost:(uncomResources - resources )}},
-        {fileType:'Miscellaneous',freq:{compressed:miscellaneous, uncompressed:uncomMiscellaneous, lost:(uncomMiscellaneous - miscellaneous)}},
-        {fileType:'Assets',freq:{compressed:assets, uncompressed:uncomAssets, lost:(uncomAssets - assets)}}
+        {fileType:'Res',freq:{Compressed:res, Uncompressed:uncomRes, Space_saved_after_Compression:(uncomRes - res)}},
+        {fileType:'Java Code',freq:{Compressed:javaCode, Uncompressed:uncomJavaCode, Space_saved_after_Compression:(uncomJavaCode - javaCode)}},
+        {fileType:'Resources',freq:{Compressed:resources, Uncompressed:uncomResources, Space_saved_after_Compression:(uncomResources - resources )}},
+        {fileType:'Miscellaneous',freq:{Compressed:miscellaneous, Uncompressed:uncomMiscellaneous, Space_saved_after_Compression:(uncomMiscellaneous - miscellaneous)}},
+        {fileType:'Assets',freq:{Compressed:assets, Uncompressed:uncomAssets, Space_saved_after_Compression:(uncomAssets - assets)}}
     ]; 
     return freqData;
 }
@@ -110,10 +110,10 @@ function dashboard(fData){
     var id = document.getElementById('display');
     d3.select("#display").text(apkName);
     var barColor = 'steelblue';
-    function segColor(c){ return {compressed:"#807dba", uncompressed:"#e08214",lost:"#41ab5d"}[c]; }
+    function segColor(c){ return {Compressed:"#807dba", Uncompressed:"#e08214",Space_saved_after_Compression:"#41ab5d"}[c]; }
     
     // compute total for each state.
-    fData.forEach(function(d){d.total=(d.freq.uncompressed)});
+    fData.forEach(function(d){d.total=(d.freq.Uncompressed)});
     
     // function to handle histogram.
     function histoGram(fD){
@@ -293,14 +293,13 @@ function dashboard(fData){
     }
     
     // calculate total frequency by segment for all state.
-    var tF = ['compressed','uncompressed','lost'].map(function(d){ 
+    var tF = ['Compressed','Uncompressed','Space_saved_after_Compression'].map(function(d){ 
         return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
     });    
     
     // calculate total frequency by state for all segment.
     var sF = fData.map(function(d){return [d.fileType,d.total];});
-    
-    
+     
     var hG = histoGram(sF), // create the histogram.
         pC = pieChart(tF), // create the pie-chart.
         leg= legend(tF);  // create the legend.
