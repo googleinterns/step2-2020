@@ -82,6 +82,11 @@ public class FileDeletionServlet extends HttpServlet {
     // file targeted for deletion belongs to the user making the request.
     if (!deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {response.sendError(404);}
 
+    // Deletes DEX features from Datastore
+    if (!deleteParsedDex(dataStore, fileName, currentUser.getUserId())) {
+      response.sendError(404);
+    }
+
     deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
 
     // The block of code below creates an ID that cloud storage
@@ -105,6 +110,34 @@ public class FileDeletionServlet extends HttpServlet {
 
 
     Query query = new Query("UserFileFeature").setFilter(targetFileFilter);
+
+    PreparedQuery results = datastore.prepare(query);
+
+    int numberOfEntities = 0;
+
+    for (Entity entity : results.asIterable()) {
+      datastore.delete(entity.getKey());
+      numberOfEntities++;
+    }
+
+    // This condition below is the bulwark of this servlet.
+    // It ensures that the file targeted for deletion belongs to
+    // the requester by checking if the filters generated any results.
+    if (numberOfEntities == 0) {return false;}
+
+    return true;
+  }
+
+  private boolean deleteParsedDex(DatastoreService datastore, String apk_name, String userId) {
+
+    Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
+    Filter fileNameFilter = new FilterPredicate("File_name", FilterOperator.EQUAL, apk_name);
+
+    CompositeFilter targetFileFilter =
+    CompositeFilterOperator.and(fileNameFilter, userIdFilter);
+
+
+    Query query = new Query("UserDexFeature").setFilter(targetFileFilter);
 
     PreparedQuery results = datastore.prepare(query);
 

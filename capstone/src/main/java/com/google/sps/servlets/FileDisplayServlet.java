@@ -1,4 +1,4 @@
-package com.google.servlets;
+package com.google.sps.servlets;
 
 import com.google.sps.data.ApkFileFeatures;
 
@@ -29,6 +29,8 @@ import com.google.gson.Gson; //Convert json to string
 @WebServlet("/display")
 public class FileDisplayServlet extends HttpServlet {
 
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     /* Receives request from client side to retrieve APK features from Datastore and return those features for rendering to client */
@@ -38,20 +40,8 @@ public class FileDisplayServlet extends HttpServlet {
     long time = Long.parseLong(request.getParameter("timeStamp"));
     String fileName = request.getParameter("apk_name");
 
-    // Create a filter for retrieval of APKs specific to a certain user with a timestamp nad filename
-    Filter timeFilter = new FilterPredicate("Timestamp", FilterOperator.EQUAL, time);
-    Filter fileNameFilter = new FilterPredicate("File_name", FilterOperator.EQUAL, fileName);
-
-    CompositeFilter targetFileFilter =
-    CompositeFilterOperator.and(fileNameFilter, timeFilter);
-
-    Query query = new Query("UserFileFeature").setFilter(targetFileFilter);
-
-    // Initiate Datastore service
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
     // Retrieve query based on filter from Datastore
-    PreparedQuery results = datastore.prepare(query);
+    PreparedQuery results = retrieveFileFeatures(fileName, time, datastore);
 
     // Categorize features of APK in a class and store in list for better conversion to the client side
     ArrayList<ApkFileFeatures> filesFeatures = new ArrayList<>();
@@ -63,6 +53,21 @@ public class FileDisplayServlet extends HttpServlet {
     Gson gson = new Gson();
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(filesFeatures));
+  }
+
+  public PreparedQuery retrieveFileFeatures(String fileName, long time, DatastoreService datastore) {
+    
+    // Create a filter for retrieval of APKs specific to a certain user with a timestamp nad filename
+    Filter timeFilter = new FilterPredicate("Timestamp", FilterOperator.EQUAL, time);
+    Filter fileNameFilter = new FilterPredicate("File_name", FilterOperator.EQUAL, fileName);
+
+    CompositeFilter targetFileFilter =
+    CompositeFilterOperator.and(fileNameFilter, timeFilter);
+
+    Query query = new Query("UserFileFeature").setFilter(targetFileFilter);
+
+    return datastore.prepare(query);
+
   }
 
   @Override

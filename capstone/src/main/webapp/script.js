@@ -81,7 +81,7 @@ function changeChart(fileStatistics, result){
     else if (result == 2){
         document.getElementById("display").style.display = 'none';
         document.getElementById("displayComponent").style.display= 'none';
-        document.getElementById("displayChart").style.display = 'block'; 
+        document.getElementById("displayChart").style.display = 'block';
         drawChart(fileStatistics);
     }
     else if (result == 3) {
@@ -103,6 +103,7 @@ async function showFileStatistics(filename, time, result) {
     const response = await fetch("/display", {method: 'POST', body: params});
     const fileStatistics = await response.json();
     changeChart(fileStatistics,result);
+    exploreParser(filename, time);
 }
 
 function dashboard(fData){
@@ -508,9 +509,6 @@ function getDisplay(list) {
   }
 }
 
-exports.sizeUnitConversion = sizeUnitConversion;
-exports.getFreqData = getFreqData;
-
 // Show the loader button once the form has been submitted
 // until the page has finished loading
 function displayLoader() {
@@ -518,6 +516,72 @@ function displayLoader() {
 
 
   loader.style.display = "block";
+}
+
+// Calls the DexParserServlet for processing of DEX files and retrieves the statistics
+async function exploreParser(filename, time) {
+  const params = new URLSearchParams();
+  params.append('file_name', filename);
+  params.append('timeStamp', time);
+  console.log(filename, time);
+
+  const response = await fetch("/dexparser", {method: 'POST', body: params});
+  const fileStats = await response.json();    
+  console.log(fileStats);
+
+  const dexButtonArea = document.getElementById("buttonDex");
+  const dexButtonElement = document.createElement('button');
+  dexButtonElement.className = 'btn btn-primary';
+  dexButtonElement.innerText = 'Explore DEX File';
+  dexButtonElement.setAttribute('id', 'button-dex');
+  dexButtonElement.addEventListener('click', () => {
+    displayParser(fileStats);
+  });
+
+  // Removes an already existing DEX explorer button
+  if(document.body.contains(document.getElementById('button-dex'))) {
+    dexButtonArea.removeChild(document.getElementById('button-dex'));
+  } 
+
+  dexButtonArea.appendChild(dexButtonElement);
+
+  // Removes all existing children in the div
+  const dexParserElement = document.getElementById("displayDexStats");
+  while (dexParserElement.firstChild) {
+    dexParserElement.removeChild(dexParserElement.firstChild);
+  }
+
+}
+
+// Displays DEX statistics of the APK retrieved from Datastore
+function displayParser(fileStats) {
+  
+  const dexParserElement = document.getElementById("displayDexStats");
+
+  dexParserElement.innerHTML = '';
+
+  for (var i = 0; i < fileStats.length; i++) {
+    dexParserElement.appendChild(
+      createListHeaderElement('DEX Statistics'));
+    dexParserElement.appendChild(
+      createListHeaderElement(('Header Size: ' + sizeUnitConversion(fileStats[i].headerSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('File Size: ' + sizeUnitConversion(fileStats[i].fileSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('StringIdsSize: ' + sizeUnitConversion(fileStats[i].stringIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('MethodIdsSize: ' + sizeUnitConversion(fileStats[i].methodIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('TypeIdsSize: ' + sizeUnitConversion(fileStats[i].typeIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('ProtoIdsSize: ' + sizeUnitConversion(fileStats[i].protoIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('FieldIdsSize: ' + sizeUnitConversion(fileStats[i].fieldIdsSize))));  
+    dexParserElement.appendChild(
+      createListHeaderElement(('ClassDefsSize: ' + sizeUnitConversion(fileStats[i].classDefsSize))));
+  }
+
+
 }
 
 exports.sizeUnitConversion = sizeUnitConversion;
