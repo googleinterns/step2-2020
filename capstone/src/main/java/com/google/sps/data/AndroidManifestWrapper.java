@@ -14,7 +14,7 @@ import java.io.InputStream;
 //byte array and displays it. This will be later sent to a parser class. 
 public class AndroidManifestWrapper {
 
-    public static void main(String args[]){     
+    public static void main(String args[]) throws Exception{     
       File file = new File (args [0]);
       AndroidManifestParser ManifestParser = new AndroidManifestParser();
       ManifestParser.decompressXML(readContentIntoByteArray(file));
