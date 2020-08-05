@@ -125,6 +125,18 @@ After completion of all these steps, you will be able to contribute to the devel
 
 <br/>
 
+#### Testing Web App development
+
+To run java test, run the following command : 
+
+```sh
+$ mvn test -DskipTests=false
+```
+To run JavaScript test wit Jasmine, run the following command:
+```sh
+$ npm test
+```
+
 ### Code Style
 
 This project uses code based on Google Style Guides which can be found at [Google Style Guides](https://google.github.io/styleguide/)
