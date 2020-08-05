@@ -69,7 +69,7 @@ public class FileDeletionServlet extends HttpServlet {
 
     // The two lines below retrieve certain details about the desired apk
     // so the wrong files aren't deleted.
-    fileName = request.getParameter("file_name");
+    fileName = request.getParameter("fileName");
     fileVisibility = request.getParameter("ownership");
 
     // The condition below is a safety belt for situations involving
@@ -81,6 +81,9 @@ public class FileDeletionServlet extends HttpServlet {
     // This condition below is a second safety belt that ensures the requested
     // file targeted for deletion belongs to the user making the request.
     if (deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {
+
+      // Deletes DEX features from Datastore
+      deleteParsedDex(dataStore, fileName, currentUser.getUserId());
 
       deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
 
@@ -102,7 +105,7 @@ public class FileDeletionServlet extends HttpServlet {
   private boolean deleteUnzippedApk(DatastoreService datastore, String apk_name, String userId) {
 
     Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
-    Filter fileNameFilter = new FilterPredicate("File_name", FilterOperator.EQUAL, apk_name);
+    Filter fileNameFilter = new FilterPredicate("FileName", FilterOperator.EQUAL, apk_name);
 
     CompositeFilter targetFileFilter =
     CompositeFilterOperator.and(fileNameFilter, userIdFilter);
@@ -127,11 +130,31 @@ public class FileDeletionServlet extends HttpServlet {
     return true;
   }
 
+  // The functions below delete all Dex entries of the target APK so no
+  // records of it are kept.
+  private void deleteParsedDex(DatastoreService datastore, String apk_name, String userId) {
+
+    Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
+    Filter fileNameFilter = new FilterPredicate("FileName", FilterOperator.EQUAL, apk_name);
+
+    CompositeFilter targetFileFilter =
+    CompositeFilterOperator.and(fileNameFilter, userIdFilter);
+
+
+    Query query = new Query("UserDexFeature").setFilter(targetFileFilter);
+
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) { datastore.delete(entity.getKey()); }
+
+  }
+
+
   private void deleteTrackedFile(DatastoreService datastore, 
   final String apk_name, final String userId, final String file_visibility) {
 
     Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
-    Filter fileNameFilter = new FilterPredicate("File_name", FilterOperator.EQUAL, apk_name);
+    Filter fileNameFilter = new FilterPredicate("FileName", FilterOperator.EQUAL, apk_name);
 
     CompositeFilter targetFileFilter =
     CompositeFilterOperator.and(fileNameFilter, userIdFilter);
