@@ -33,9 +33,9 @@ public class LogoutServlet extends HttpServlet {
 
     if (userService.isUserLoggedIn()) {
 
-      response.sendRedirect(userService.createLogoutURL("/signout"));
+      response.sendRedirect(userService.createLogoutURL(request.getRequestURI()));
 
-    } else { response.sendRedirect("/#/home"); }
+    } else { response.sendRedirect(request.getRequestURI()); }
     
   }
 }
