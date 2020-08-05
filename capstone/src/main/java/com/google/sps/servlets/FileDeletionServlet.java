@@ -80,21 +80,23 @@ public class FileDeletionServlet extends HttpServlet {
 
     // This condition below is a second safety belt that ensures the requested
     // file targeted for deletion belongs to the user making the request.
-    if (!deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {response.sendError(404);}
+    if (deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {
 
-    // Deletes DEX features from Datastore
-    if (!deleteParsedDex(dataStore, fileName, currentUser.getUserId())) {
-      response.sendError(404);
+      // Deletes DEX features from Datastore
+      deleteParsedDex(dataStore, fileName, currentUser.getUserId());
+
+      deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
+
+      // The block of code below creates an ID that cloud storage
+      // uses to locate the desired APK and deletes it.
+      blobId = BlobId.of(BUCKETNAME, "apks/" + currentUser.getUserId() + "/" + fileName);
+      storage.delete(blobId);
+
+      response.sendRedirect("/#/explore");
+
     }
-
-    deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
-
-    // The block of code below creates an ID that cloud storage
-    // uses to locate the desired APK and deletes it.
-    blobId = BlobId.of(BUCKETNAME, "apks/" + currentUser.getUserId() + "/" + fileName);
-    storage.delete(blobId);
-
-    response.sendRedirect("/#/explore");
+    
+    else {response.sendError(404);}
 
   }
 
@@ -130,7 +132,7 @@ public class FileDeletionServlet extends HttpServlet {
 
   // The functions below delete all Dex entries of the target APK so no
   // records of it are kept.
-  private boolean deleteParsedDex(DatastoreService datastore, String apk_name, String userId) {
+  private void deleteParsedDex(DatastoreService datastore, String apk_name, String userId) {
 
     Filter userIdFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
     Filter fileNameFilter = new FilterPredicate("FileName", FilterOperator.EQUAL, apk_name);
@@ -143,19 +145,8 @@ public class FileDeletionServlet extends HttpServlet {
 
     PreparedQuery results = datastore.prepare(query);
 
-    int numberOfEntities = 0;
+    for (Entity entity : results.asIterable()) { datastore.delete(entity.getKey()); }
 
-    for (Entity entity : results.asIterable()) {
-      datastore.delete(entity.getKey());
-      numberOfEntities++;
-    }
-
-    // This condition below is the bulwark of this servlet.
-    // It ensures that the file targeted for deletion belongs to
-    // the requester by checking if the filters generated any results.
-    if (numberOfEntities == 0) {return false;}
-
-    return true;
   }
 
 

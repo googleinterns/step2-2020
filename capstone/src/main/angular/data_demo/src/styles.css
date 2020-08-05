@@ -66,3 +66,29 @@
 .binary_file span {
     flex-grow: 1;
 }
+
+input[type=search] {
+
+    width: 100px;
+    height: 43px;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: white;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+
+}
+
+input[type=search]:focus {
+    width: 110%;
+    height: 43px;
+}
+
+/*The code below removes the drop down arrow from the search
+bar. The datalist automatically appears and starts filtering
+its collection as the user types in so there is no need to have the
+drop down button.*/
+[list]::-webkit-calendar-picker-indicator {
+    display: none;
+}

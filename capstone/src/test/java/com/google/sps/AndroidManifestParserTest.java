@@ -56,7 +56,7 @@ public class AndroidManifestParserTest{
     
     //This Test if the bytes  is converting to human readable XML format
     @Test
-    public void testIfBytesConvertsToReadableXml() {
+    public void testIfBytesConvertsToReadableXml() throws Exception {
         AndroidManifestParser ManifestParser = new AndroidManifestParser();
         
         String filePath = Resources.getResource("AndroidManifest.xml").getPath();
