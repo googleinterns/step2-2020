@@ -80,6 +80,10 @@ input[type=search]:focus {
     height: 43px;
 }
 
-input::-webkit-calendar-picker-indicator {
+/*The code below removes the drop down arrow from the search
+bar. The datalist automatically appears and starts filtering
+its collection as the user types in so there is no need to have the
+drop down button.*/
+[list]::-webkit-calendar-picker-indicator {
     display: none;
 }
