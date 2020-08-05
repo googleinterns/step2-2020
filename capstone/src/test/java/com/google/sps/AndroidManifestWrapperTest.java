@@ -15,6 +15,7 @@
 package com.google.sps;
 
 import com.google.sps.data.AndroidManifestWrapper;
+import com.google.common.io.Resources;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,9 +30,10 @@ import org.junit.runners.JUnit4;
 public class AndroidManifestWrapperTest{
     @Test
     public void testIfFileConvertsToBytes() {
+        String filePath = Resources.getResource("AndroidManifest.xml").getPath();
+        System.out.print(filePath);
         AndroidManifestWrapper ManifestTester = new AndroidManifestWrapper();
-        //Apk is hardcoded for now to understand how everything works.
-        File file = new File ("AndroidManifest.xml");
+        File file = new File(filePath);
         FileInputStream fileInputStream = null;
         byte[] bFile = new byte[(int) file.length()];
          try{

@@ -14,26 +14,19 @@ import java.io.InputStream;
 //byte array and displays it. This will be later sent to a parser class. 
 public class AndroidManifestWrapper {
 
-    public static void main(String[] args) {
-       
-      new AndroidManifestWrapper();
+    public static void main(String args[]){     
+      File file = new File (args [0]);
+      AndroidManifestParser ManifestParser = new AndroidManifestParser();
+      ManifestParser.decompressXML(readContentIntoByteArray(file));
+    }
 
-    }
-    public AndroidManifestWrapper() {
-       File file = new File ("./com/google/sps/data/AndroidManifest.xml");
-       boolean exists = file.exists();
-       if (exists) System.out.println("I found AndroidManifest.xml");
-       AndroidManifestParser ManifestParser = new AndroidManifestParser();
-       ManifestParser.displayAndroidManifestContent(readContentIntoByteArray(file));
-    }
-    
-    public byte[] readContentIntoByteArray(File file) {
+    //This function converts the file to bytes
+    public static byte[] readContentIntoByteArray(File file) {
 
       FileInputStream fileInputStream = null;
       byte[] bFile = new byte[(int) file.length()];
 
-      try
-      {
+      try {
         //convert file into array of bytes
         fileInputStream = new FileInputStream(file);
         fileInputStream.read(bFile);
@@ -46,4 +39,3 @@ public class AndroidManifestWrapper {
     return bFile;
     }
 }
-

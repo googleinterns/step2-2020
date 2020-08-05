@@ -1,0 +1,2748 @@
+<manifest versionCode="resourceID 0x12" versionName="3.1.0" compileSdkVersion="resourceID 0x1c" compileSdkVersionCodename="9" package="io.appium.android.apis" platformBuildVersionCode="resourceID 0x1c" platformBuildVersionName="resourceID 0x9">
+  <uses-sdk minSdkVersion="resourceID 0x11" targetSdkVersion="resourceID 0x1c">
+  </uses-sdk>  (line 29-29)
+  <uses-permission name="android.permission.READ_CONTACTS">
+  </uses-permission>  (line 33-33)
+  <uses-permission name="android.permission.WRITE_CONTACTS">
+  </uses-permission>  (line 34-34)
+  <uses-permission name="android.permission.VIBRATE">
+  </uses-permission>  (line 35-35)
+  <uses-permission name="android.permission.ACCESS_COARSE_LOCATION">
+  </uses-permission>  (line 36-36)
+  <uses-permission name="android.permission.INTERNET">
+  </uses-permission>  (line 37-37)
+  <uses-permission name="android.permission.SET_WALLPAPER">
+  </uses-permission>  (line 38-38)
+  <uses-permission name="android.permission.WRITE_EXTERNAL_STORAGE">
+  </uses-permission>  (line 39-39)
+  <uses-permission name="android.permission.SEND_SMS">
+  </uses-permission>  (line 40-40)
+  <uses-permission name="android.permission.RECEIVE_SMS">
+  </uses-permission>  (line 41-41)
+  <uses-permission name="android.permission.NFC">
+  </uses-permission>  (line 42-42)
+  <uses-permission name="android.permission.RECORD_AUDIO">
+  </uses-permission>  (line 45-45)
+  <uses-permission name="android.permission.CAMERA">
+  </uses-permission>  (line 51-51)
+  <uses-feature name="android.hardware.camera">
+  </uses-feature>  (line 53-53)
+  <uses-feature name="android.hardware.camera.autofocus" required="resourceID 0x0">
+  </uses-feature>  (line 54-54)
+  <instrumentation label="Local Sample" name=".app.LocalSampleInstrumentation" targetPackage="io.appium.android.apis">
+  </instrumentation>  (line 58-58)
+  <application label="resourceID 0x7f0e0072" icon="resourceID 0x7f080057" name="io.appium.android.apis.ApiDemosApplication" debuggable="resourceID 0xffffffff" allowBackup="resourceID 0x0" hardwareAccelerated="resourceID 0xffffffff" supportsRtl="resourceID 0xffffffff" appComponentFactory="androidx.core.app.CoreComponentFactory">
+    <uses-library name="com.example.will.never.exist" required="resourceID 0x0">
+    </uses-library>  (line 77-77)
+    <activity name="io.appium.android.apis.ApiDemos">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 83-83)
+        <category name="android.intent.category.DEFAULT">
+        </category>  (line 85-85)
+        <category name="android.intent.category.LAUNCHER">
+        </category>  (line 86-86)
+      </intent-filter>  (line 86-82)
+    </activity>  (line 86-81)
+    <activity label="resourceID 0x7f0e0055" name="io.appium.android.apis.app.HelloWorld">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 101-101)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 103-103)
+      </intent-filter>  (line 103-100)
+    </activity>  (line 103-97)
+    <activity theme="resourceID 0x103006f" label="resourceID 0x7f0e0050" name="io.appium.android.apis.app.DialogActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 111-111)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 113-113)
+      </intent-filter>  (line 113-110)
+    </activity>  (line 113-106)
+    <activity theme="resourceID 0x7f0f0110" label="resourceID 0x7f0e004e" name="io.appium.android.apis.app.CustomDialogActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 121-121)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 123-123)
+      </intent-filter>  (line 123-120)
+    </activity>  (line 123-116)
+    <activity label="resourceID 0x7f0e0260" name="io.appium.android.apis.app.QuickContactsDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 130-130)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 132-132)
+      </intent-filter>  (line 132-129)
+    </activity>  (line 132-126)
+    <activity theme="resourceID 0x7f0f0114" label="resourceID 0x7f0e0080" name="io.appium.android.apis.app.WallpaperActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 140-140)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 142-142)
+      </intent-filter>  (line 142-139)
+    </activity>  (line 142-135)
+    <activity theme="resourceID 0x7f0f0112" label="resourceID 0x7f0e007e" name="io.appium.android.apis.app.TranslucentActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 150-150)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 152-152)
+      </intent-filter>  (line 152-149)
+    </activity>  (line 152-145)
+    <activity theme="resourceID 0x7f0f0113" label="resourceID 0x7f0e007f" name="io.appium.android.apis.app.TranslucentBlurActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 160-160)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 162-162)
+      </intent-filter>  (line 162-159)
+    </activity>  (line 162-155)
+    <activity label="resourceID 0x7f0e0048" name="io.appium.android.apis.app.Animation">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 169-169)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 171-171)
+      </intent-filter>  (line 171-168)
+    </activity>  (line 171-165)
+    <activity label="resourceID 0x7f0e0074" name="io.appium.android.apis.app.SaveRestoreState" windowSoftInputMode="resourceID 0x14">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 179-179)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 181-181)
+      </intent-filter>  (line 181-178)
+    </activity>  (line 181-174)
+    <activity label="resourceID 0x7f0e0061" name="io.appium.android.apis.app.PersistentState" windowSoftInputMode="resourceID 0x14">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 189-189)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 191-191)
+      </intent-filter>  (line 191-188)
+    </activity>  (line 191-184)
+    <activity label="resourceID 0x7f0e0067" name="io.appium.android.apis.app.ActivityRecreate" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 199-199)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 201-201)
+      </intent-filter>  (line 201-198)
+    </activity>  (line 201-194)
+    <activity label="resourceID 0x7f0e0052" name="io.appium.android.apis.app.FinishAffinity" enabled="resourceID 0x7f050006" taskAffinity=":finishing">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 210-210)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 212-212)
+      </intent-filter>  (line 212-209)
+    </activity>  (line 212-204)
+    <activity label="resourceID 0x7f0e02ee" name="io.appium.android.apis.app.SoftInputModes">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 219-219)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 221-221)
+      </intent-filter>  (line 221-218)
+    </activity>  (line 221-215)
+    <activity label="resourceID 0x7f0e0066" name="io.appium.android.apis.app.ReceiveResult">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 228-228)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 230-230)
+      </intent-filter>  (line 230-227)
+    </activity>  (line 230-224)
+    <activity theme="resourceID 0x7f0f0115" name="io.appium.android.apis.app.SendResult">
+    </activity>  (line 233-233)
+    <activity label="resourceID 0x7f0e0054" name="io.appium.android.apis.app.Forwarding">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 241-241)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 243-243)
+      </intent-filter>  (line 243-240)
+    </activity>  (line 243-237)
+    <activity name="io.appium.android.apis.app.ForwardTarget">
+    </activity>  (line 246-246)
+    <activity label="resourceID 0x7f0e0069" name="io.appium.android.apis.app.RedirectEnter">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 252-252)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 254-254)
+      </intent-filter>  (line 254-251)
+    </activity>  (line 254-248)
+    <activity name="io.appium.android.apis.app.RedirectMain">
+    </activity>  (line 257-257)
+    <activity name="io.appium.android.apis.app.RedirectGetter">
+    </activity>  (line 259-259)
+    <activity theme="resourceID 0x1030005" label="resourceID 0x7f0e004f" name="io.appium.android.apis.app.CustomTitle" windowSoftInputMode="resourceID 0x24">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 272-272)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 274-274)
+      </intent-filter>  (line 274-271)
+    </activity>  (line 274-266)
+    <activity label="resourceID 0x7f0e006d" name="io.appium.android.apis.app.ReorderOnLaunch">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 281-281)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 283-283)
+      </intent-filter>  (line 283-280)
+    </activity>  (line 283-277)
+    <activity name="io.appium.android.apis.app.ReorderTwo">
+    </activity>  (line 286-286)
+    <activity name="io.appium.android.apis.app.ReorderThree">
+    </activity>  (line 287-287)
+    <activity name="io.appium.android.apis.app.ReorderFour">
+    </activity>  (line 288-288)
+    <activity label="resourceID 0x7f0e007b" name="io.appium.android.apis.app.SetWallpaperActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 293-293)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 295-295)
+      </intent-filter>  (line 295-292)
+    </activity>  (line 295-289)
+    <activity label="resourceID 0x7f0e0076" name="io.appium.android.apis.app.ScreenOrientation">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 302-302)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 304-304)
+      </intent-filter>  (line 304-301)
+    </activity>  (line 304-298)
+    <activity label="resourceID 0x7f0e0063" name="io.appium.android.apis.app.PresentationActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 311-311)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 313-313)
+      </intent-filter>  (line 313-310)
+    </activity>  (line 313-307)
+    <activity label="resourceID 0x7f0e0064" name="io.appium.android.apis.app.PresentationWithMediaRouterActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 320-320)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 322-322)
+      </intent-filter>  (line 322-319)
+    </activity>  (line 322-316)
+    <activity label="resourceID 0x7f0e0079" name="io.appium.android.apis.app.SecureWindowActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 329-329)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 331-331)
+      </intent-filter>  (line 331-328)
+    </activity>  (line 331-325)
+    <activity label="resourceID 0x7f0e0077" name="io.appium.android.apis.app.SecureDialogActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 338-338)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 340-340)
+      </intent-filter>  (line 340-337)
+    </activity>  (line 340-334)
+    <activity label="resourceID 0x7f0e0078" name="io.appium.android.apis.app.SecureSurfaceViewActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 347-347)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 349-349)
+      </intent-filter>  (line 349-346)
+    </activity>  (line 349-343)
+    <activity label="resourceID 0x7f0e0160" name="io.appium.android.apis.app.FragmentAlertDialog" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 360-360)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 362-362)
+      </intent-filter>  (line 362-359)
+    </activity>  (line 362-355)
+    <activity label="resourceID 0x7f0e0161" name="io.appium.android.apis.app.FragmentArguments" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 370-370)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 372-372)
+      </intent-filter>  (line 372-369)
+    </activity>  (line 372-365)
+    <activity label="resourceID 0x7f0e0168" name="io.appium.android.apis.app.FragmentCustomAnimations" enabled="resourceID 0x7f050004">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 380-380)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 382-382)
+      </intent-filter>  (line 382-379)
+    </activity>  (line 382-375)
+    <activity label="resourceID 0x7f0e016d" name="io.appium.android.apis.app.FragmentHideShow" enabled="resourceID 0x7f050003" windowSoftInputMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 391-391)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 393-393)
+      </intent-filter>  (line 393-390)
+    </activity>  (line 393-385)
+    <activity label="resourceID 0x7f0e0166" name="io.appium.android.apis.app.FragmentContextMenu" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 401-401)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 403-403)
+      </intent-filter>  (line 403-400)
+    </activity>  (line 403-396)
+    <activity label="resourceID 0x7f0e0169" name="io.appium.android.apis.app.FragmentDialog" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 411-411)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 413-413)
+      </intent-filter>  (line 413-410)
+    </activity>  (line 413-406)
+    <activity label="resourceID 0x7f0e016a" name="io.appium.android.apis.app.FragmentDialogOrActivity" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 421-421)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 423-423)
+      </intent-filter>  (line 423-420)
+    </activity>  (line 423-416)
+    <activity label="resourceID 0x7f0e016e" name="io.appium.android.apis.app.FragmentLayout" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 431-431)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 433-433)
+      </intent-filter>  (line 433-430)
+    </activity>  (line 433-426)
+    <activity name="io.appium.android.apis.app.FragmentLayout$DetailsActivity" enabled="resourceID 0x7f050003">
+    </activity>  (line 436-436)
+    <activity label="resourceID 0x7f0e016f" name="io.appium.android.apis.app.FragmentListArray" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 444-444)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 446-446)
+      </intent-filter>  (line 446-443)
+    </activity>  (line 446-439)
+    <activity label="resourceID 0x7f0e0170" name="io.appium.android.apis.app.FragmentMenu" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 454-454)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 456-456)
+      </intent-filter>  (line 456-453)
+    </activity>  (line 456-449)
+    <activity label="resourceID 0x7f0e0172" name="io.appium.android.apis.app.FragmentNestingTabs" enabled="resourceID 0x7f050007">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 464-464)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 466-466)
+      </intent-filter>  (line 466-463)
+    </activity>  (line 466-459)
+    <activity label="resourceID 0x7f0e0175" name="io.appium.android.apis.app.FragmentRetainInstance" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 474-474)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 476-476)
+      </intent-filter>  (line 476-473)
+    </activity>  (line 476-469)
+    <activity label="resourceID 0x7f0e0174" name="io.appium.android.apis.app.FragmentReceiveResult" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 484-484)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 486-486)
+      </intent-filter>  (line 486-483)
+    </activity>  (line 486-479)
+    <activity label="resourceID 0x7f0e0177" name="io.appium.android.apis.app.FragmentStack" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 494-494)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 496-496)
+      </intent-filter>  (line 496-493)
+    </activity>  (line 496-489)
+    <activity label="resourceID 0x7f0e0178" name="io.appium.android.apis.app.FragmentTabs" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 504-504)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 506-506)
+      </intent-filter>  (line 506-503)
+    </activity>  (line 506-499)
+    <activity label="resourceID 0x7f0e01f3" name="io.appium.android.apis.app.LoaderCursor" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 517-517)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 519-519)
+      </intent-filter>  (line 519-516)
+    </activity>  (line 519-512)
+    <activity label="resourceID 0x7f0e01f4" name="io.appium.android.apis.app.LoaderCustom" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 527-527)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 529-529)
+      </intent-filter>  (line 529-526)
+    </activity>  (line 529-522)
+    <activity label="resourceID 0x7f0e01f6" name="io.appium.android.apis.app.LoaderThrottle" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 537-537)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 539-539)
+      </intent-filter>  (line 539-536)
+    </activity>  (line 539-532)
+    <provider name="io.appium.android.apis.app.LoaderThrottle$SimpleProvider" enabled="resourceID 0x7f050003" authorities="io.appium.android.apis.app.LoaderThrottle">
+    </provider>  (line 543-543)
+    <activity label="resourceID 0x7f0e01f5" name="io.appium.android.apis.app.LoaderRetained" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 553-553)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 555-555)
+      </intent-filter>  (line 555-552)
+    </activity>  (line 555-548)
+    <activity label="resourceID 0x7f0e0058" name="io.appium.android.apis.app.Intents">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 565-565)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 567-567)
+      </intent-filter>  (line 567-564)
+    </activity>  (line 567-561)
+    <activity label="resourceID 0x7f0e0057" name="io.appium.android.apis.app.IntentActivityFlags">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 574-574)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 576-576)
+      </intent-filter>  (line 576-573)
+    </activity>  (line 576-570)
+    <service name="io.appium.android.apis.app.LocalService" stopWithTask="resourceID 0xffffffff">
+    </service>  (line 582-582)
+    <activity label="resourceID 0x7f0e005c" name="io.appium.android.apis.app.LocalServiceActivities$Controller" launchMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 591-591)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 593-593)
+      </intent-filter>  (line 593-590)
+    </activity>  (line 593-586)
+    <activity label="resourceID 0x7f0e005b" name="io.appium.android.apis.app.LocalServiceActivities$Binding">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 600-600)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 602-602)
+      </intent-filter>  (line 602-599)
+    </activity>  (line 602-596)
+    <service name="io.appium.android.apis.app.MessengerService" process=":remote">
+    </service>  (line 606-606)
+    <activity label="resourceID 0x7f0e005e" name="io.appium.android.apis.app.MessengerServiceActivities$Binding">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 614-614)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 616-616)
+      </intent-filter>  (line 616-613)
+    </activity>  (line 616-610)
+    <service name="io.appium.android.apis.app.RemoteService" process=":remote">
+      <intent-filter>
+        <action name="io.appium.android.apis.app.IRemoteService">
+        </action>  (line 629-629)
+        <action name="io.appium.android.apis.app.ISecondary">
+        </action>  (line 630-630)
+        <action name="io.appium.android.apis.app.REMOTE_SERVICE">
+        </action>  (line 635-635)
+      </intent-filter>  (line 635-623)
+    </service>  (line 635-620)
+    <activity label="resourceID 0x7f0e006c" name="io.appium.android.apis.app.RemoteService$Controller" launchMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 644-644)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 646-646)
+      </intent-filter>  (line 646-643)
+    </activity>  (line 646-639)
+    <activity label="resourceID 0x7f0e006a" name="io.appium.android.apis.app.RemoteService$Binding">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 653-653)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 655-655)
+      </intent-filter>  (line 655-652)
+    </activity>  (line 655-649)
+    <activity label="resourceID 0x7f0e006b" name="io.appium.android.apis.app.RemoteService$BindingOptions">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 662-662)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 664-664)
+      </intent-filter>  (line 664-661)
+    </activity>  (line 664-658)
+    <service name="io.appium.android.apis.app.ServiceStartArguments">
+    </service>  (line 668-668)
+    <activity label="resourceID 0x7f0e007a" name="io.appium.android.apis.app.ServiceStartArguments$Controller" launchMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 675-675)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 677-677)
+      </intent-filter>  (line 677-674)
+    </activity>  (line 677-670)
+    <service name="io.appium.android.apis.app.ForegroundService">
+    </service>  (line 681-681)
+    <activity label="resourceID 0x7f0e0053" name="io.appium.android.apis.app.ForegroundService$Controller" launchMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 688-688)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 690-690)
+      </intent-filter>  (line 690-687)
+    </activity>  (line 690-683)
+    <activity label="resourceID 0x7f0e0059" name="io.appium.android.apis.app.IsolatedService$Controller" enabled="resourceID 0x7f050006" launchMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 699-699)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 701-701)
+      </intent-filter>  (line 701-698)
+    </activity>  (line 701-693)
+    <service name="io.appium.android.apis.app.IsolatedService" enabled="resourceID 0x7f050006" isolatedProcess="resourceID 0xffffffff">
+    </service>  (line 705-705)
+    <service name="io.appium.android.apis.app.IsolatedService2" enabled="resourceID 0x7f050006" isolatedProcess="resourceID 0xffffffff">
+    </service>  (line 709-709)
+    <receiver name="io.appium.android.apis.app.OneShotAlarm" process=":remote">
+    </receiver>  (line 716-716)
+    <receiver name="io.appium.android.apis.app.RepeatingAlarm" process=":remote">
+    </receiver>  (line 719-719)
+    <activity label="resourceID 0x7f0e0045" name="io.appium.android.apis.app.AlarmController">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 727-727)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 729-729)
+      </intent-filter>  (line 729-726)
+    </activity>  (line 729-723)
+    <service name="io.appium.android.apis.app.AlarmService_Service" process=":remote">
+    </service>  (line 733-733)
+    <activity label="resourceID 0x7f0e0046" name="io.appium.android.apis.app.AlarmService">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 741-741)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 743-743)
+      </intent-filter>  (line 743-740)
+    </activity>  (line 743-737)
+    <activity label="resourceID 0x7f0e0031" name="io.appium.android.apis.accessibility.ClockBackActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 755-755)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 757-757)
+      </intent-filter>  (line 757-754)
+    </activity>  (line 757-751)
+    <service label="resourceID 0x7f0e0033" name="io.appium.android.apis.accessibility.ClockBackService" permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+      <intent-filter>
+        <action name="android.accessibilityservice.AccessibilityService">
+        </action>  (line 766-766)
+      </intent-filter>  (line 766-765)
+    </service>  (line 766-761)
+    <activity label="resourceID 0x7f0e002d" name="io.appium.android.apis.accessibility.TaskListActivity" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 775-775)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 777-777)
+      </intent-filter>  (line 777-774)
+    </activity>  (line 777-770)
+    <service label="resourceID 0x7f0e0030" name="io.appium.android.apis.accessibility.TaskBackService" permission="android.permission.BIND_ACCESSIBILITY_SERVICE" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.accessibilityservice.AccessibilityService">
+        </action>  (line 787-787)
+      </intent-filter>  (line 787-786)
+      <meta-data name="android.accessibilityservice" resource="resourceID 0x7f110012">
+      </meta-data>  (line 790-790)
+    </service>  (line 790-781)
+    <activity label="resourceID 0x7f0e0029" name="io.appium.android.apis.accessibility.CustomViewAccessibilityActivity" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 800-800)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 802-802)
+      </intent-filter>  (line 802-799)
+    </activity>  (line 802-795)
+    <activity label="resourceID 0x7f0e005a" name="io.appium.android.apis.app.LocalSample">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 812-812)
+      </intent-filter>  (line 812-811)
+    </activity>  (line 812-808)
+    <activity label="resourceID 0x7f0e004d" name="io.appium.android.apis.app.ContactsFilter">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 820-820)
+      </intent-filter>  (line 820-819)
+    </activity>  (line 820-816)
+    <activity label="App/Notification/NotifyWithText" name="io.appium.android.apis.app.NotifyWithText">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 831-831)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 833-833)
+      </intent-filter>  (line 833-830)
+    </activity>  (line 833-827)
+    <activity label="App/Notification/IncomingMessage" name="io.appium.android.apis.app.IncomingMessage">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 840-840)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 842-842)
+      </intent-filter>  (line 842-839)
+    </activity>  (line 842-836)
+    <activity label="App/Notification/IncomingMessageView" name="io.appium.android.apis.app.IncomingMessageView">
+    </activity>  (line 845-845)
+    <activity theme="resourceID 0x7f0f0117" label="You have messages" name="io.appium.android.apis.app.IncomingMessageInterstitial" taskAffinity="" excludeFromRecents="resourceID 0xffffffff" launchMode="resourceID 0x2">
+    </activity>  (line 849-849)
+    <activity theme="resourceID 0x7f0f0113" name="io.appium.android.apis.app.NotificationDisplay" taskAffinity="" excludeFromRecents="resourceID 0xffffffff" noHistory="resourceID 0xffffffff">
+    </activity>  (line 864-864)
+    <activity label="App/Notification/Status Bar" name="io.appium.android.apis.app.StatusBarNotifications" launchMode="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 876-876)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 878-878)
+      </intent-filter>  (line 878-875)
+    </activity>  (line 878-871)
+    <service name="io.appium.android.apis.app.NotifyingService">
+    </service>  (line 882-882)
+    <activity label="App/Notification/Notifying Service Controller" name="io.appium.android.apis.app.NotifyingController">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 888-888)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 890-890)
+      </intent-filter>  (line 890-887)
+    </activity>  (line 890-884)
+    <activity label="resourceID 0x7f0e0047" name="io.appium.android.apis.app.AlertDialogSamples">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 899-899)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 901-901)
+      </intent-filter>  (line 901-898)
+    </activity>  (line 901-895)
+    <activity label="resourceID 0x7f0e02b0" name="io.appium.android.apis.app.SearchInvoke">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 917-917)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 919-919)
+      </intent-filter>  (line 919-916)
+      <meta-data name="android.app.default_searchable" value=".app.SearchQueryResults">
+      </meta-data>  (line 924-924)
+    </activity>  (line 924-913)
+    <activity label="resourceID 0x7f0e02b3" name="io.appium.android.apis.app.SearchQueryResults">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 945-945)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 947-947)
+      </intent-filter>  (line 947-944)
+      <intent-filter>
+        <action name="android.intent.action.SEARCH">
+        </action>  (line 953-953)
+        <category name="android.intent.category.DEFAULT">
+        </category>  (line 955-955)
+      </intent-filter>  (line 955-952)
+      <meta-data name="android.app.searchable" resource="resourceID 0x7f110011">
+      </meta-data>  (line 961-961)
+    </activity>  (line 961-941)
+    <provider name="io.appium.android.apis.app.SearchSuggestionSampleProvider" authorities="io.appium.android.apis.SuggestionProvider">
+    </provider>  (line 969-969)
+    <activity label="resourceID 0x7f0e02e6" name="io.appium.android.apis.app.LauncherShortcuts">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1006-1006)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1008-1008)
+      </intent-filter>  (line 1008-1005)
+    </activity>  (line 1008-1002)
+    <activity-alias label="resourceID 0x7f0e0299" name="io.appium.android.apis.app.CreateShortcuts" targetActivity="io.appium.android.apis.app.LauncherShortcuts">
+      <intent-filter>
+        <action name="android.intent.action.CREATE_SHORTCUT">
+        </action>  (line 1020-1020)
+        <category name="android.intent.category.DEFAULT">
+        </category>  (line 1022-1022)
+      </intent-filter>  (line 1022-1019)
+    </activity-alias>  (line 1022-1013)
+    <activity label="resourceID 0x7f0e0210" name="io.appium.android.apis.app.MenuInflateFromXml">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1032-1032)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1034-1034)
+      </intent-filter>  (line 1034-1031)
+    </activity>  (line 1034-1028)
+    <activity label="resourceID 0x7f0e0073" name="io.appium.android.apis.app.DeviceAdminSample">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1044-1044)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1046-1046)
+      </intent-filter>  (line 1046-1043)
+    </activity>  (line 1046-1040)
+    <receiver label="resourceID 0x7f0e0297" name="io.appium.android.apis.app.DeviceAdminSample$DeviceAdminSampleReceiver" permission="android.permission.BIND_DEVICE_ADMIN" description="resourceID 0x7f0e0298">
+      <meta-data name="android.app.device_admin" resource="resourceID 0x7f110009">
+      </meta-data>  (line 1055-1055)
+      <intent-filter>
+        <action name="android.app.action.DEVICE_ADMIN_ENABLED">
+        </action>  (line 1060-1060)
+      </intent-filter>  (line 1060-1059)
+    </receiver>  (line 1060-1050)
+    <activity label="resourceID 0x7f0e03cc" name="io.appium.android.apis.app.VoiceRecognition">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1070-1070)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1072-1072)
+      </intent-filter>  (line 1072-1069)
+    </activity>  (line 1072-1066)
+    <activity label="resourceID 0x7f0e03a7" name="io.appium.android.apis.app.TextToSpeechActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1082-1082)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1084-1084)
+      </intent-filter>  (line 1084-1081)
+    </activity>  (line 1084-1078)
+    <activity label="resourceID 0x7f0e0037" name="io.appium.android.apis.app.ActionBarMechanics" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1094-1094)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1096-1096)
+      </intent-filter>  (line 1096-1093)
+    </activity>  (line 1096-1089)
+    <activity label="resourceID 0x7f0e0043" name="io.appium.android.apis.app.ActionBarUsage" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1104-1104)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1106-1106)
+      </intent-filter>  (line 1106-1103)
+    </activity>  (line 1106-1099)
+    <activity label="resourceID 0x7f0e0035" name="io.appium.android.apis.app.ActionBarDisplayOptions" enabled="resourceID 0x7f050003" logo="resourceID 0x7f080056">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1115-1115)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1117-1117)
+      </intent-filter>  (line 1117-1114)
+    </activity>  (line 1117-1109)
+    <activity label="resourceID 0x7f0e0042" name="io.appium.android.apis.app.ActionBarTabs" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1125-1125)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1127-1127)
+      </intent-filter>  (line 1127-1124)
+    </activity>  (line 1127-1120)
+    <activity label="resourceID 0x7f0e003a" name="io.appium.android.apis.app.ActionBarSettingsActionProviderActivity" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1135-1135)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1137-1137)
+      </intent-filter>  (line 1137-1134)
+    </activity>  (line 1137-1130)
+    <activity label="resourceID 0x7f0e003d" name="io.appium.android.apis.app.ActionBarShareActionProviderActivity" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1145-1145)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1147-1147)
+      </intent-filter>  (line 1147-1144)
+    </activity>  (line 1147-1140)
+    <activity label="resourceID 0x7f0e002b" name="io.appium.android.apis.accessibility.AccessibilityNodeProviderActivity" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1157-1157)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1159-1159)
+      </intent-filter>  (line 1159-1156)
+    </activity>  (line 1159-1152)
+    <receiver name="io.appium.android.apis.app.AppUpdateReceiver">
+      <intent-filter>
+        <action name="android.intent.action.MY_PACKAGE_REPLACED">
+        </action>  (line 1167-1167)
+      </intent-filter>  (line 1167-1166)
+    </receiver>  (line 1167-1165)
+    <activity label="resourceID 0x7f0e0173" name="io.appium.android.apis.preference.FragmentPreferences" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1180-1180)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1182-1182)
+      </intent-filter>  (line 1182-1179)
+    </activity>  (line 1182-1175)
+    <activity label="resourceID 0x7f0e024a" name="io.appium.android.apis.preference.PreferenceWithHeaders" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1190-1190)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1192-1192)
+      </intent-filter>  (line 1192-1189)
+    </activity>  (line 1192-1185)
+    <activity label="resourceID 0x7f0e024c" name="io.appium.android.apis.preference.PreferencesFromXml">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1199-1199)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1201-1201)
+      </intent-filter>  (line 1201-1198)
+    </activity>  (line 1201-1195)
+    <activity label="resourceID 0x7f0e024b" name="io.appium.android.apis.preference.PreferencesFromCode">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1208-1208)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1210-1210)
+      </intent-filter>  (line 1210-1207)
+    </activity>  (line 1210-1204)
+    <activity label="resourceID 0x7f0e008a" name="io.appium.android.apis.preference.AdvancedPreferences">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1217-1217)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1219-1219)
+      </intent-filter>  (line 1219-1216)
+    </activity>  (line 1219-1213)
+    <activity label="resourceID 0x7f0e01c7" name="io.appium.android.apis.preference.LaunchingPreferences">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1226-1226)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1228-1228)
+      </intent-filter>  (line 1228-1225)
+    </activity>  (line 1228-1222)
+    <activity label="resourceID 0x7f0e0249" name="io.appium.android.apis.preference.PreferenceDependencies">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1235-1235)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1237-1237)
+      </intent-filter>  (line 1237-1234)
+    </activity>  (line 1237-1231)
+    <activity label="resourceID 0x7f0e0120" name="io.appium.android.apis.preference.DefaultValues">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1244-1244)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1246-1246)
+      </intent-filter>  (line 1246-1243)
+    </activity>  (line 1246-1240)
+    <activity label="resourceID 0x7f0e0335" name="io.appium.android.apis.preference.SwitchPreference" enabled="resourceID 0x7f050005">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1254-1254)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1256-1256)
+      </intent-filter>  (line 1256-1253)
+    </activity>  (line 1256-1249)
+    <activity label="resourceID 0x7f0e004c" name="io.appium.android.apis.content.ClipboardSample" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1269-1269)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1271-1271)
+      </intent-filter>  (line 1271-1268)
+    </activity>  (line 1271-1264)
+    <activity label="resourceID 0x7f0e0051" name="io.appium.android.apis.content.ExternalStorage">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1278-1278)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1280-1280)
+        <category name="android.intent.category.EMBED">
+        </category>  (line 1281-1281)
+      </intent-filter>  (line 1281-1277)
+    </activity>  (line 1281-1274)
+    <activity label="resourceID 0x7f0e007c" name="io.appium.android.apis.content.StyledText">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1288-1288)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1290-1290)
+        <category name="android.intent.category.EMBED">
+        </category>  (line 1291-1291)
+      </intent-filter>  (line 1291-1287)
+    </activity>  (line 1291-1284)
+    <activity label="resourceID 0x7f0e006f" name="io.appium.android.apis.content.ResourcesLayoutReference">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1298-1298)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1300-1300)
+        <category name="android.intent.category.EMBED">
+        </category>  (line 1301-1301)
+      </intent-filter>  (line 1301-1297)
+    </activity>  (line 1301-1294)
+    <activity label="resourceID 0x7f0e0071" name="io.appium.android.apis.content.ResourcesWidthAndHeight" enabled="resourceID 0x7f050004">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1309-1309)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1311-1311)
+        <category name="android.intent.category.EMBED">
+        </category>  (line 1312-1312)
+      </intent-filter>  (line 1312-1308)
+    </activity>  (line 1312-1304)
+    <activity label="resourceID 0x7f0e0070" name="io.appium.android.apis.content.ResourcesSmallestWidth" enabled="resourceID 0x7f050004">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1320-1320)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1322-1322)
+        <category name="android.intent.category.EMBED">
+        </category>  (line 1323-1323)
+      </intent-filter>  (line 1323-1319)
+    </activity>  (line 1323-1315)
+    <activity label="resourceID 0x7f0e0065" name="io.appium.android.apis.content.ReadAsset">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1330-1330)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1332-1332)
+        <category name="android.intent.category.EMBED">
+        </category>  (line 1333-1333)
+      </intent-filter>  (line 1333-1329)
+    </activity>  (line 1333-1326)
+    <activity label="resourceID 0x7f0e006e" name="io.appium.android.apis.content.ResourcesSample">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1340-1340)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1342-1342)
+      </intent-filter>  (line 1342-1339)
+    </activity>  (line 1342-1336)
+    <activity label="resourceID 0x7f0e0062" name="io.appium.android.apis.content.PickContact">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1349-1349)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1351-1351)
+      </intent-filter>  (line 1351-1348)
+    </activity>  (line 1351-1345)
+    <activity label="resourceID 0x7f0e0056" name="io.appium.android.apis.content.InstallApk" enabled="resourceID 0x7f050004">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1359-1359)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1361-1361)
+      </intent-filter>  (line 1361-1358)
+    </activity>  (line 1361-1354)
+    <provider name="io.appium.android.apis.content.FileProvider" enabled="resourceID 0x7f050004" authorities="io.appium.android.apis.content.FileProvider">
+    </provider>  (line 1365-1365)
+    <activity label="OS/Morse Code" name="io.appium.android.apis.os.MorseCode">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1378-1378)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1380-1380)
+      </intent-filter>  (line 1380-1377)
+    </activity>  (line 1380-1374)
+    <activity label="OS/Sensors" name="io.appium.android.apis.os.Sensors">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1387-1387)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1389-1389)
+      </intent-filter>  (line 1389-1386)
+    </activity>  (line 1389-1383)
+    <activity label="OS/Rotation Vector" name="io.appium.android.apis.os.RotationVectorDemo" screenOrientation="resourceID 0x5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1397-1397)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1399-1399)
+      </intent-filter>  (line 1399-1396)
+    </activity>  (line 1399-1392)
+    <activity label="OS/SMS Messaging" name="io.appium.android.apis.os.SmsMessagingDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1406-1406)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1408-1408)
+      </intent-filter>  (line 1408-1405)
+    </activity>  (line 1408-1402)
+    <activity theme="resourceID 0x1030010" name="io.appium.android.apis.os.SmsReceivedDialog" launchMode="resourceID 0x3">
+    </activity>  (line 1411-1411)
+    <receiver name="io.appium.android.apis.os.SmsMessageReceiver" enabled="resourceID 0x0">
+      <intent-filter>
+        <action name="android.provider.Telephony.SMS_RECEIVED">
+        </action>  (line 1420-1420)
+      </intent-filter>  (line 1420-1419)
+    </receiver>  (line 1420-1416)
+    <activity label="Animation/Loading" name="io.appium.android.apis.animation.AnimationLoading" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1434-1434)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1436-1436)
+      </intent-filter>  (line 1436-1433)
+    </activity>  (line 1436-1428)
+    <activity label="Animation/Cloning" name="io.appium.android.apis.animation.AnimationCloning" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1445-1445)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1447-1447)
+      </intent-filter>  (line 1447-1444)
+    </activity>  (line 1447-1439)
+    <activity label="Animation/Seeking" name="io.appium.android.apis.animation.AnimationSeeking" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1456-1456)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1458-1458)
+      </intent-filter>  (line 1458-1455)
+    </activity>  (line 1458-1450)
+    <activity label="Animation/Events" name="io.appium.android.apis.animation.AnimatorEvents" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1467-1467)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1469-1469)
+      </intent-filter>  (line 1469-1466)
+    </activity>  (line 1469-1461)
+    <activity label="Animation/Bouncing Balls" name="io.appium.android.apis.animation.BouncingBalls" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1478-1478)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1480-1480)
+      </intent-filter>  (line 1480-1477)
+    </activity>  (line 1480-1472)
+    <activity label="Animation/Custom Evaluator" name="io.appium.android.apis.animation.CustomEvaluator" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1489-1489)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1491-1491)
+      </intent-filter>  (line 1491-1488)
+    </activity>  (line 1491-1483)
+    <activity label="Animation/View Flip" name="io.appium.android.apis.animation.ListFlipper" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1499-1499)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1501-1501)
+      </intent-filter>  (line 1501-1498)
+    </activity>  (line 1501-1494)
+    <activity label="Animation/Reversing" name="io.appium.android.apis.animation.ReversingAnimation" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1510-1510)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1512-1512)
+      </intent-filter>  (line 1512-1509)
+    </activity>  (line 1512-1504)
+    <activity label="Animation/Multiple Properties" name="io.appium.android.apis.animation.MultiPropertyAnimation" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1521-1521)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1523-1523)
+      </intent-filter>  (line 1523-1520)
+    </activity>  (line 1523-1515)
+    <activity label="Animation/Layout Animations" name="io.appium.android.apis.animation.LayoutAnimations" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1531-1531)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1533-1533)
+      </intent-filter>  (line 1533-1530)
+    </activity>  (line 1533-1526)
+    <activity label="Animation/Hide-Show Animations" name="io.appium.android.apis.animation.LayoutAnimationsHideShow" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1541-1541)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1543-1543)
+      </intent-filter>  (line 1543-1540)
+    </activity>  (line 1543-1536)
+    <activity label="Animation/Default Layout Animations" name="io.appium.android.apis.animation.LayoutAnimationsByDefault" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1551-1551)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1553-1553)
+      </intent-filter>  (line 1553-1550)
+    </activity>  (line 1553-1546)
+    <activity label="Views/Animation/3D Transition" name="io.appium.android.apis.animation.Transition3d">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1565-1565)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1567-1567)
+      </intent-filter>  (line 1567-1564)
+    </activity>  (line 1567-1561)
+    <activity label="Views/TextClock" name="io.appium.android.apis.view.TextClockDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1579-1579)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1581-1581)
+      </intent-filter>  (line 1581-1578)
+    </activity>  (line 1581-1575)
+    <activity label="Views/Chronometer" name="io.appium.android.apis.view.ChronometerDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1588-1588)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1590-1590)
+      </intent-filter>  (line 1590-1587)
+    </activity>  (line 1590-1584)
+    <activity label="Views/WebView" name="io.appium.android.apis.view.WebView1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1597-1597)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1599-1599)
+      </intent-filter>  (line 1599-1596)
+    </activity>  (line 1599-1593)
+    <activity label="Views/WebView2" name="io.appium.android.apis.view.WebView2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1606-1606)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1608-1608)
+      </intent-filter>  (line 1608-1605)
+    </activity>  (line 1608-1602)
+    <activity label="Views/WebView3" name="io.appium.android.apis.view.WebView3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1615-1615)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1617-1617)
+      </intent-filter>  (line 1617-1614)
+    </activity>  (line 1617-1611)
+    <activity label="Views/Layouts/RelativeLayout/1. Vertical" name="io.appium.android.apis.view.RelativeLayout1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1624-1624)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1626-1626)
+      </intent-filter>  (line 1626-1623)
+    </activity>  (line 1626-1620)
+    <activity label="Views/Layouts/RelativeLayout/2. Simple Form" name="io.appium.android.apis.view.RelativeLayout2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1633-1633)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1635-1635)
+      </intent-filter>  (line 1635-1632)
+    </activity>  (line 1635-1629)
+    <activity label="Views/Layouts/LinearLayout/1. Vertical" name="io.appium.android.apis.view.LinearLayout1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1642-1642)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1644-1644)
+      </intent-filter>  (line 1644-1641)
+    </activity>  (line 1644-1638)
+    <activity label="Views/Layouts/LinearLayout/2. Vertical (Fill Screen)" name="io.appium.android.apis.view.LinearLayout2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1651-1651)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1653-1653)
+      </intent-filter>  (line 1653-1650)
+    </activity>  (line 1653-1647)
+    <activity label="Views/Layouts/LinearLayout/3. Vertical (Padded)" name="io.appium.android.apis.view.LinearLayout3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1660-1660)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1662-1662)
+      </intent-filter>  (line 1662-1659)
+    </activity>  (line 1662-1656)
+    <activity label="Views/Layouts/LinearLayout/4. Horizontal" name="io.appium.android.apis.view.LinearLayout4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1669-1669)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1671-1671)
+      </intent-filter>  (line 1671-1668)
+    </activity>  (line 1671-1665)
+    <activity label="Views/Layouts/LinearLayout/5. Simple Form" name="io.appium.android.apis.view.LinearLayout5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1678-1678)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1680-1680)
+      </intent-filter>  (line 1680-1677)
+    </activity>  (line 1680-1674)
+    <activity label="Views/Layouts/LinearLayout/6. Uniform Size" name="io.appium.android.apis.view.LinearLayout6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1687-1687)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1689-1689)
+      </intent-filter>  (line 1689-1686)
+    </activity>  (line 1689-1683)
+    <activity label="Views/Layouts/LinearLayout/7. Fill Parent" name="io.appium.android.apis.view.LinearLayout7">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1696-1696)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1698-1698)
+      </intent-filter>  (line 1698-1695)
+    </activity>  (line 1698-1692)
+    <activity label="Views/Layouts/LinearLayout/8. Gravity" name="io.appium.android.apis.view.LinearLayout8">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1705-1705)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1707-1707)
+      </intent-filter>  (line 1707-1704)
+    </activity>  (line 1707-1701)
+    <activity label="Views/Layouts/LinearLayout/9. Layout Weight" name="io.appium.android.apis.view.LinearLayout9">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1714-1714)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1716-1716)
+      </intent-filter>  (line 1716-1713)
+    </activity>  (line 1716-1710)
+    <activity label="Views/Layouts/LinearLayout/10. Background Image" name="io.appium.android.apis.view.LinearLayout10">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1723-1723)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1725-1725)
+      </intent-filter>  (line 1725-1722)
+    </activity>  (line 1725-1719)
+    <activity label="Views/Radio Group" name="io.appium.android.apis.view.RadioGroup1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1732-1732)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1734-1734)
+      </intent-filter>  (line 1734-1731)
+    </activity>  (line 1734-1728)
+    <activity label="Views/Layouts/ScrollView/1. Short" name="io.appium.android.apis.view.ScrollView1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1741-1741)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1743-1743)
+      </intent-filter>  (line 1743-1740)
+    </activity>  (line 1743-1737)
+    <activity label="Views/Layouts/ScrollView/2. Long" name="io.appium.android.apis.view.ScrollView2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1750-1750)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1752-1752)
+      </intent-filter>  (line 1752-1749)
+    </activity>  (line 1752-1746)
+    <activity label="Views/Layouts/HorizontalScrollView" name="io.appium.android.apis.view.HorizontalScrollView1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1759-1759)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1761-1761)
+      </intent-filter>  (line 1761-1758)
+    </activity>  (line 1761-1755)
+    <activity label="Views/Tabs/1. Content By Id" name="io.appium.android.apis.view.Tabs1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1768-1768)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1770-1770)
+      </intent-filter>  (line 1770-1767)
+    </activity>  (line 1770-1764)
+    <activity label="Views/Tabs/2. Content By Factory" name="io.appium.android.apis.view.Tabs2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1777-1777)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1779-1779)
+      </intent-filter>  (line 1779-1776)
+    </activity>  (line 1779-1773)
+    <activity label="Views/Tabs/3. Content By Intent" name="io.appium.android.apis.view.Tabs3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1786-1786)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1788-1788)
+      </intent-filter>  (line 1788-1785)
+    </activity>  (line 1788-1782)
+    <activity theme="resourceID 0x1030005" label="Views/Tabs/4. Non Holo theme" name="io.appium.android.apis.view.Tabs4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1796-1796)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1798-1798)
+      </intent-filter>  (line 1798-1795)
+    </activity>  (line 1798-1791)
+    <activity label="Views/Tabs/5. Scrollable" name="io.appium.android.apis.view.Tabs5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1805-1805)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1807-1807)
+      </intent-filter>  (line 1807-1804)
+    </activity>  (line 1807-1801)
+    <activity label="Views/Tabs/6. Right aligned" name="io.appium.android.apis.view.Tabs6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1814-1814)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1816-1816)
+      </intent-filter>  (line 1816-1813)
+    </activity>  (line 1816-1810)
+    <activity label="Views/Layouts/ScrollView/3. Internal Selection" name="io.appium.android.apis.view.InternalSelectionScroll">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1823-1823)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1825-1825)
+      </intent-filter>  (line 1825-1822)
+    </activity>  (line 1825-1819)
+    <activity label="Views/Layouts/TableLayout/01. Basic" name="io.appium.android.apis.view.TableLayout1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1832-1832)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1834-1834)
+      </intent-filter>  (line 1834-1831)
+    </activity>  (line 1834-1828)
+    <activity label="Views/Layouts/TableLayout/02. Empty Cells" name="io.appium.android.apis.view.TableLayout2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1841-1841)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1843-1843)
+      </intent-filter>  (line 1843-1840)
+    </activity>  (line 1843-1837)
+    <activity label="Views/Layouts/TableLayout/03. Long Content" name="io.appium.android.apis.view.TableLayout3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1850-1850)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1852-1852)
+      </intent-filter>  (line 1852-1849)
+    </activity>  (line 1852-1846)
+    <activity label="Views/Layouts/TableLayout/04. Stretchable" name="io.appium.android.apis.view.TableLayout4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1859-1859)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1861-1861)
+      </intent-filter>  (line 1861-1858)
+    </activity>  (line 1861-1855)
+    <activity label="Views/Layouts/TableLayout/05. Spanning and Stretchable" name="io.appium.android.apis.view.TableLayout5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1868-1868)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1870-1870)
+      </intent-filter>  (line 1870-1867)
+    </activity>  (line 1870-1864)
+    <activity label="Views/Layouts/TableLayout/06. More Spanning and Stretchable" name="io.appium.android.apis.view.TableLayout6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1877-1877)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1879-1879)
+      </intent-filter>  (line 1879-1876)
+    </activity>  (line 1879-1873)
+    <activity label="Views/Layouts/TableLayout/07. Column Collapse" name="io.appium.android.apis.view.TableLayout7">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1886-1886)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1888-1888)
+      </intent-filter>  (line 1888-1885)
+    </activity>  (line 1888-1882)
+    <activity label="Views/Layouts/TableLayout/08. Toggle Stretch" name="io.appium.android.apis.view.TableLayout8">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1895-1895)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1897-1897)
+      </intent-filter>  (line 1897-1894)
+    </activity>  (line 1897-1891)
+    <activity label="Views/Layouts/TableLayout/09. Toggle Shrink" name="io.appium.android.apis.view.TableLayout9">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1904-1904)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1906-1906)
+      </intent-filter>  (line 1906-1903)
+    </activity>  (line 1906-1900)
+    <activity label="Views/Layouts/TableLayout/10. Simple Form" name="io.appium.android.apis.view.TableLayout10">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1913-1913)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1915-1915)
+      </intent-filter>  (line 1915-1912)
+    </activity>  (line 1915-1909)
+    <activity label="Views/Layouts/TableLayout/11. Gravity" name="io.appium.android.apis.view.TableLayout11">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1922-1922)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1924-1924)
+      </intent-filter>  (line 1924-1921)
+    </activity>  (line 1924-1918)
+    <activity label="Views/Layouts/TableLayout/12. Cell Spanning" name="io.appium.android.apis.view.TableLayout12">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1931-1931)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1933-1933)
+      </intent-filter>  (line 1933-1930)
+    </activity>  (line 1933-1927)
+    <activity label="Views/Layouts/GridLayout/1. Simple Form" name="io.appium.android.apis.view.GridLayout1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1940-1940)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1942-1942)
+      </intent-filter>  (line 1942-1939)
+    </activity>  (line 1942-1936)
+    <activity label="Views/Layouts/GridLayout/2. Form (XML)" name="io.appium.android.apis.view.GridLayout2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1949-1949)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1951-1951)
+      </intent-filter>  (line 1951-1948)
+    </activity>  (line 1951-1945)
+    <activity label="Views/Layouts/GridLayout/3. Form (Java)" name="io.appium.android.apis.view.GridLayout3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1958-1958)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1960-1960)
+      </intent-filter>  (line 1960-1957)
+    </activity>  (line 1960-1954)
+    <activity label="Views/Layouts/Baseline/1. Top" name="io.appium.android.apis.view.Baseline1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1967-1967)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1969-1969)
+      </intent-filter>  (line 1969-1966)
+    </activity>  (line 1969-1963)
+    <activity label="Views/Layouts/Baseline/2. Bottom" name="io.appium.android.apis.view.Baseline2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1976-1976)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1978-1978)
+      </intent-filter>  (line 1978-1975)
+    </activity>  (line 1978-1972)
+    <activity label="Views/Layouts/Baseline/3. Center" name="io.appium.android.apis.view.Baseline3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1985-1985)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1987-1987)
+      </intent-filter>  (line 1987-1984)
+    </activity>  (line 1987-1981)
+    <activity label="Views/Layouts/Baseline/4. Everywhere" name="io.appium.android.apis.view.Baseline4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 1994-1994)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 1996-1996)
+      </intent-filter>  (line 1996-1993)
+    </activity>  (line 1996-1990)
+    <activity label="Views/Layouts/Baseline/5. Multi-line" name="io.appium.android.apis.view.Baseline6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2003-2003)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2005-2005)
+      </intent-filter>  (line 2005-2002)
+    </activity>  (line 2005-1999)
+    <activity label="Views/Layouts/Baseline/6. Relative" name="io.appium.android.apis.view.Baseline7">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2012-2012)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2014-2014)
+      </intent-filter>  (line 2014-2011)
+    </activity>  (line 2014-2008)
+    <activity label="Views/Layouts/Baseline/Nested Example 1" name="io.appium.android.apis.view.BaselineNested1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2021-2021)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2023-2023)
+      </intent-filter>  (line 2023-2020)
+    </activity>  (line 2023-2017)
+    <activity label="Views/Layouts/Baseline/Nested Example 2" name="io.appium.android.apis.view.BaselineNested2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2030-2030)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2032-2032)
+      </intent-filter>  (line 2032-2029)
+    </activity>  (line 2032-2026)
+    <activity label="Views/Layouts/Baseline/Nested Example 3" name="io.appium.android.apis.view.BaselineNested3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2039-2039)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2041-2041)
+      </intent-filter>  (line 2041-2038)
+    </activity>  (line 2041-2035)
+    <activity label="Views/ScrollBars/1. Basic" name="io.appium.android.apis.view.ScrollBar1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2048-2048)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2050-2050)
+      </intent-filter>  (line 2050-2047)
+    </activity>  (line 2050-2044)
+    <activity label="Views/ScrollBars/2. Fancy" name="io.appium.android.apis.view.ScrollBar2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2057-2057)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2059-2059)
+      </intent-filter>  (line 2059-2056)
+    </activity>  (line 2059-2053)
+    <activity label="Views/ScrollBars/3. Style" name="io.appium.android.apis.view.ScrollBar3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2066-2066)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2068-2068)
+      </intent-filter>  (line 2068-2065)
+    </activity>  (line 2068-2062)
+    <activity label="Views/Visibility" name="io.appium.android.apis.view.Visibility1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2075-2075)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2077-2077)
+      </intent-filter>  (line 2077-2074)
+    </activity>  (line 2077-2071)
+    <activity label="Views/Lists/01. Array" name="io.appium.android.apis.view.List1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2084-2084)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2086-2086)
+      </intent-filter>  (line 2086-2083)
+    </activity>  (line 2086-2080)
+    <activity label="Views/Lists/02. Cursor (People)" name="io.appium.android.apis.view.List2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2093-2093)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2095-2095)
+      </intent-filter>  (line 2095-2092)
+    </activity>  (line 2095-2089)
+    <activity label="Views/Lists/03. Cursor (Phones)" name="io.appium.android.apis.view.List3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2102-2102)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2104-2104)
+      </intent-filter>  (line 2104-2101)
+    </activity>  (line 2104-2098)
+    <activity label="Views/Lists/04. ListAdapter" name="io.appium.android.apis.view.List4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2111-2111)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2113-2113)
+      </intent-filter>  (line 2113-2110)
+    </activity>  (line 2113-2107)
+    <activity label="Views/Lists/05. Separators" name="io.appium.android.apis.view.List5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2120-2120)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2122-2122)
+      </intent-filter>  (line 2122-2119)
+    </activity>  (line 2122-2116)
+    <activity label="Views/Lists/06. ListAdapter Collapsed" name="io.appium.android.apis.view.List6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2129-2129)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2131-2131)
+      </intent-filter>  (line 2131-2128)
+    </activity>  (line 2131-2125)
+    <activity label="Views/Lists/07. Cursor (Phones)" name="io.appium.android.apis.view.List7">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2138-2138)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2140-2140)
+      </intent-filter>  (line 2140-2137)
+    </activity>  (line 2140-2134)
+    <activity label="Views/Lists/08. Photos" name="io.appium.android.apis.view.List8">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2147-2147)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2149-2149)
+      </intent-filter>  (line 2149-2146)
+    </activity>  (line 2149-2143)
+    <activity label="Views/Lists/09. Array (Overlay)" name="io.appium.android.apis.view.List9">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2156-2156)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2158-2158)
+      </intent-filter>  (line 2158-2155)
+    </activity>  (line 2158-2152)
+    <activity label="Views/Lists/10. Single choice list" name="io.appium.android.apis.view.List10">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2165-2165)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2167-2167)
+      </intent-filter>  (line 2167-2164)
+    </activity>  (line 2167-2161)
+    <activity label="Views/Lists/11. Multiple choice list" name="io.appium.android.apis.view.List11">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2174-2174)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2176-2176)
+      </intent-filter>  (line 2176-2173)
+    </activity>  (line 2176-2170)
+    <activity label="Views/Lists/12. Transcript" name="io.appium.android.apis.view.List12">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2183-2183)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2185-2185)
+      </intent-filter>  (line 2185-2182)
+    </activity>  (line 2185-2179)
+    <activity label="Views/Lists/13. Slow Adapter" name="io.appium.android.apis.view.List13">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2192-2192)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2194-2194)
+      </intent-filter>  (line 2194-2191)
+    </activity>  (line 2194-2188)
+    <activity label="Views/Lists/14. Efficient Adapter" name="io.appium.android.apis.view.List14">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2201-2201)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2203-2203)
+      </intent-filter>  (line 2203-2200)
+    </activity>  (line 2203-2197)
+    <activity label="Views/Lists/15. Selection Mode" name="io.appium.android.apis.view.List15">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2210-2210)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2212-2212)
+      </intent-filter>  (line 2212-2209)
+    </activity>  (line 2212-2206)
+    <activity label="Views/Lists/16. Border selection mode" name="io.appium.android.apis.view.List16">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2219-2219)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2221-2221)
+      </intent-filter>  (line 2221-2218)
+    </activity>  (line 2221-2215)
+    <activity label="Views/Lists/17. Activate items" name="io.appium.android.apis.view.List17">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2228-2228)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2230-2230)
+      </intent-filter>  (line 2230-2227)
+    </activity>  (line 2230-2224)
+    <activity label="Views/Expandable Lists/1. Custom Adapter" name="io.appium.android.apis.view.ExpandableList1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2237-2237)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2239-2239)
+      </intent-filter>  (line 2239-2236)
+    </activity>  (line 2239-2233)
+    <activity label="Views/Expandable Lists/2. Cursor (People)" name="io.appium.android.apis.view.ExpandableList2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2246-2246)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2248-2248)
+      </intent-filter>  (line 2248-2245)
+    </activity>  (line 2248-2242)
+    <activity label="Views/Expandable Lists/3. Simple Adapter" name="io.appium.android.apis.view.ExpandableList3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2255-2255)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2257-2257)
+      </intent-filter>  (line 2257-2254)
+    </activity>  (line 2257-2251)
+    <activity theme="resourceID 0x103000c" label="Views/Custom" name="io.appium.android.apis.view.CustomView1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2265-2265)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2267-2267)
+      </intent-filter>  (line 2267-2264)
+    </activity>  (line 2267-2260)
+    <activity label="Views/Gallery/1. Photos" name="io.appium.android.apis.view.Gallery1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2274-2274)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2276-2276)
+      </intent-filter>  (line 2276-2273)
+    </activity>  (line 2276-2270)
+    <activity label="Views/Gallery/2. People" name="io.appium.android.apis.view.Gallery2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2283-2283)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2285-2285)
+      </intent-filter>  (line 2285-2282)
+    </activity>  (line 2285-2279)
+    <activity label="Views/Spinner" name="io.appium.android.apis.view.Spinner1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2292-2292)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2294-2294)
+      </intent-filter>  (line 2294-2291)
+    </activity>  (line 2294-2288)
+    <activity label="Views/Grid/1. Icon Grid" name="io.appium.android.apis.view.Grid1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2301-2301)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2303-2303)
+      </intent-filter>  (line 2303-2300)
+    </activity>  (line 2303-2297)
+    <activity label="Views/Grid/2. Photo Grid" name="io.appium.android.apis.view.Grid2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2310-2310)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2312-2312)
+      </intent-filter>  (line 2312-2309)
+    </activity>  (line 2312-2306)
+    <activity label="Views/Grid/3. Selection Mode" name="io.appium.android.apis.view.Grid3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2319-2319)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2321-2321)
+      </intent-filter>  (line 2321-2318)
+    </activity>  (line 2321-2315)
+    <activity label="Views/ImageView" name="io.appium.android.apis.view.ImageView1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2328-2328)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2330-2330)
+      </intent-filter>  (line 2330-2327)
+    </activity>  (line 2330-2324)
+    <activity label="Views/ImageSwitcher" name="io.appium.android.apis.view.ImageSwitcher1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2337-2337)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2339-2339)
+      </intent-filter>  (line 2339-2336)
+    </activity>  (line 2339-2333)
+    <activity label="Views/TextSwitcher" name="io.appium.android.apis.view.TextSwitcher1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2346-2346)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2348-2348)
+      </intent-filter>  (line 2348-2345)
+    </activity>  (line 2348-2342)
+    <activity label="Views/ImageButton" name="io.appium.android.apis.view.ImageButton1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2355-2355)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2357-2357)
+      </intent-filter>  (line 2357-2354)
+    </activity>  (line 2357-2351)
+    <activity label="Views/Animation/Shake" name="io.appium.android.apis.view.Animation1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2364-2364)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2366-2366)
+      </intent-filter>  (line 2366-2363)
+    </activity>  (line 2366-2360)
+    <activity label="Views/Animation/Push" name="io.appium.android.apis.view.Animation2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2373-2373)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2375-2375)
+      </intent-filter>  (line 2375-2372)
+    </activity>  (line 2375-2369)
+    <activity label="Views/Animation/Interpolators" name="io.appium.android.apis.view.Animation3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2382-2382)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2384-2384)
+      </intent-filter>  (line 2384-2381)
+    </activity>  (line 2384-2378)
+    <activity label="Views/Layout Animation/1. Grid Fade" name="io.appium.android.apis.view.LayoutAnimation1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2391-2391)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2393-2393)
+      </intent-filter>  (line 2393-2390)
+    </activity>  (line 2393-2387)
+    <activity label="Views/Layout Animation/2. List Cascade" name="io.appium.android.apis.view.LayoutAnimation2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2400-2400)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2402-2402)
+      </intent-filter>  (line 2402-2399)
+    </activity>  (line 2402-2396)
+    <activity label="Views/Layout Animation/3. Reverse Order" name="io.appium.android.apis.view.LayoutAnimation3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2409-2409)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2411-2411)
+      </intent-filter>  (line 2411-2408)
+    </activity>  (line 2411-2405)
+    <activity label="Views/Layout Animation/4. Randomize" name="io.appium.android.apis.view.LayoutAnimation4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2418-2418)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2420-2420)
+      </intent-filter>  (line 2420-2417)
+    </activity>  (line 2420-2414)
+    <activity label="Views/Layout Animation/5. Grid Direction" name="io.appium.android.apis.view.LayoutAnimation5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2427-2427)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2429-2429)
+      </intent-filter>  (line 2429-2426)
+    </activity>  (line 2429-2423)
+    <activity label="Views/Layout Animation/6. Wave Scale" name="io.appium.android.apis.view.LayoutAnimation6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2436-2436)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2438-2438)
+      </intent-filter>  (line 2438-2435)
+    </activity>  (line 2438-2432)
+    <activity label="Views/Layout Animation/7. Nested Animations" name="io.appium.android.apis.view.LayoutAnimation7">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2445-2445)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2447-2447)
+      </intent-filter>  (line 2447-2444)
+    </activity>  (line 2447-2441)
+    <activity theme="resourceID 0x103000c" label="Views/Controls/1. Light Theme" name="io.appium.android.apis.view.Controls1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2455-2455)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2457-2457)
+      </intent-filter>  (line 2457-2454)
+    </activity>  (line 2457-2450)
+    <activity theme="resourceID 0x1030005" label="Views/Controls/2. Dark Theme" name="io.appium.android.apis.view.Controls2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2465-2465)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2467-2467)
+      </intent-filter>  (line 2467-2464)
+    </activity>  (line 2467-2460)
+    <activity theme="resourceID 0x103006e" label="Views/Controls/3. Holo Light Theme" name="io.appium.android.apis.view.Controls3" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2476-2476)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2478-2478)
+      </intent-filter>  (line 2478-2475)
+    </activity>  (line 2478-2470)
+    <activity theme="resourceID 0x103006b" label="Views/Controls/4. Holo Dark Theme" name="io.appium.android.apis.view.Controls4" enabled="resourceID 0x7f050003">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2487-2487)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2489-2489)
+      </intent-filter>  (line 2489-2486)
+    </activity>  (line 2489-2481)
+    <activity theme="resourceID 0x7f0f00a1" label="Views/Controls/5. Custom Theme" name="io.appium.android.apis.view.Controls5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2497-2497)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2499-2499)
+      </intent-filter>  (line 2499-2496)
+    </activity>  (line 2499-2492)
+    <activity theme="resourceID 0x7f0f0116" label="Views/Controls/6. Holo or Old Theme" name="io.appium.android.apis.view.Controls6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2507-2507)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2509-2509)
+      </intent-filter>  (line 2509-2506)
+    </activity>  (line 2509-2502)
+    <activity label="Views/TextFields" name="io.appium.android.apis.view.TextFields">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2516-2516)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2518-2518)
+      </intent-filter>  (line 2518-2515)
+    </activity>  (line 2518-2512)
+    <activity label="Views/Buttons" name="io.appium.android.apis.view.Buttons1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2525-2525)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2527-2527)
+      </intent-filter>  (line 2527-2524)
+    </activity>  (line 2527-2521)
+    <activity label="Views/Auto Complete/1. Screen Top" name="io.appium.android.apis.view.AutoComplete1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2534-2534)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2536-2536)
+      </intent-filter>  (line 2536-2533)
+    </activity>  (line 2536-2530)
+    <activity label="Views/Auto Complete/2. Screen Bottom" name="io.appium.android.apis.view.AutoComplete2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2543-2543)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2545-2545)
+      </intent-filter>  (line 2545-2542)
+    </activity>  (line 2545-2539)
+    <activity label="Views/Auto Complete/3. Scroll" name="io.appium.android.apis.view.AutoComplete3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2552-2552)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2554-2554)
+      </intent-filter>  (line 2554-2551)
+    </activity>  (line 2554-2548)
+    <activity label="Views/Auto Complete/4. Contacts" name="io.appium.android.apis.view.AutoComplete4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2561-2561)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2563-2563)
+      </intent-filter>  (line 2563-2560)
+    </activity>  (line 2563-2557)
+    <activity label="Views/Auto Complete/5. Contacts with Hint" name="io.appium.android.apis.view.AutoComplete5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2570-2570)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2572-2572)
+      </intent-filter>  (line 2572-2569)
+    </activity>  (line 2572-2566)
+    <activity label="Views/Auto Complete/6. Multiple items" name="io.appium.android.apis.view.AutoComplete6">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2579-2579)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2581-2581)
+      </intent-filter>  (line 2581-2578)
+    </activity>  (line 2581-2575)
+    <activity label="Views/Progress Bar/1. Incremental" name="io.appium.android.apis.view.ProgressBar1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2588-2588)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2590-2590)
+      </intent-filter>  (line 2590-2587)
+    </activity>  (line 2590-2584)
+    <activity label="Views/Progress Bar/2. Smooth" name="io.appium.android.apis.view.ProgressBar2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2597-2597)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2599-2599)
+      </intent-filter>  (line 2599-2596)
+    </activity>  (line 2599-2593)
+    <activity label="Views/Progress Bar/3. Dialogs" name="io.appium.android.apis.view.ProgressBar3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2606-2606)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2608-2608)
+      </intent-filter>  (line 2608-2605)
+    </activity>  (line 2608-2602)
+    <activity label="Views/Progress Bar/4. In Title Bar" name="io.appium.android.apis.view.ProgressBar4">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2615-2615)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2617-2617)
+      </intent-filter>  (line 2617-2614)
+    </activity>  (line 2617-2611)
+    <activity label="Views/Seek Bar" name="io.appium.android.apis.view.SeekBar1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2624-2624)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2626-2626)
+      </intent-filter>  (line 2626-2623)
+    </activity>  (line 2626-2620)
+    <activity label="Views/Rating Bar" name="io.appium.android.apis.view.RatingBar1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2633-2633)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2635-2635)
+      </intent-filter>  (line 2635-2632)
+    </activity>  (line 2635-2629)
+    <activity label="Views/Focus/1. Vertical" name="io.appium.android.apis.view.Focus1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2642-2642)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2644-2644)
+      </intent-filter>  (line 2644-2641)
+    </activity>  (line 2644-2638)
+    <activity label="Views/Focus/2. Horizontal" name="io.appium.android.apis.view.Focus2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2651-2651)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2653-2653)
+      </intent-filter>  (line 2653-2650)
+    </activity>  (line 2653-2647)
+    <activity label="Views/Focus/3. Circular" name="io.appium.android.apis.view.Focus3">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2660-2660)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2662-2662)
+      </intent-filter>  (line 2662-2659)
+    </activity>  (line 2662-2656)
+    <activity label="Views/Focus/4. Internal Selection" name="io.appium.android.apis.view.InternalSelectionFocus">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2669-2669)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2671-2671)
+      </intent-filter>  (line 2671-2668)
+    </activity>  (line 2671-2665)
+    <activity label="Views/Focus/5. Sequential (Tab Order)" name="io.appium.android.apis.view.Focus5">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2678-2678)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2680-2680)
+      </intent-filter>  (line 2680-2677)
+    </activity>  (line 2680-2674)
+    <activity label="Views/Date Widgets/1. Dialog" name="io.appium.android.apis.view.DateWidgets1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2687-2687)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2689-2689)
+      </intent-filter>  (line 2689-2686)
+    </activity>  (line 2689-2683)
+    <activity label="Views/Date Widgets/2. Inline" name="io.appium.android.apis.view.DateWidgets2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2696-2696)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2698-2698)
+      </intent-filter>  (line 2698-2695)
+    </activity>  (line 2698-2692)
+    <activity label="Views/Popup Menu" name="io.appium.android.apis.view.PopupMenu1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2705-2705)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2707-2707)
+      </intent-filter>  (line 2707-2704)
+    </activity>  (line 2707-2701)
+    <activity theme="resourceID 0x103006b" label="Views/Search View/Action Bar" name="io.appium.android.apis.view.SearchViewActionBar">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2715-2715)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2717-2717)
+      </intent-filter>  (line 2717-2714)
+      <meta-data name="android.app.default_searchable" value=".app.SearchQueryResults">
+      </meta-data>  (line 2720-2720)
+    </activity>  (line 2720-2710)
+    <activity theme="resourceID 0x103006b" label="Views/Search View/Always Expanded" name="io.appium.android.apis.view.SearchViewAlwaysVisible">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2729-2729)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2731-2731)
+      </intent-filter>  (line 2731-2728)
+      <meta-data name="android.app.default_searchable" value=".app.SearchQueryResults">
+      </meta-data>  (line 2734-2734)
+    </activity>  (line 2734-2724)
+    <activity theme="resourceID 0x103006b" label="Views/Search View/Filter" name="io.appium.android.apis.view.SearchViewFilterMode">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2743-2743)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2745-2745)
+      </intent-filter>  (line 2745-2742)
+    </activity>  (line 2745-2738)
+    <activity label="Views/Rotating Button" name="io.appium.android.apis.view.RotatingButton">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2752-2752)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2754-2754)
+      </intent-filter>  (line 2754-2751)
+    </activity>  (line 2754-2748)
+    <activity label="Views/Secure View" name="io.appium.android.apis.view.SecureView">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2761-2761)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2763-2763)
+      </intent-filter>  (line 2763-2760)
+    </activity>  (line 2763-2757)
+    <activity label="Views/Splitting Touches across Views" name="io.appium.android.apis.view.SplitTouchView">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2770-2770)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2772-2772)
+      </intent-filter>  (line 2772-2769)
+    </activity>  (line 2772-2766)
+    <activity label="Views/Drag and Drop" name="io.appium.android.apis.view.DragAndDropDemo" enabled="resourceID 0x7f050003" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2781-2781)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2783-2783)
+      </intent-filter>  (line 2783-2780)
+    </activity>  (line 2783-2775)
+    <activity label="Views/Game Controller Input" name="io.appium.android.apis.view.GameControllerInput">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2790-2790)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2792-2792)
+      </intent-filter>  (line 2792-2789)
+    </activity>  (line 2792-2786)
+    <activity label="Views/Hover Events" name="io.appium.android.apis.view.Hover">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2799-2799)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2801-2801)
+      </intent-filter>  (line 2801-2798)
+    </activity>  (line 2801-2795)
+    <activity label="Views/System UI Visibility/System UI Modes" name="io.appium.android.apis.view.OverscanActivity" uiOptions="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2809-2809)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2811-2811)
+      </intent-filter>  (line 2811-2808)
+    </activity>  (line 2811-2804)
+    <activity theme="resourceID 0x1030119" label="Views/System UI Visibility/Content Browser" name="io.appium.android.apis.view.ContentBrowserActivity" uiOptions="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2820-2820)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2822-2822)
+      </intent-filter>  (line 2822-2819)
+    </activity>  (line 2822-2814)
+    <activity theme="resourceID 0x103006b" label="Views/System UI Visibility/Video Player" name="io.appium.android.apis.view.VideoPlayerActivity" uiOptions="resourceID 0x1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2831-2831)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2833-2833)
+      </intent-filter>  (line 2833-2830)
+    </activity>  (line 2833-2825)
+    <activity label="Views/Switches" name="io.appium.android.apis.view.Switches">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2840-2840)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2842-2842)
+      </intent-filter>  (line 2842-2839)
+    </activity>  (line 2842-2836)
+    <activity label="Views/Picker" name="io.appium.android.apis.view.CustomPicker1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2849-2849)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2851-2851)
+      </intent-filter>  (line 2851-2848)
+    </activity>  (line 2851-2845)
+    <activity label="Graphics/OpenGL ES/Kube" name="io.appium.android.apis.graphics.kube.Kube" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2864-2864)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2866-2866)
+      </intent-filter>  (line 2866-2863)
+    </activity>  (line 2866-2859)
+    <activity label="Graphics/Compass" name="io.appium.android.apis.graphics.Compass">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2873-2873)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2875-2875)
+      </intent-filter>  (line 2875-2872)
+    </activity>  (line 2875-2869)
+    <activity label="Graphics/CameraPreview" name="io.appium.android.apis.graphics.CameraPreview" screenOrientation="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2883-2883)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2885-2885)
+      </intent-filter>  (line 2885-2882)
+    </activity>  (line 2885-2878)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/Compressed Texture" name="io.appium.android.apis.graphics.CompressedTextureActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2894-2894)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2896-2896)
+      </intent-filter>  (line 2896-2893)
+    </activity>  (line 2896-2888)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/Cube Map" name="io.appium.android.apis.graphics.CubeMapActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2905-2905)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2907-2907)
+      </intent-filter>  (line 2907-2904)
+    </activity>  (line 2907-2899)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/Frame Buffer Object" name="io.appium.android.apis.graphics.FrameBufferObjectActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2916-2916)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2918-2918)
+      </intent-filter>  (line 2918-2915)
+    </activity>  (line 2918-2910)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/GLSurfaceView" name="io.appium.android.apis.graphics.GLSurfaceViewActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2927-2927)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2929-2929)
+      </intent-filter>  (line 2929-2926)
+    </activity>  (line 2929-2921)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/OpenGL ES 2.0" name="io.appium.android.apis.graphics.GLES20Activity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2938-2938)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2940-2940)
+      </intent-filter>  (line 2940-2937)
+    </activity>  (line 2940-2932)
+    <activity label="Graphics/OpenGL ES/Matrix Palette Skinning" name="io.appium.android.apis.graphics.MatrixPaletteActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2948-2948)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2950-2950)
+      </intent-filter>  (line 2950-2947)
+    </activity>  (line 2950-2943)
+    <activity theme="resourceID 0x7f0f0112" label="Graphics/OpenGL ES/Translucent GLSurfaceView" name="io.appium.android.apis.graphics.TranslucentGLSurfaceViewActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2959-2959)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2961-2961)
+      </intent-filter>  (line 2961-2958)
+    </activity>  (line 2961-2953)
+    <activity theme="resourceID 0x103006f" label="Graphics/OpenGL ES/Textured Triangle" name="io.appium.android.apis.graphics.TriangleActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2970-2970)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2972-2972)
+      </intent-filter>  (line 2972-2969)
+    </activity>  (line 2972-2964)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/Sprite Text" name="io.appium.android.apis.graphics.spritetext.SpriteTextActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2981-2981)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2983-2983)
+      </intent-filter>  (line 2983-2980)
+    </activity>  (line 2983-2975)
+    <activity theme="resourceID 0x1030006" label="Graphics/OpenGL ES/Touch Rotate" name="io.appium.android.apis.graphics.TouchRotateActivity" configChanges="resourceID 0xda0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 2992-2992)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 2994-2994)
+      </intent-filter>  (line 2994-2991)
+    </activity>  (line 2994-2986)
+    <activity label="Graphics/PolyToPoly" name="io.appium.android.apis.graphics.PolyToPoly">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3001-3001)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3003-3003)
+      </intent-filter>  (line 3003-3000)
+    </activity>  (line 3003-2997)
+    <activity label="Graphics/ScaleToFit" name="io.appium.android.apis.graphics.ScaleToFit">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3010-3010)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3012-3012)
+      </intent-filter>  (line 3012-3009)
+    </activity>  (line 3012-3006)
+    <activity label="Graphics/RoundRects" name="io.appium.android.apis.graphics.RoundRects">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3019-3019)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3021-3021)
+      </intent-filter>  (line 3021-3018)
+    </activity>  (line 3021-3015)
+    <activity label="Graphics/Drawable/ShapeDrawable" name="io.appium.android.apis.graphics.ShapeDrawable1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3028-3028)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3030-3030)
+      </intent-filter>  (line 3030-3027)
+    </activity>  (line 3030-3024)
+    <activity label="Graphics/SurfaceView Overlay" name="io.appium.android.apis.graphics.SurfaceViewOverlay">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3037-3037)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3039-3039)
+      </intent-filter>  (line 3039-3036)
+    </activity>  (line 3039-3033)
+    <activity label="Graphics/Surface Window" name="io.appium.android.apis.graphics.WindowSurface">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3046-3046)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3048-3048)
+      </intent-filter>  (line 3048-3045)
+    </activity>  (line 3048-3042)
+    <activity label="Graphics/Text Align" name="io.appium.android.apis.graphics.TextAlign" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3056-3056)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3058-3058)
+      </intent-filter>  (line 3058-3055)
+    </activity>  (line 3058-3051)
+    <activity label="Graphics/Arcs" name="io.appium.android.apis.graphics.Arcs">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3065-3065)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3067-3067)
+      </intent-filter>  (line 3067-3064)
+    </activity>  (line 3067-3061)
+    <activity label="Graphics/Patterns" name="io.appium.android.apis.graphics.Patterns">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3074-3074)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3076-3076)
+      </intent-filter>  (line 3076-3073)
+    </activity>  (line 3076-3070)
+    <activity label="Graphics/Clipping" name="io.appium.android.apis.graphics.Clipping" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3084-3084)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3086-3086)
+      </intent-filter>  (line 3086-3083)
+    </activity>  (line 3086-3079)
+    <activity label="Graphics/Layers" name="io.appium.android.apis.graphics.Layers">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3093-3093)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3095-3095)
+      </intent-filter>  (line 3095-3092)
+    </activity>  (line 3095-3089)
+    <activity label="Graphics/UnicodeChart" name="io.appium.android.apis.graphics.UnicodeChart" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3103-3103)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3105-3105)
+      </intent-filter>  (line 3105-3102)
+    </activity>  (line 3105-3098)
+    <activity label="Graphics/PathFillTypes" name="io.appium.android.apis.graphics.PathFillTypes">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3112-3112)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3114-3114)
+      </intent-filter>  (line 3114-3111)
+    </activity>  (line 3114-3108)
+    <activity label="Graphics/Pictures" name="io.appium.android.apis.graphics.Pictures" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3122-3122)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3124-3124)
+      </intent-filter>  (line 3124-3121)
+    </activity>  (line 3124-3117)
+    <activity label="Graphics/Vertices" name="io.appium.android.apis.graphics.Vertices" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3132-3132)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3134-3134)
+      </intent-filter>  (line 3134-3131)
+    </activity>  (line 3134-3127)
+    <activity label="Graphics/AnimateDrawables" name="io.appium.android.apis.graphics.AnimateDrawables">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3141-3141)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3143-3143)
+      </intent-filter>  (line 3143-3140)
+    </activity>  (line 3143-3137)
+    <activity label="Graphics/SensorTest" name="io.appium.android.apis.graphics.SensorTest">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3150-3150)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3152-3152)
+      </intent-filter>  (line 3152-3149)
+    </activity>  (line 3152-3146)
+    <activity label="Graphics/AlphaBitmap" name="io.appium.android.apis.graphics.AlphaBitmap">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3159-3159)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3161-3161)
+      </intent-filter>  (line 3161-3158)
+    </activity>  (line 3161-3155)
+    <activity label="Graphics/Regions" name="io.appium.android.apis.graphics.Regions">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3168-3168)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3170-3170)
+      </intent-filter>  (line 3170-3167)
+    </activity>  (line 3170-3164)
+    <activity label="Graphics/Sweep" name="io.appium.android.apis.graphics.Sweep">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3177-3177)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3179-3179)
+      </intent-filter>  (line 3179-3176)
+    </activity>  (line 3179-3173)
+    <activity label="Graphics/BitmapMesh" name="io.appium.android.apis.graphics.BitmapMesh">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3186-3186)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3188-3188)
+      </intent-filter>  (line 3188-3185)
+    </activity>  (line 3188-3182)
+    <activity label="Graphics/MeasureText" name="io.appium.android.apis.graphics.MeasureText">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3195-3195)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3197-3197)
+      </intent-filter>  (line 3197-3194)
+    </activity>  (line 3197-3191)
+    <activity label="Graphics/Typefaces" name="io.appium.android.apis.graphics.Typefaces">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3204-3204)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3206-3206)
+      </intent-filter>  (line 3206-3203)
+    </activity>  (line 3206-3200)
+    <activity label="Graphics/FingerPaint" name="io.appium.android.apis.graphics.FingerPaint">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3213-3213)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3215-3215)
+      </intent-filter>  (line 3215-3212)
+    </activity>  (line 3215-3209)
+    <activity label="Graphics/ColorMatrix" name="io.appium.android.apis.graphics.ColorMatrixSample">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3222-3222)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3224-3224)
+      </intent-filter>  (line 3224-3221)
+    </activity>  (line 3224-3218)
+    <activity label="Graphics/BitmapDecode" name="io.appium.android.apis.graphics.BitmapDecode" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3232-3232)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3234-3234)
+      </intent-filter>  (line 3234-3231)
+    </activity>  (line 3234-3227)
+    <activity label="Graphics/ColorFilters" name="io.appium.android.apis.graphics.ColorFilters">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3241-3241)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3243-3243)
+      </intent-filter>  (line 3243-3240)
+    </activity>  (line 3243-3237)
+    <activity label="Graphics/CreateBitmap" name="io.appium.android.apis.graphics.CreateBitmap">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3250-3250)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3252-3252)
+      </intent-filter>  (line 3252-3249)
+    </activity>  (line 3252-3246)
+    <activity label="Graphics/Points" name="io.appium.android.apis.graphics.DrawPoints" hardwareAccelerated="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3260-3260)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3262-3262)
+      </intent-filter>  (line 3262-3259)
+    </activity>  (line 3262-3255)
+    <activity theme="resourceID 0x7f0f010f" label="Graphics/Touch Paint" name="io.appium.android.apis.graphics.TouchPaint" configChanges="resourceID 0xdf0">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3271-3271)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3273-3273)
+      </intent-filter>  (line 3273-3270)
+    </activity>  (line 3273-3265)
+    <activity label="Graphics/BitmapPixels" name="io.appium.android.apis.graphics.BitmapPixels">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3280-3280)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3282-3282)
+      </intent-filter>  (line 3282-3279)
+    </activity>  (line 3282-3276)
+    <activity label="Graphics/Xfermodes" name="io.appium.android.apis.graphics.Xfermodes">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3289-3289)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3291-3291)
+      </intent-filter>  (line 3291-3288)
+    </activity>  (line 3291-3285)
+    <activity label="Graphics/PathEffects" name="io.appium.android.apis.graphics.PathEffects">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3298-3298)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3300-3300)
+      </intent-filter>  (line 3300-3297)
+    </activity>  (line 3300-3294)
+    <activity label="Graphics/Drawable/GradientDrawable" name="io.appium.android.apis.graphics.GradientDrawable1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3307-3307)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3309-3309)
+      </intent-filter>  (line 3309-3306)
+    </activity>  (line 3309-3303)
+    <activity label="Graphics/PurgeableBitmap/NonPurgeable" name="io.appium.android.apis.graphics.PurgeableBitmap">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3316-3316)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3318-3318)
+      </intent-filter>  (line 3318-3315)
+    </activity>  (line 3318-3312)
+    <activity-alias label="Graphics/PurgeableBitmap/Purgeable" name="io.appium.android.apis.Purgeable" targetActivity="io.appium.android.apis.graphics.PurgeableBitmap">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3327-3327)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3329-3329)
+      </intent-filter>  (line 3329-3326)
+    </activity-alias>  (line 3329-3322)
+    <activity label="Graphics/Density" name="io.appium.android.apis.graphics.DensityActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3337-3337)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3339-3339)
+      </intent-filter>  (line 3339-3336)
+    </activity>  (line 3339-3333)
+    <activity label="Media/MediaPlayer" name="io.appium.android.apis.media.MediaPlayerDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3351-3351)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3353-3353)
+      </intent-filter>  (line 3353-3350)
+    </activity>  (line 3353-3347)
+    <activity label="Media/MediaPlayer" name="io.appium.android.apis.media.MediaPlayerDemo_Audio">
+      <intent-filter>
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3360-3360)
+      </intent-filter>  (line 3360-3359)
+    </activity>  (line 3360-3356)
+    <activity label="Media/MediaPlayer" name="io.appium.android.apis.media.MediaPlayerDemo_Video">
+      <intent-filter>
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3367-3367)
+      </intent-filter>  (line 3367-3366)
+    </activity>  (line 3367-3363)
+    <activity label="Media/VideoView" name="io.appium.android.apis.media.VideoViewDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3374-3374)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3376-3376)
+      </intent-filter>  (line 3376-3373)
+    </activity>  (line 3376-3370)
+    <activity label="Media/AudioFx" name="io.appium.android.apis.media.AudioFxDemo">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3383-3383)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3385-3385)
+      </intent-filter>  (line 3385-3382)
+    </activity>  (line 3385-3379)
+    <receiver name="io.appium.android.apis.appwidget.ExampleAppWidgetProvider">
+      <meta-data name="android.appwidget.provider" resource="resourceID 0x7f110001">
+      </meta-data>  (line 3394-3394)
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_UPDATE">
+        </action>  (line 3399-3399)
+      </intent-filter>  (line 3399-3398)
+    </receiver>  (line 3399-3393)
+    <activity name="io.appium.android.apis.appwidget.ExampleAppWidgetConfigure">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_CONFIGURE">
+        </action>  (line 3405-3405)
+      </intent-filter>  (line 3405-3404)
+    </activity>  (line 3405-3403)
+    <receiver name="io.appium.android.apis.appwidget.ExampleBroadcastReceiver" enabled="resourceID 0x0">
+      <intent-filter>
+        <action name="android.intent.ACTION_TIMEZONE_CHANGED">
+        </action>  (line 3413-3413)
+        <action name="android.intent.ACTION_TIME">
+        </action>  (line 3414-3414)
+      </intent-filter>  (line 3414-3412)
+    </receiver>  (line 3414-3409)
+    <activity label="Text/Linkify" name="io.appium.android.apis.text.Link">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3426-3426)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3428-3428)
+      </intent-filter>  (line 3428-3425)
+    </activity>  (line 3428-3422)
+    <activity label="Text/Marquee" name="io.appium.android.apis.text.Marquee">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3435-3435)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3437-3437)
+      </intent-filter>  (line 3437-3434)
+    </activity>  (line 3437-3431)
+    <activity label="Text/LogTextBox" name="io.appium.android.apis.text.LogTextBox1">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3444-3444)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3446-3446)
+      </intent-filter>  (line 3446-3443)
+    </activity>  (line 3446-3440)
+    <activity label="Text/KeyEventText" name="io.appium.android.apis.text.KeyEventText">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3453-3453)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3455-3455)
+      </intent-filter>  (line 3455-3452)
+    </activity>  (line 3455-3449)
+    <activity label="Text/Unicode" name="io.appium.android.apis.text.Unicode">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3462-3462)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3464-3464)
+      </intent-filter>  (line 3464-3461)
+    </activity>  (line 3464-3458)
+    <activity label="NFC/ForegroundDispatch" name="io.appium.android.apis.nfc.ForegroundDispatch">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3471-3471)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3473-3473)
+      </intent-filter>  (line 3473-3470)
+    </activity>  (line 3473-3467)
+    <activity label="NFC/TechFilter" name="io.appium.android.apis.nfc.TechFilter">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3480-3480)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3482-3482)
+      </intent-filter>  (line 3482-3479)
+      <intent-filter>
+        <action name="android.nfc.action.TECH_DISCOVERED">
+        </action>  (line 3487-3487)
+      </intent-filter>  (line 3487-3486)
+      <meta-data name="android.nfc.action.TECH_DISCOVERED" resource="resourceID 0x7f11000a">
+      </meta-data>  (line 3490-3490)
+    </activity>  (line 3490-3476)
+    <activity label="NFC/ForegroundNdefPush" name="io.appium.android.apis.nfc.ForegroundNdefPush">
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>  (line 3498-3498)
+        <category name="appium.android.intent.category.SAMPLE_CODE">
+        </category>  (line 3500-3500)
+      </intent-filter>  (line 3500-3497)
+    </activity>  (line 3500-3494)
+  </application>  (line 3500-63)
+</manifest>  (line 3500-24)

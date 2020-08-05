@@ -1,8 +1,10 @@
 .row {
-    justify-content: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 120px;
 }
 .container{
-    padding-top: 10px;
+  padding-top: 10px;
 }
 .flip-card {
   background-color: transparent;
