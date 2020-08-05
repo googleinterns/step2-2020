@@ -80,16 +80,20 @@ public class FileDeletionServlet extends HttpServlet {
 
     // This condition below is a second safety belt that ensures the requested
     // file targeted for deletion belongs to the user making the request.
-    if (!deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {response.sendError(404);}
+    if (deleteUnzippedApk(dataStore, fileName, currentUser.getUserId())) {
 
-    deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
+      deleteTrackedFile(dataStore, "apks/" + fileName, currentUser.getUserId(), fileVisibility.trim());
 
-    // The block of code below creates an ID that cloud storage
-    // uses to locate the desired APK and deletes it.
-    blobId = BlobId.of(BUCKETNAME, "apks/" + currentUser.getUserId() + "/" + fileName);
-    storage.delete(blobId);
+      // The block of code below creates an ID that cloud storage
+      // uses to locate the desired APK and deletes it.
+      blobId = BlobId.of(BUCKETNAME, "apks/" + currentUser.getUserId() + "/" + fileName);
+      storage.delete(blobId);
 
-    response.sendRedirect("/#/explore");
+      response.sendRedirect("/#/explore");
+
+    }
+    
+    else {response.sendError(404);}
 
   }
 

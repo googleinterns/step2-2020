@@ -36,6 +36,19 @@ async function logInStatus() {
 
 }
 
+async function loadCorrectPageDOM() {
+
+  logInStatus();
+
+  if (window.location.href == "http://localhost:8080/#/explore") {
+
+    document.getElementById('searchBar').hidden = false;
+    fileDisplayAndSearchQuery();
+
+  } else { document.getElementById('searchBar').hidden = true; }
+
+}
+
 var apkName;
 function getFreqData(list){
     var res, javaCode, libraries, assets,resources, miscellaneous,total, freqData;
@@ -96,12 +109,15 @@ function changeChart(fileStatistics, result){
 // FileDisplayServlet for drawChart to display the content graph and
 // getDisplay to show the statistics of the file
 async function showFileStatistics(filename, time, result) {
+
     const params = new URLSearchParams();
     params.append('apk_name', filename);
     params.append('timeStamp', time);
+
     apkName = filename;
     const response = await fetch("/display", {method: 'POST', body: params});
     const fileStatistics = await response.json();
+
     changeChart(fileStatistics,result);
 }
 
@@ -328,20 +344,37 @@ function drawChart(list) {
   chart.draw(data, options);
 }
 
-function displayFiles() {
-  fetch('/retrieve_files').then(response => response.json()).then((apks) => {
-    const apkListElement = document.getElementById('display-files');
-    apks.forEach((apk) => {
-      apkListElement.appendChild(createApkElement(apk));
-    })
-  });
+async function fileDisplayAndSearchQuery() {
+
+  const response = await fetch("/retrieve_files");
+  const apk_list  = await response.json();
+
+  displayFiles(apk_list);
+  createDataList(apk_list);
+
+}
+
+function createDataList(apks) {
+
+  const searchList = document.getElementById('binary_files');
+  apks.forEach((apk) => {searchList.appendChild(createSearchElement(apk.name));})
+  
+}
+
+function displayFiles(apks) {
+
+  const apkListElement = document.getElementById('display-files');
+  apks.forEach((apk) => {apkListElement.appendChild(createApkElement(apk));})
+
 }
 
 function deleteAPK(fileName, fileOwnership) {
+
   const params = new URLSearchParams();
   params.append('file_name', fileName);
   params.append('ownership', fileOwnership);
   fetch('/delete_file', {method: 'POST', body: params});
+
 }
 
 
@@ -349,19 +382,36 @@ function deleteAPK(fileName, fileOwnership) {
 // for file upload. It only shows it when a file
 // has been selected for upload.
 function fileVisibility() {
+
   var file = document.getElementById('file').value;
+
   if (file.length != 0) {
+
     document.getElementById('private').hidden = false;
     document.getElementById('privacy').hidden = false;
     document.getElementById('public').hidden = false;
     document.getElementById('privacies').hidden = false;
+    
   } else {
+
     document.getElementById('private').hidden = true;
     document.getElementById('privacy').hidden = true;
     document.getElementById('public').hidden = true;
     document.getElementById('privacies').hidden = true;
+
   }
 }
+
+
+function createSearchElement(name) {
+
+  const optionElement = document.createElement('option');
+  optionElement.value = name;
+
+  return optionElement;
+
+}
+
 
 function createApkElement(apk) {
 
@@ -400,6 +450,8 @@ function createApkElement(apk) {
 
     apkElement.appendChild(deleteButtonElement);
   }
+
+  displayed_apks[apk.name] = apkElement;
 
   return apkElement;
 }
@@ -513,6 +565,7 @@ function getDisplay(list) {
   }
 }
 
+
 // Show the loader button once the form has been submitted
 // until the page has finished loading
 function displayLoader() {
@@ -520,5 +573,6 @@ function displayLoader() {
   loader.style.display = "block";
 }
 
+var displayed_apks = {};
 exports.sizeUnitConversion = sizeUnitConversion;
 exports.getFreqData = getFreqData;

@@ -36,12 +36,13 @@
 
   </dependencyManagement>
 
+
   <dependencies>
 
-      <dependency>
+    <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-logging</artifactId>
-      </dependency>
+    </dependency>
 
     <dependency>
         <groupId>commons-io</groupId>

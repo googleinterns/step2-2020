@@ -111,6 +111,7 @@ public class APKUploadServlet extends HttpServlet {
       storeTrackedFiles(fileName, file_visibility, datastore, currentTime, userService.getCurrentUser());
 
     }
+    
     response.sendRedirect("/#/explore");
   }
 
