@@ -12,12 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package com.google.sps.data;
+
 import java.util.ArrayList; 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
+
+import java.util.logging.Level; 
+import java.util.logging.Logger; 
+import java.util.logging.*; 
+
 public class AndroidManifestParser {
      
     // decompressXML -- Parse the 'compressed' binary form of Android XML docs 
@@ -26,8 +34,8 @@ public class AndroidManifestParser {
     public static int startTag =  0x00100102;
     public static int endTag =    0x00100103;
     public static String spaces = "                                             ";
-    File file = new File("AndroidManifestReadFile.txt");  
-
+    
+    private static final Logger LOGGER = Logger.getLogger(AndroidManifestParser.class.getName());
 
     ArrayList<String> permissionsList = new ArrayList<String>();
     /*
@@ -35,11 +43,29 @@ public class AndroidManifestParser {
     Currently decompressXml returns an ArrayList of permissions
     */
     
-    public File decompressXML(byte[] xml) {
+    public File decompressXML(byte[] xml) throws Exception {
     /* 
      Link to StackOverflow reference: 
      https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
     */
+
+    File file = File.createTempFile("AndroidManifest", ".txt"); 
+           
+    if (file.exists()) { 
+
+            // the file is created 
+            // as the function retruned true 
+            LOGGER.info("Temp File created: "
+                                + file.getAbsolutePath()); 
+        } 
+
+        else { 
+
+            // display the file cannot be created 
+            // as the function returned false 
+            LOGGER.info("Temp File cannot be created: "
+                                + file.getAbsolutePath()); 
+        } 
 
 
     // Compressed XML file/bytes starts with 24x bytes of data,
@@ -124,14 +150,14 @@ public class AndroidManifestParser {
                 sb.append(" "+attrName+"=\""+attrValue+"\"");
                 getPermissions(attrValue);
             }
-            writeToFile(indent, "<"+name+sb+">");
+            writeToFile(indent, "<"+name+sb+">", file);
             indent++;
         
         } else if (tag0 == endTag) { // XML END TAG
             indent--;
             off += 6*4;  // Skip over 6 words of endTag data
             String name = compXmlString(xml, sitOff, stOff, nameSi);  
-            writeToFile(indent, "</"+name+">  (line "+startTagLineNo+"-"+lineNo+")");      
+            writeToFile(indent, "</"+name+">  (line "+startTagLineNo+"-"+lineNo+")", file);      
         } else if (tag0 == endDocTag) {  // END OF XML DOC TAG
             break;
         
@@ -144,16 +170,14 @@ public class AndroidManifestParser {
     } // end of decompressXML
 
     //This method writes the parsed Xml to a file 
-    public void writeToFile(int indent, String str) {
+    public void writeToFile(int indent, String str, File f) {
+
         try{
-            if(file.exists()==false){
-                    file.createNewFile();
-            }
-            PrintWriter out = new PrintWriter(new FileWriter(file, true));
+            PrintWriter out = new PrintWriter(new FileWriter(f, true));
             out.append(spaces.substring(0, Math.min(indent*2, spaces.length()))+str+"\n");
             out.close();
         }catch(IOException e){
-                System.out.println("COULD NOT LOG!!");
+                LOGGER.info("Could not Write to file!");
             }
     }
 
