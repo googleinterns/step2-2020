@@ -150,14 +150,14 @@ public class DeleteServletTest {
     storage.create(blobInfo, Files.readAllBytes(file.toPath()));
 
     Entity private_file = new Entity(user.getUserId());
-    private_file.setProperty("File_name", "HelloActivity.apk");
+    private_file.setProperty("FileName", "HelloActivity.apk");
     private_file.setProperty("UserId", user.getUserId());
     private_file.setProperty("Time", currentTime);
 
     datastore.put(private_file);
 
     Entity unzippedAPK = new Entity("UserFileFeature");
-    unzippedAPK.setProperty("File_name", "HelloActivity.apk");
+    unzippedAPK.setProperty("FileName", "HelloActivity.apk");
     unzippedAPK.setProperty("UserId", user.getUserId());
     unzippedAPK.setProperty("Time", currentTime);
 
@@ -178,42 +178,42 @@ public class DeleteServletTest {
     // ability to verify if the delete request is authentic
     // before taking action.
     Entity public_file1 = new Entity("Vaderker");
-    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("FileName", "HelloActivity.apk");
     public_file1.setProperty("UserId", "93884584564745785");
     public_file1.setProperty("Time", currentTime);
 
     datastore.put(public_file1);
 
     Entity public_file2 = new Entity("Vaderker");
-    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("FileName", "Avalon.apk");
     public_file2.setProperty("UserId", "5566495842542584");
     public_file2.setProperty("Time", currentTime);
 
     datastore.put(public_file2);
 
     Entity public_file3 = new Entity(user.getUserId());
-    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("FileName", "Phylum.apk");
     public_file3.setProperty("UserId", user.getUserId());
     public_file3.setProperty("Time", currentTime);
 
     datastore.put(public_file3);
 
     Entity public_file4 = new Entity("Vaderker");
-    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("FileName", "Kingdoms.apk");
     public_file4.setProperty("UserId", "4295948459425854");
     public_file4.setProperty("Time", currentTime);
 
     datastore.put(public_file4);
 
     Entity unzippedAPK = new Entity("UserFileFeature");
-    unzippedAPK.setProperty("File_name", "Phylum.apk");
+    unzippedAPK.setProperty("FileName", "Phylum.apk");
     unzippedAPK.setProperty("UserId", user.getUserId());
     unzippedAPK.setProperty("Time", currentTime);
 
     datastore.put(unzippedAPK);
 
     Entity unzipped_apk = new Entity("UserFileFeature");
-    unzipped_apk.setProperty("File_name", "Kingdoms.apk");
+    unzipped_apk.setProperty("FileName", "Kingdoms.apk");
     unzipped_apk.setProperty("UserId", "4295948459425854");
     unzipped_apk.setProperty("Time", currentTime);
 

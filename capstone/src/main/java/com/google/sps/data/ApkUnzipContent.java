@@ -64,7 +64,7 @@ public class ApkUnzipContent {
   // Creates entity to be stored in Datastore using contents retrieved from the unzip function
   public Entity toEntity(String UserId, String file_name, Long apkSizeOnDisk, Long totalApkSize, Long filesCount, long Timestamp) {
     Entity fileEntity = new Entity("UserFileFeature");
-    fileEntity.setProperty("File_name", file_name);
+    fileEntity.setProperty("FileName", file_name);
     fileEntity.setProperty("UserId", UserId);
     fileEntity.setProperty("Res_File_Size", apkPackageContentMap.get("res"));
     fileEntity.setProperty("Dex_File_Size", apkPackageContentMap.get("dex"));
