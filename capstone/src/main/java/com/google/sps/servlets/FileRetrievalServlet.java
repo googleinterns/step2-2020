@@ -76,7 +76,7 @@ public class FileRetrievalServlet extends HttpServlet {
       // permissions on a file and also helps the display and 
       // delete servlets target a particular APK.
       for (Entity entity : result.asIterable()) {
-        apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
+        apks.add(new APK(((String) entity.getProperty("FileName")).substring(5), 
         "true", (long) entity.getProperty("Time")));
       }
 
@@ -85,7 +85,7 @@ public class FileRetrievalServlet extends HttpServlet {
       result = retrieveOwnedPublicFiles(userService.getCurrentUser(), datastore);
 
       for (Entity entity : result.asIterable()) {
-        apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
+        apks.add(new APK(((String) entity.getProperty("FileName")).substring(5), 
         "true1", (long) entity.getProperty("Time")));
       }
       
@@ -95,7 +95,7 @@ public class FileRetrievalServlet extends HttpServlet {
     result = retrievePublicFiles(userService, datastore);
 
     for (Entity entity : result.asIterable()) {
-      apks.add(new APK(((String) entity.getProperty("File_name")).substring(5), 
+      apks.add(new APK(((String) entity.getProperty("FileName")).substring(5), 
       "false", (long) entity.getProperty("Time")));
     }
 

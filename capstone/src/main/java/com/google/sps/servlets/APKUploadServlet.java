@@ -102,7 +102,7 @@ public class APKUploadServlet extends HttpServlet {
       // The attributes below send information essential for identifying
       // the stored blobs later on to the unzip servlet for cohesive data storage.
       request.setAttribute("object_name", fileName);
-      request.setAttribute("file_name", file.getSubmittedFileName());
+      request.setAttribute("fileName", file.getSubmittedFileName());
       request.setAttribute("userId", userService.getCurrentUser().getUserId());
       unzip.include(request, response);
 
@@ -123,7 +123,7 @@ public class APKUploadServlet extends HttpServlet {
 
     if ("Private".equals(visible)) {file = new Entity(currentUser.getUserId());}
     else {file = new Entity("Vaderker");}
-    file.setProperty("File_name", file_name);
+    file.setProperty("FileName", file_name);
     file.setProperty("UserId", currentUser.getUserId());
     file.setProperty("Time", time);
 

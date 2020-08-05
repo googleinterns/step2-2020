@@ -156,28 +156,28 @@ public class FileRetrievalServletTest {
     // correct query results which contains no duplicates in 
     // retrieveOwnedPublicFiles
     Entity public_file1 = new Entity("Vaderker");
-    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("FileName", "HelloActivity.apk");
     public_file1.setProperty("UserId", "93884584564745785");
     public_file1.setProperty("Time", currentTime);
 
     datastore.put(public_file1);
 
     Entity public_file2 = new Entity("Vaderker");
-    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("FileName", "Avalon.apk");
     public_file2.setProperty("UserId", "5566495842542584");
     public_file2.setProperty("Time", currentTime);
 
     datastore.put(public_file2);
 
     Entity public_file3 = new Entity("Vaderker");
-    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("FileName", "Phylum.apk");
     public_file3.setProperty("UserId", "85425758352584589");
     public_file3.setProperty("Time", currentTime);
 
     datastore.put(public_file3);
 
     Entity public_file4 = new Entity("Vaderker");
-    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("FileName", "Kingdoms.apk");
     public_file4.setProperty("UserId", "4295948459425854");
     public_file4.setProperty("Time", currentTime);
 
@@ -204,28 +204,28 @@ public class FileRetrievalServletTest {
     // and if so, by the appropriate function calls to prevent duplicate
     // results from being generated
     Entity public_file1 = new Entity("Vaderker");
-    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("FileName", "HelloActivity.apk");
     public_file1.setProperty("UserId", "93884584564745785");
     public_file1.setProperty("Time", currentTime);
 
     datastore.put(public_file1);
 
     Entity public_file2 = new Entity("Vaderker");
-    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("FileName", "Avalon.apk");
     public_file2.setProperty("UserId", "5566495842542584");
     public_file2.setProperty("Time", currentTime);
 
     datastore.put(public_file2);
 
     Entity public_file3 = new Entity("Vaderker");
-    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("FileName", "Phylum.apk");
     public_file3.setProperty("UserId", user.getUserId());
     public_file3.setProperty("Time", currentTime);
 
     datastore.put(public_file3);
 
     Entity public_file4 = new Entity("Vaderker");
-    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("FileName", "Kingdoms.apk");
     public_file4.setProperty("UserId", user.getUserId());
     public_file4.setProperty("Time", currentTime);
 
@@ -248,28 +248,28 @@ public class FileRetrievalServletTest {
   public void retrievingAllEntities() throws Exception {
 
     Entity public_file1 = new Entity("Vaderker");
-    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("FileName", "HelloActivity.apk");
     public_file1.setProperty("UserId", "93884584564745785");
     public_file1.setProperty("Time", currentTime);
 
     datastore.put(public_file1);
 
     Entity public_file2 = new Entity("Vaderker");
-    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("FileName", "Avalon.apk");
     public_file2.setProperty("UserId", "5566495842542584");
     public_file2.setProperty("Time", currentTime);
 
     datastore.put(public_file2);
 
     Entity public_file3 = new Entity(user.getUserId());
-    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("FileName", "Phylum.apk");
     public_file3.setProperty("UserId", user.getUserId());
     public_file3.setProperty("Time", currentTime);
 
     datastore.put(public_file3);
 
     Entity public_file4 = new Entity("Vaderker");
-    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("FileName", "Kingdoms.apk");
     public_file4.setProperty("UserId", user.getUserId());
     public_file4.setProperty("Time", currentTime);
 
@@ -294,28 +294,28 @@ public class FileRetrievalServletTest {
     // This function is testing to ensure that the correct
     // kind of entities are retrieved when needed.
     Entity public_file1 = new Entity("VADERKER");
-    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("FileName", "HelloActivity.apk");
     public_file1.setProperty("UserId", "93884584564745785");
     public_file1.setProperty("Time", currentTime);
 
     datastore.put(public_file1);
 
     Entity public_file2 = new Entity("VADERker");
-    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("FileName", "Avalon.apk");
     public_file2.setProperty("UserId", "5566495842542584");
     public_file2.setProperty("Time", currentTime);
 
     datastore.put(public_file2);
 
     Entity public_file3 = new Entity("Public ");
-    public_file3.setProperty("File_name", "Phylum.apk");
+    public_file3.setProperty("FileName", "Phylum.apk");
     public_file3.setProperty("UserId", "85425758352584589");
     public_file3.setProperty("Time", currentTime);
 
     datastore.put(public_file3);
 
     Entity public_file4 = new Entity("Private Vaderker");
-    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("FileName", "Kingdoms.apk");
     public_file4.setProperty("UserId", "4295948459425854");
     public_file4.setProperty("Time", currentTime);
 
@@ -344,21 +344,21 @@ public class FileRetrievalServletTest {
     // public files are reported or shown
     // to a user who is not logged in.
     Entity public_file1 = new Entity("Vaderker");
-    public_file1.setProperty("File_name", "HelloActivity.apk");
+    public_file1.setProperty("FileName", "HelloActivity.apk");
     public_file1.setProperty("UserId", "93884584564745785");
     public_file1.setProperty("Time", currentTime);
 
     datastore.put(public_file1);
 
     Entity private_file = new Entity("5566495842542584");
-    private_file.setProperty("File_name", "Avalon.apk");
+    private_file.setProperty("FileName", "Avalon.apk");
     private_file.setProperty("UserId", "5566495842542584");
     private_file.setProperty("Time", currentTime);
 
     datastore.put(private_file);
 
     Entity public_file2 = new Entity("Vaderker");
-    public_file2.setProperty("File_name", "Avalon.apk");
+    public_file2.setProperty("FileName", "Avalon.apk");
     public_file2.setProperty("UserId", "5566495842542584");
     public_file2.setProperty("Time", currentTime);
 
@@ -372,7 +372,7 @@ public class FileRetrievalServletTest {
     datastore.put(public_file3);
 
     Entity public_file4 = new Entity("Vaderker");
-    public_file4.setProperty("File_name", "Kingdoms.apk");
+    public_file4.setProperty("FileName", "Kingdoms.apk");
     public_file4.setProperty("UserId", "4295948459425854");
     public_file4.setProperty("Time", currentTime);
 
