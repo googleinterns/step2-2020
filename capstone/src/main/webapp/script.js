@@ -71,11 +71,11 @@ function getFreqData(list){
     }
 
     freqData=[
-        {fileType:'Res',freq:{compressed:res, uncompressed:uncomRes, lost:(uncomRes - res)}},
-        {fileType:'Java Code',freq:{compressed:javaCode, uncompressed:uncomJavaCode, lost:(uncomJavaCode - javaCode)}},
-        {fileType:'Resources',freq:{compressed:resources, uncompressed:uncomResources, lost:(uncomResources - resources )}},
-        {fileType:'Miscellaneous',freq:{compressed:miscellaneous, uncompressed:uncomMiscellaneous, lost:(uncomMiscellaneous - miscellaneous)}},
-        {fileType:'Assets',freq:{compressed:assets, uncompressed:uncomAssets, lost:(uncomAssets - assets)}}
+        {fileType:'Res',freq:{Compressed:res, Uncompressed:uncomRes, Space_saved_after_Compression:(uncomRes - res)}},
+        {fileType:'Java Code',freq:{Compressed:javaCode, Uncompressed:uncomJavaCode, Space_saved_after_Compression:(uncomJavaCode - javaCode)}},
+        {fileType:'Resources',freq:{Compressed:resources, Uncompressed:uncomResources, Space_saved_after_Compression:(uncomResources - resources )}},
+        {fileType:'Miscellaneous',freq:{Compressed:miscellaneous, Uncompressed:uncomMiscellaneous, Space_saved_after_Compression:(uncomMiscellaneous - miscellaneous)}},
+        {fileType:'Assets',freq:{Compressed:assets, Uncompressed:uncomAssets, Space_saved_after_Compression:(uncomAssets - assets)}}
     ]; 
     return freqData;
 }
@@ -88,7 +88,7 @@ function changeChart(fileStatistics, result){
         document.getElementById("display").style.display = 'block';
         d3.select("#display").selectAll("svg").remove();
         d3.select("#display").selectAll("table").remove();
-        d3.select("#display").text(apkName);
+        //d3.select("#display").text(apkName);
         dashboard(getFreqData(fileStatistics));     
     }
     else if (result == 2){
@@ -97,11 +97,10 @@ function changeChart(fileStatistics, result){
         document.getElementById("displayChart").style.display = 'block'; 
         drawChart(fileStatistics);
     }
-    else {
+    else if (result == 3) {
         document.getElementById("displayChart").style.display = 'none';
         document.getElementById("display").style.display = 'none';
         document.getElementById("displayComponent").style.display= 'block';
-        document.createElement("h5").text(apkName);
         getDisplay(fileStatistics);
     }
 }
@@ -112,7 +111,7 @@ function changeChart(fileStatistics, result){
 async function showFileStatistics(filename, time, result) {
 
     const params = new URLSearchParams();
-    params.append('apk_name', filename);
+    params.append('apkName', filename);
     params.append('timeStamp', time);
 
     apkName = filename;
@@ -120,8 +119,7 @@ async function showFileStatistics(filename, time, result) {
     const fileStatistics = await response.json();
     
     changeChart(fileStatistics,result);
-    getDisplay(fileStatistics);
-
+    exploreParser(filename, time);
 }
 
 function dashboard(fData){
@@ -129,10 +127,10 @@ function dashboard(fData){
     var id = document.getElementById('display');
     d3.select("#display").text(apkName);
     var barColor = 'steelblue';
-    function segColor(c){ return {compressed:"#807dba", uncompressed:"#e08214",lost:"#41ab5d"}[c]; }
+    function segColor(c){ return {Compressed:"#807dba", Uncompressed:"#e08214",Space_saved_after_Compression:"#41ab5d"}[c]; }
     
     // compute total for each state.
-    fData.forEach(function(d){d.total=(d.freq.uncompressed)});
+    fData.forEach(function(d){d.total=(d.freq.Uncompressed)});
     
     // function to handle histogram.
     function histoGram(fD){
@@ -312,14 +310,13 @@ function dashboard(fData){
     }
     
     // calculate total frequency by segment for all state.
-    var tF = ['compressed','uncompressed','lost'].map(function(d){ 
+    var tF = ['Compressed','Uncompressed','Space_saved_after_Compression'].map(function(d){ 
         return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
     });    
     
     // calculate total frequency by state for all segment.
     var sF = fData.map(function(d){return [d.fileType,d.total];});
-    
-    
+     
     var hG = histoGram(sF), // create the histogram.
         pC = pieChart(tF), // create the pie-chart.
         leg= legend(tF);  // create the legend.
@@ -375,7 +372,7 @@ function displayFiles(apks) {
 function deleteAPK(fileName, fileOwnership) {
 
   const params = new URLSearchParams();
-  params.append('file_name', fileName);
+  params.append('fileName', fileName);
   params.append('ownership', fileOwnership);
   fetch('/delete_file', {method: 'POST', body: params});
 
@@ -406,6 +403,7 @@ function fileVisibility() {
   }
 }
 
+
 function createSearchElement(name) {
 
   const optionElement = document.createElement('option');
@@ -415,14 +413,6 @@ function createSearchElement(name) {
 
 }
 
-// This function creates the list element
-// that displays an APK's name, the explore button
-// for retrieving the APK's data and the delete button for deleting the  APK
-function createListElement(text) {
-  const liElement = document.createElement('ul');
-  liElement.innerText = text;
-  return liElement;
-}
 
 function createApkElement(apk) {
 
@@ -484,6 +474,46 @@ function sizeUnitConversion(size){
     return size.toString()+" Bytes";
 }
 
+//This function adds a background color to the Apk file type to make it easily distinguished
+function createListAPKNameElement(texts) {
+  const card = document.createElement("div");
+  card.className = "card bg-primary text-dark";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-header";
+  cardBody.innerText =("APK Name: " + texts);
+
+  card.appendChild(cardBody);
+  
+  return card;
+}
+
+//This function adds a background color to the Apk Header to make it easily distinguished
+function createListHeaderElement(texts) {
+  const card = document.createElement("div");
+  card.className = "card bg-secondary text-white";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-header";
+  cardBody.innerText = texts;
+
+  card.appendChild(cardBody);
+  
+  return card;
+}
+
+//This function adds a background color to the Apk compressed and uncompressed 
+//size type to make it easily distinguished
+function createListBodyElement(texts) {
+  const card = document.createElement("div");
+  card.className = "card bg-light text-dark";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-header";
+  cardBody.innerText = texts;
+
+  card.appendChild(cardBody);
+  
+  return card;
+}
+
 // getDisplay makes a user aware of how much space each component
 // of the APK consumes.
 function getDisplay(list) {
@@ -494,33 +524,48 @@ function getDisplay(list) {
     
   for (var i = 0; i < list.length; i++) {
         contentListElement.appendChild(
-        createListElement(('Uncompressed Res: '+ sizeUnitConversion(list[i].resFileSize[0]))));
+        createListAPKNameElement(apkName));
         contentListElement.appendChild(
-        createListElement(('Compressed Res: '+ sizeUnitConversion(list[i].resFileSize[1]))));
+        createListHeaderElement('Res '));
         contentListElement.appendChild(
-        createListElement(('Uncompressed Java Code: '+ sizeUnitConversion(list[i].dexFileSize[0]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].resFileSize[0]))));
         contentListElement.appendChild(
-        createListElement(('Compressed Java Code: '+ sizeUnitConversion(list[i].dexFileSize[1]))));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].resFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed Libraries: '+ sizeUnitConversion(list[i].libraryFileSize[0]))));
+        createListHeaderElement('Java Code '));
         contentListElement.appendChild(
-        createListElement(('Compressed Libraries: '+ sizeUnitConversion(list[i].libraryFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].dexFileSize[0]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed Assets: '+ sizeUnitConversion(list[i].assetsFileSize[0]))));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].dexFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Compressed Assets: '+ sizeUnitConversion(list[i].assetsFileSize[1]))));
+        createListHeaderElement('Libraries '));
         contentListElement.appendChild(
-        createListElement(('Uncompressed Resources: '+ sizeUnitConversion(list[i].resourcesFileSize[0]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].libraryFileSize[0]))));
         contentListElement.appendChild(
-        createListElement(('Compressed Resources: '+ sizeUnitConversion(list[i].resourcesFileSize[1]))));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].libraryFileSize[1]))));
         contentListElement.appendChild(
-        createListElement(('Uncompressed Miscellaneous: '+   sizeUnitConversion(list[i].miscFileSize[0]))));
+        createListHeaderElement('Assets '));
         contentListElement.appendChild(
-        createListElement(('Compressed Miscellaneous: '+   sizeUnitConversion(list[i].miscFileSize[1]))));
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].assetsFileSize[0]))));
         contentListElement.appendChild(
-        createListElement(('Total: '+  sizeUnitConversion(list[i].totalApkSize))));
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].assetsFileSize[1]))));
+        contentListElement.appendChild(
+        createListHeaderElement('Resources '));
+        contentListElement.appendChild(
+        createListBodyElement(('Uncompressed: '+ sizeUnitConversion(list[i].resourcesFileSize[0]))));
+        contentListElement.appendChild(
+        createListBodyElement(('Compressed: '+ sizeUnitConversion(list[i].resourcesFileSize[1]))));
+        contentListElement.appendChild(
+        createListHeaderElement('Miscellaneous '));
+        contentListElement.appendChild(
+        createListBodyElement(('Uncompressed: '+   sizeUnitConversion(list[i].miscFileSize[0]))));
+        contentListElement.appendChild(
+        createListBodyElement(('Compressed: '+   sizeUnitConversion(list[i].miscFileSize[1]))));
+        contentListElement.appendChild(
+        createListHeaderElement(('Total: '+  sizeUnitConversion(list[i].totalApkSize))));
   }
 }
+
 
 /* scrollToAPK() retrieves the queried APK from a dictionary.
 It then uses getBoundingClientRect() which keeps track of the
@@ -535,9 +580,81 @@ function scrollToAPK() {
   apkListObject.style.border = "thick solid blue";
 
   setTimeout(function() { apkListObject.style.border = "thin solid black"; }, 2000);
+}
+
+// Show the loader button once the form has been submitted
+// until the page has finished loading
+function displayLoader() {
+  var loader = document.getElementById('btn-load');
+  loader.style.display = "block";
+}
+
+// Calls the DexParserServlet for processing of DEX files and retrieves the statistics
+async function exploreParser(filename, time) {
+  const params = new URLSearchParams();
+  params.append('fileName', filename);
+  params.append('timeStamp', time);
+  console.log(filename, time);
+
+  const response = await fetch("/dexparser", {method: 'POST', body: params});
+  const fileStats = await response.json();    
+  console.log(fileStats);
+
+  const dexButtonArea = document.getElementById("buttonDex");
+  const dexButtonElement = document.createElement('button');
+  dexButtonElement.className = 'btn btn-primary';
+  dexButtonElement.innerText = 'Explore DEX File';
+  dexButtonElement.setAttribute('id', 'button-dex');
+  dexButtonElement.addEventListener('click', () => {
+    displayParser(fileStats);
+  });
+
+  // Removes an already existing DEX explorer button
+  if(document.body.contains(document.getElementById('button-dex'))) {
+    dexButtonArea.removeChild(document.getElementById('button-dex'));
+  } 
+
+  dexButtonArea.appendChild(dexButtonElement);
+
+  // Removes all existing children in the div
+  const dexParserElement = document.getElementById("displayDexStats");
+  while (dexParserElement.firstChild) {
+    dexParserElement.removeChild(dexParserElement.firstChild);
+  }
+
+}
+
+// Displays DEX statistics of the APK retrieved from Datastore
+function displayParser(fileStats) {
+  
+  const dexParserElement = document.getElementById("displayDexStats");
+
+  dexParserElement.innerHTML = '';
+
+  for (var i = 0; i < fileStats.length; i++) {
+    dexParserElement.appendChild(
+      createListHeaderElement('DEX Statistics'));
+    dexParserElement.appendChild(
+      createListHeaderElement(('Header Size: ' + sizeUnitConversion(fileStats[i].headerSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('File Size: ' + sizeUnitConversion(fileStats[i].fileSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('StringIdsSize: ' + sizeUnitConversion(fileStats[i].stringIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('MethodIdsSize: ' + sizeUnitConversion(fileStats[i].methodIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('TypeIdsSize: ' + sizeUnitConversion(fileStats[i].typeIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('ProtoIdsSize: ' + sizeUnitConversion(fileStats[i].protoIdsSize))));
+    dexParserElement.appendChild(
+      createListHeaderElement(('FieldIdsSize: ' + sizeUnitConversion(fileStats[i].fieldIdsSize))));  
+    dexParserElement.appendChild(
+      createListHeaderElement(('ClassDefsSize: ' + sizeUnitConversion(fileStats[i].classDefsSize))));
+  }
 
 }
 
 var displayed_apks = {};
+
 exports.sizeUnitConversion = sizeUnitConversion;
 exports.getFreqData = getFreqData;

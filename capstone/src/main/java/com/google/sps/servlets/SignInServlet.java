@@ -38,8 +38,7 @@ public class SignInServlet extends HttpServlet {
       response.sendRedirect(userService.createLoginURL("/signin"));
 
     } else { response.sendRedirect("/#/explore"); }
-    
-    
+
   }
 
   @Override
