@@ -117,7 +117,7 @@ async function showFileStatistics(filename, time, result) {
     apkName = filename;
     const response = await fetch("/display", {method: 'POST', body: params});
     const fileStatistics = await response.json();
-
+    
     changeChart(fileStatistics,result);
     exploreParser(filename, time);
 }
@@ -566,6 +566,21 @@ function getDisplay(list) {
   }
 }
 
+
+/* scrollToAPK() retrieves the queried APK from a dictionary.
+It then uses getBoundingClientRect() which keeps track of the
+object's position at any given time to scroll to the APK's
+position for user interaction. */
+function scrollToAPK() {
+
+  var apkListObject = displayed_apks[document.getElementById('search').value];
+  var apkPosition = apkListObject.getBoundingClientRect();
+  window.scrollTo(0, apkPosition.top);
+
+  apkListObject.style.border = "thick solid blue";
+
+  setTimeout(function() { apkListObject.style.border = "thin solid black"; }, 2000);
+}
 
 // Show the loader button once the form has been submitted
 // until the page has finished loading

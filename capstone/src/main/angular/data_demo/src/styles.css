@@ -69,7 +69,7 @@
 
 input[type=search] {
 
-    width: 100px;
+    width: 150px;
     height: 43px;
     border: 2px solid #ccc;
     border-radius: 15px;
@@ -81,14 +81,14 @@ input[type=search] {
 }
 
 input[type=search]:focus {
-    width: 110%;
+    width: 250px;
     height: 43px;
 }
 
-/*The code below removes the drop down arrow from the search
+/* The code below removes the drop down arrow from the search
 bar. The datalist automatically appears and starts filtering
 its collection as the user types in so there is no need to have the
-drop down button.*/
+drop down button. */
 [list]::-webkit-calendar-picker-indicator {
     display: none;
 }
