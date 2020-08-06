@@ -4,9 +4,11 @@
   
   <div class="form-inline">
 
-    <form class="form-inline" id="searchBar" hidden>
-      <input type="search" list="binary_files" name="search" placeholder="Search..">
-      <datalist id="binary_files"></datalist>
+    <!-- The first form has false returned onsubmit to prevent the form
+       from being submitted and reloading the page.-->
+    <form class="form-inline" id="searchBar" onsubmit="scrollToAPK(); return false;" hidden>
+      <input type="search" list="binary_files" id="search" placeholder="Search...">
+      <datalist id="binary_files" onclick="show();"></datalist>
     </form>
 
     <form class="form-inline" id="login" action="/signin" style="padding: 10px;">
