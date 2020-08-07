@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.RandomAccessFile;
+import java.io.File;
 
 import java.util.zip.DataFormatException;
 import java.util.ArrayList;
@@ -136,8 +137,10 @@ public class DexLoader {
 
   /* Runs with the DexParser servlet and local wrapper for DEX parsing*/
   public static RandomAccessFile openClassDexZipFileEntry(ZipInputStream zis) throws IOException {
-    
-    RandomAccessFile raf = new RandomAccessFile("data.dex", "rw");
+
+    File file = File.createTempFile("data", ".dex"); 
+
+    RandomAccessFile raf = new RandomAccessFile(file, "rw");
 
 		/*
 		 * Copy all data from ZipInputStream to file

@@ -40,7 +40,7 @@ async function loadCorrectPageDOM() {
 
   logInStatus();
 
-  if (window.location.href == "https://step-2020-team-2.uc.r.appspot.com/#/explore") {
+  if (window.location.hash === '#/explore') {
 
     document.getElementById('searchBar').hidden = false;
     fileDisplayAndSearchQuery();

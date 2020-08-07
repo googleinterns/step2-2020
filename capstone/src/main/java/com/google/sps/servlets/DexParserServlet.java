@@ -110,13 +110,6 @@ public class DexParserServlet extends HttpServlet {
 
     // Name of APK
     fileName = request.getParameter("fileName");
-    
-    // Checks if user is signed in and attributes the userId
-    if (userService.isUserLoggedIn()){
-      userId = userService.getCurrentUser().getUserId();
-    } else {
-      userId = "Vaderker";
-    }
 
     // Create a filter for retrieval of APKs specific to a certain user with a timestamp and filename
     Filter timeFilter = new FilterPredicate("Timestamp", FilterOperator.EQUAL, time);
@@ -128,12 +121,20 @@ public class DexParserServlet extends HttpServlet {
     Query query = new Query("UserDexFeature").setFilter(targetFileFilter);
 
     // Retrieve query based on filter from Datastore
-    List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());;
-    
+    List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
+
     // Checks if the DEX file has been processed before and simply retrieves it from Datastore
     if(!(results.isEmpty())) {
       doGet(request, response);
       return;
+    }
+
+    Query userIdQuery = new Query("UserFileFeature").setFilter(targetFileFilter);
+
+    PreparedQuery queryResult = datastore.prepare(userIdQuery);
+
+    for (Entity entity : queryResult.asIterable()) {
+      userId = entity.getProperty("UserId").toString();
     }
 
     // The ID of your GCS object
@@ -144,7 +145,6 @@ public class DexParserServlet extends HttpServlet {
 
     Blob blob = fileUnzip.getApkObjectFromCloudStorage(PROJECTID, BUCKETNAME, objectName);
 
-
     DexLoader dexLoader = new DexLoader();
     InputStream is = new ByteArrayInputStream(blob.getContent());
     ZipInputStream zis = new ZipInputStream(is);
@@ -153,6 +153,7 @@ public class DexParserServlet extends HttpServlet {
     ArrayList<RandomAccessFile> rafs = dexLoader.analyzeApkFeaturesOnline(zis);
 
     for (RandomAccessFile raf : rafs) {
+
       DexData dexData = new DexData(raf);
 
       try {
