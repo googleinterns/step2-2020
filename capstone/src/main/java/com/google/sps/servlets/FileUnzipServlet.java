@@ -113,6 +113,7 @@ public class FileUnzipServlet extends HttpServlet {
         long uncompressedSize = ze.getSize();
 
         // For testing purposes in the console
+        LOGGER.info(fileName);
         LOGGER.info("Real Compressed Size " + compressedSize);
         LOGGER.info("Real Uncompressed Size " + uncompressedSize);
 
