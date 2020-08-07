@@ -4,3 +4,9 @@ indexes:
   - name: UserId
   - name: Timestamp
     direction: desc
+
+- kind: UserDexFeature
+  properties:
+  - name: UserId
+  - name: Timestamp
+    direction: desc
